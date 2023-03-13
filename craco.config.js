@@ -1,10 +1,9 @@
-const path = require("path");
+const { resolve } = require("node:path");
 
 module.exports = {
   webpack: {
     alias: {
-      "@": path.resolve(__dirname, "src/"),
-      "@components": path.resolve(__dirname, "src/components"),
+      "@": resolve(__dirname, "./src"),
     },
   },
 };
