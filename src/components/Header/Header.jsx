@@ -1,4 +1,4 @@
-import sajaLogo from "@/assets/logo.png";
+import sajaLogo from "@/assets/Home/logo.png";
 import styled from "styled-components";
 
 function Header() {
