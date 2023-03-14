@@ -33,7 +33,7 @@ const StyledDiv = styled.div`
   display: flex;
   width: 1200px;
   height: 64px;
-  justify-content: space-between;
+  justify-content: center;
   margin-top: 10px;
   line-height: 64px;
   position: fixed;
@@ -55,7 +55,7 @@ const StyledDiv = styled.div`
     color: white;
     width: 100px;
     height: 40px;
-    margin: 12px 16px 12px 20px;
+    margin: 12px 16px 12px 10px;
     border-radius: 8px;
     border: none;
     font-weight: 600;
@@ -83,6 +83,9 @@ const StyledDiv = styled.div`
     height: 24px;
     font-weight: 700;
     font-size: 18px;
+  }
+  a:hover {
+    color: #eca997;
   }
 
   .imgContainner {
