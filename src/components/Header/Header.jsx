@@ -21,9 +21,7 @@ function Header() {
         </ul>
       </nav>
       <input type="text" placeholder="물품이나 동네를 검색해보세요"></input>
-      <div>
-        <a href="/">로그인</a>
-      </div>
+      <a href="/">로그인</a>
       <button>회원가입</button>
     </StyledDiv>
   );
@@ -35,9 +33,12 @@ const StyledDiv = styled.div`
   display: flex;
   width: 1200px;
   height: 64px;
-  justify-content: center;
-  margin: 10px auto;
+  justify-content: space-between;
+  margin-top: 10px;
   line-height: 64px;
+  position: fixed;
+  left: 50%;
+  transform: translate(-50%, 0);
 
   img {
     width: 150px;
@@ -57,6 +58,8 @@ const StyledDiv = styled.div`
     margin: 12px 16px 12px 20px;
     border-radius: 8px;
     border: none;
+    font-weight: 600;
+    font-size: 18px;
   }
 
   input {
@@ -64,11 +67,13 @@ const StyledDiv = styled.div`
     height: 40px;
     margin-top: 12px;
     margin-right: 31px;
-    margin-left: 16px;
+    margin-left: 20px;
     border-radius: 6px;
     border: none;
     background-color: #f2f3f6;
     padding-left: 10px;
+    font-weight: 400;
+    font-size: 16px;
   }
 
   a {
