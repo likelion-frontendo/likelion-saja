@@ -4,7 +4,7 @@ import styled from "styled-components";
 export function Header() {
   return (
     <StyledHeader>
-      <a className="imgContainner" href="/">
+      <a className="imgContainer" href="/">
         <img src={sajaLogo} alt="사자 로고" />
       </a>
       <nav>
@@ -21,8 +21,10 @@ export function Header() {
         </ul>
       </nav>
       <input type="text" placeholder="물품이나 동네를 검색해보세요"></input>
-      <a href="/">로그인</a>
-      <button>회원가입</button>
+      <div>
+        <a href="/">로그인</a>
+        <button>회원가입</button>
+      </div>
     </StyledHeader>
   );
 }
@@ -53,7 +55,7 @@ const StyledHeader = styled.header`
     color: white;
     width: 100px;
     height: 40px;
-    margin: 12px 16px 12px 0px;
+    margin: 12px 16px;
     border-radius: 8px;
     border: none;
     font-weight: 600;
@@ -84,7 +86,7 @@ const StyledHeader = styled.header`
     color: #eca997;
   }
 
-  .imgContainner {
+  .imgContainer {
     width: 150px;
     height: 64px;
   }
