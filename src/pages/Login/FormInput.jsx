@@ -1,15 +1,15 @@
 import styled from 'styled-components/macro'
 
-export function FormInput() {
+export function FormInput({name, type, placeholder}) {
   return (
-    <StyledForm>
-        <label htmlFor="아이디">아이디</label>
-        <input value="" type="text" id="아이디" name="아이디" placeholder="아이디를 입력해주세요"></input>
-    </StyledForm>
+    <StyledDiv>
+      <label htmlFor={name}>아이디</label>
+      <input id={name} name={name} type={type} placeholder={placeholder}/>
+    </StyledDiv>
   )
 }
 
-const StyledForm = styled.form`
+const StyledDiv = styled.div`
   label {
     overflow: hidden;
     position: absolute;
