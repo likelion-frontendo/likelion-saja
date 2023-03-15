@@ -3,6 +3,7 @@ import instargram from "@/assets/Home/instargram.png";
 import youtube from "@/assets/Home/youtube.png";
 import naverblog from "@/assets/Home/naverblog.png";
 import styled from "styled-components";
+import {Link} from "react-router-dom";
 
 export function Footer() {
   return (
@@ -39,33 +40,33 @@ export function Footer() {
           </address>
         </section>
         <section className="aContainer">
-          <a href="/">제휴 문의</a>
-          <a href="/">광고 문의</a>
-          <a href="/">PR 문의</a>
-          <a href="/">IR 문의</a>
+          <Link to={"#"}>제휴 문의</Link>
+          <Link to={"#"}>광고 문의</Link>
+          <Link to={"#"}>PR 문의</Link>
+          <Link to={"#"}>IR 문의</Link>
         </section>
         <section className="aContainer">
-          <a href="/">이용약관</a>
-          <a href="/" className="unique">
+          <Link to={"#"}>이용약관</Link>
+          <Link to={"#"} className="unique">
             개인정보처리방침
-          </a>
-          <a href="/">위치기반서비스 이용약관</a>
-          <a href="/">이용자보호 비전과 계획</a>
+          </Link>
+          <Link to={"#"}>위치기반서비스 이용약관</Link>
+          <Link to={"#"}>이용자보호 비전과 계획</Link>
         </section>
       </section>
       <section className="container">
-        <a href="/">
+        <Link to={"#"}>
           <img src={facebook} alt="" />
-        </a>
-        <a href="/">
+        </Link>
+        <Link to={"#"}>
           <img src={instargram} alt="" />
-        </a>
-        <a href="/">
+        </Link>
+        <Link to={"#"}>
           <img src={youtube} alt="" />
-        </a>
-        <a href="/">
+        </Link>
+        <Link to={"#"}>
           <img src={naverblog} alt="" />
-        </a>
+        </Link>
       </section>
     </StyledFooter>
   );
@@ -92,7 +93,7 @@ const StyledFooter = styled.footer`
     font-size: 13.008px;
   }
 
-  a {
+  Link {
     margin: 0 14px;
     text-decoration: none;
     margin-left: 0;
