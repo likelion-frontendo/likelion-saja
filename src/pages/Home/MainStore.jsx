@@ -6,7 +6,7 @@ function MainStore() {
     <StyledStore>
       <div className="inner">
         <h2>다양한 동네 가게를 볼 수 있어요</h2>
-        <div className="store-buttons">
+        <div className="storeButtons">
           <button>전체</button>
           <button>식당</button>
           <button>카페</button>
@@ -14,7 +14,7 @@ function MainStore() {
           <button>뷰티/미용</button>
           <button>헬스/필라테스/요가</button>
         </div>
-        <div className="store-container"></div>
+        <div className="storeContainer"></div>
       </div>
     </StyledStore>
   );
@@ -37,7 +37,7 @@ const StyledStore = styled.div`
     color: #212124;
   }
 
-  .store-buttons {
+  .storeButtons {
     display: flex;
     margin-top: 40px;
     gap: 8px;
@@ -52,7 +52,7 @@ const StyledStore = styled.div`
     border-radius: 100px;
   }
 
-  .store-container {
+  .storeContainer {
     margin-top: 85px;
     display: grid;
     grid-template-rows: repeat(2, 1fr);
