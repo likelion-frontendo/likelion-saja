@@ -21,5 +21,5 @@ export default MainBanner;
 
 const StyledBanner = styled.div`
   width: clamp(1040px, 100%, 1920px);
-  margin: 0 auto;
+  margin: 80px auto;
 `;

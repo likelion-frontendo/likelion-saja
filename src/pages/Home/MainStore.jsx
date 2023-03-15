@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import Store from "./Store";
 
 function MainStore() {
   return (
@@ -14,7 +15,18 @@ function MainStore() {
           <button>뷰티/미용</button>
           <button>헬스/필라테스/요가</button>
         </div>
-        <div className="storeContainer"></div>
+        <div className="storeList">
+          <Store />
+          <Store />
+          <Store />
+          <Store />
+          <Store />
+          <Store />
+          <Store />
+          <Store />
+          <Store />
+          <Store />
+        </div>
       </div>
     </StyledStore>
   );
@@ -23,6 +35,8 @@ function MainStore() {
 export default MainStore;
 
 const StyledStore = styled.div`
+  margin-bottom: 80px;
+
   .inner {
     margin: 65px auto 85px;
     width: 1056px;
@@ -52,12 +66,13 @@ const StyledStore = styled.div`
     border-radius: 100px;
   }
 
-  .storeContainer {
-    margin-top: 85px;
+  .storeList {
+    width: 768px;
+    margin: 10px auto 0;
     display: grid;
-    grid-template-rows: repeat(2, 1fr);
-    grid-template-columns: repeat(4, 1fr);
-    gap: 55px;
+    grid-template-rows: repeat(5, 1fr);
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 32px;
     justify-items: center;
   }
 `;
