@@ -93,7 +93,7 @@ const StyledFooter = styled.footer`
     font-size: 13.008px;
   }
 
-  Link {
+  a {
     margin: 0 14px;
     text-decoration: none;
     margin-left: 0;
