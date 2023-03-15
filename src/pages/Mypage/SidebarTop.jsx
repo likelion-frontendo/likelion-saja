@@ -1,7 +1,7 @@
 import styled from "styled-components/macro";
-import SidebarBottom from "@/pages/Mypage/SidebarBottom";
+import {SidebarBottom} from "@/pages/Mypage/SidebarBottom";
 
-function SidebarTop() {
+export function SidebarTop() {
   return (
     <MypageSide>
       <div className="profile">
@@ -17,7 +17,7 @@ function SidebarTop() {
 const MypageSide = styled.div`
   width: 216px;
   height: 598px;
-  /* profile */
+
   & .profile {
     height: 220px;
     border: 1px solid #6c816d;
@@ -43,4 +43,3 @@ const MypageSide = styled.div`
     font-size: 14px;
   }
 `;
-export {SidebarTop};

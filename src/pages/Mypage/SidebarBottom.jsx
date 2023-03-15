@@ -6,56 +6,57 @@ import {ReactComponent as Heart} from "@/assets/Mypage/heart.svg";
 import {ReactComponent as Tag} from "@/assets/Mypage/tag.svg";
 import {ReactComponent as Gear} from "@/assets/Mypage/gear.svg";
 import {ReactComponent as Envelope} from "@/assets/Mypage/envelope.svg";
+import {Link} from "react-router-dom";
 
-function SidebarBottom() {
+export function SidebarBottom() {
   return (
     <SidebarList>
       <div className="menuTitle">My Page</div>
       <ul className="listTop">
-        <link to="#">
+        <Link to="/">
           <li>
             <Person className="listIcon" />
             <span>내정보</span>
           </li>
-        </link>
-        <link to="#">
+        </Link>
+        <Link to="/">
           <li>
             <Buy className="listIcon" />
             <span>구매 내역</span>
           </li>
-        </link>
-        <link to="#">
+        </Link>
+        <Link to="/">
           <li>
             <Receipt className="listIcon" />
             <span>판매 내역</span>
           </li>
-        </link>
-        <link to="#">
+        </Link>
+        <Link to="/">
           <li>
             <Heart className="listIcon" />
             <span>관심 목록</span>
           </li>
-        </link>
-        <link to="#">
+        </Link>
+        <Link to="/">
           <li>
             <Tag className="listIcon" />
             <span>알림 키워드 설정</span>
           </li>
-        </link>
+        </Link>
       </ul>
       <ul className="listBottom">
-        <link to="#">
+        <Link to="/">
           <li>
             <Gear className="listIcon" />
             <span>내 프로필 수정</span>
           </li>
-        </link>
-        <link to="#">
+        </Link>
+        <Link to="/">
           <li>
             <Envelope className="listIcon" />
             <span>친구 초대</span>
           </li>
-        </link>
+        </Link>
       </ul>
     </SidebarList>
   );
@@ -86,12 +87,6 @@ const SidebarList = styled.div`
     vertical-align: middle;
     transition: fill 0.2s ease-in-out;
   }
-  & ul li:hover .listIcon,
-  & ul li:hover {
-    fill: #eca997;
-    color: #eca997;
-  }
-
   .listTop {
     padding: 6px 0 18px 0;
   }
@@ -99,6 +94,9 @@ const SidebarList = styled.div`
     padding-top: 6px;
     border-top: 1px solid #dcdee3;
   }
+  & ul li:hover .listIcon,
+  & ul li:hover {
+    fill: #eca997;
+    color: #eca997;
+  }
 `;
-
-export {SidebarBottom};

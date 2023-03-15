@@ -1,10 +1,10 @@
-import Sidebar from "@/pages/Mypage/SidebarTop";
+import {SidebarTop} from "@/pages/Mypage/SidebarTop";
 import styled from "styled-components/macro";
 
-function Mypage() {
+export function Mypage() {
   return (
     <Wrap>
-      <Sidebar></Sidebar>
+      <SidebarTop></SidebarTop>
     </Wrap>
   );
 }
@@ -15,4 +15,3 @@ const Wrap = styled.div`
   margin: 60px auto 0 auto;
   background-color: lightpink;
 `;
-export {Mypage};
