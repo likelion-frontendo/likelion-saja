@@ -3,7 +3,7 @@ import styled from 'styled-components/macro'
 export function FormInput({name, type, placeholder}) {
   return (
     <StyledDiv>
-      <label htmlFor={name}>아이디</label>
+      <label htmlFor={name}>{name}</label>
       <input id={name} name={name} type={type} placeholder={placeholder}/>
     </StyledDiv>
   )
@@ -28,7 +28,7 @@ const StyledDiv = styled.div`
     height: 50px;
     font-size: 16px;
     padding-left: 20px;
-    border: 1px solid A6A6A6;
+    border: 1px solid #A6A6A6;
     border-radius: 4px;
   }  
 `
