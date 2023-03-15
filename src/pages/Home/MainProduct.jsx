@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import Product from "@/components/Product";
 
-export default function MainProduct() {
+function MainProduct() {
   return (
     <StyledProduct>
       <div className="inner">
@@ -24,6 +24,8 @@ export default function MainProduct() {
     </StyledProduct>
   );
 }
+
+export default MainProduct;
 
 const StyledProduct = styled.div`
   .inner {

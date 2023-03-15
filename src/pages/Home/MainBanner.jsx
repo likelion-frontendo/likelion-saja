@@ -3,7 +3,7 @@ import BannerImg from "@/assets/banner01.svg";
 import styled from "styled-components";
 import {Swiper, SwiperSlide} from "swiper/react";
 
-export default function MainBanner() {
+function MainBanner() {
   return (
     <StyledBanner>
       <Swiper>
@@ -16,6 +16,8 @@ export default function MainBanner() {
     </StyledBanner>
   );
 }
+
+export default MainBanner;
 
 const StyledBanner = styled.div`
   width: clamp(1040px, 100%, 1920px);

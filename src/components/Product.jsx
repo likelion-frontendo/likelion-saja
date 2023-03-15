@@ -2,11 +2,11 @@ import React from "react";
 import styled from "styled-components";
 import test from "@/assets/test.jpg";
 
-export default function Product() {
+function Product() {
   return (
     <StyledProductContainer>
       <a href="">
-        <img src={test}></img>
+        <img src={test} alt="상품 이미지"></img>
       </a>
       <span className="title">버버리가방</span>
       <span className="price">20,000원</span>
@@ -15,6 +15,8 @@ export default function Product() {
     </StyledProductContainer>
   );
 }
+
+export default Product;
 
 const StyledProductContainer = styled.div`
   display: flex;
@@ -32,7 +34,6 @@ const StyledProductContainer = styled.div`
   }
 
   .title {
-    display: block;
     font-style: normal;
     margin-top: 12px;
     font-weight: 400;
@@ -68,7 +69,6 @@ const StyledProductContainer = styled.div`
   .interest {
     display: block;
     font-style: normal;
-    color: #212529;
     margin-top: 3px;
     font-size: 12px;
     line-height: 14px;

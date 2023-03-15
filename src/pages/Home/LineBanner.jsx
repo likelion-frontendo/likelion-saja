@@ -2,7 +2,7 @@ import React from "react";
 import BannerImg from "@/assets/lineBanner.svg";
 import styled from "styled-components";
 
-export default function LineBanner() {
+function LineBanner() {
   return (
     <StyledLineBanner>
       <a href="">
@@ -11,6 +11,8 @@ export default function LineBanner() {
     </StyledLineBanner>
   );
 }
+
+export default LineBanner;
 
 const StyledLineBanner = styled.div`
   margin: 0 auto;
