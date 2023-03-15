@@ -1,11 +1,12 @@
 import styled from "styled-components/macro";
+import profile from "@/assets/Mypage/유네찌.png";
 import {SidebarBottom} from "@/pages/Mypage/SidebarBottom";
 
 export function SidebarTop() {
   return (
     <MypageSide>
       <div className="profile">
-        <img src={require("@/assets/Mypage/유네찌.png")} alt="프로필 이미지"></img>
+        <img src={profile} alt="프로필 이미지"></img>
         <p className="profileName">유미</p>
         <p className="profileNum">#1817221</p>
       </div>
