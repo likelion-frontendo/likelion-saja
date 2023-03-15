@@ -1,13 +1,14 @@
 import React from "react";
 import styled from "styled-components";
 import test from "@/assets/test.jpg";
+import {Link} from "react-router-dom";
 
-function Product() {
+export function Product() {
   return (
     <StyledProductContainer>
-      <a href="">
+      <Link to="/">
         <img src={test} alt="상품 이미지"></img>
-      </a>
+      </Link>
       <span className="title">버버리가방</span>
       <span className="price">20,000원</span>
       <span className="location">부산 북구 만덕제2동</span>
@@ -15,8 +16,6 @@ function Product() {
     </StyledProductContainer>
   );
 }
-
-export default Product;
 
 const StyledProductContainer = styled.div`
   display: flex;

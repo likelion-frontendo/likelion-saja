@@ -1,8 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 import Product from "@/components/Product";
+import {Link} from "react-router-dom";
 
-function MainProduct() {
+export function MainProduct() {
   return (
     <StyledProduct>
       <div className="inner">
@@ -17,15 +18,13 @@ function MainProduct() {
           <Product />
           <Product />
         </div>
-        <a href="">
+        <Link to="/">
           <span className="popularProduct">인기매물 더 보기</span>
-        </a>
+        </Link>
       </div>
     </StyledProduct>
   );
 }
-
-export default MainProduct;
 
 const StyledProduct = styled.div`
   .inner {
@@ -50,12 +49,6 @@ const StyledProduct = styled.div`
     grid-template-columns: repeat(4, 1fr);
     gap: 55px;
     justify-items: center;
-  }
-
-  a {
-    text-decoration: none;
-    cursor: pointer;
-    color: inherit;
   }
 
   .popularProduct {

@@ -1,14 +1,15 @@
 import React from "react";
 import styled from "styled-components";
 import test from "@/assets/test.jpg";
+import {Link} from "react-router-dom";
 
-function Store() {
+export function Store() {
   return (
     <StyledStoreContainer>
       <div className="storeInner">
-        <a href="">
+        <Link to="/">
           <img src={test} alt="상품 이미지"></img>
-        </a>
+        </Link>
         <div className="storeContainer">
           <div className="storeInfo">
             <span className="title">임은하푸드 인천창고</span>
@@ -28,8 +29,6 @@ function Store() {
     </StyledStoreContainer>
   );
 }
-
-export default Store;
 
 const StyledStoreContainer = styled.div`
   display: flex;

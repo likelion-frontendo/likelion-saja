@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
-import Store from "./Store";
+import Store from "@/pages/Home/Store";
 
-function MainStore() {
+export function MainStore() {
   return (
     <StyledStore>
       <div className="inner">
@@ -31,8 +31,6 @@ function MainStore() {
     </StyledStore>
   );
 }
-
-export default MainStore;
 
 const StyledStore = styled.div`
   margin-bottom: 80px;
