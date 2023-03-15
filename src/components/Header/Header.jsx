@@ -33,7 +33,7 @@ const StyledHeader = styled.header`
   display: flex;
   width: 1200px;
   height: 64px;
-  justify-content: space-between;
+  justify-content: space-around;
   margin-top: 10px;
   line-height: 64px;
   position: fixed;
@@ -43,6 +43,7 @@ const StyledHeader = styled.header`
   img {
     width: 180px;
     height: 64px;
+    margin-left: 0;
   }
 
   li {
@@ -56,6 +57,7 @@ const StyledHeader = styled.header`
     width: 100px;
     height: 40px;
     margin: 12px 16px;
+    margin-right: 0;
     border-radius: 8px;
     border: none;
     font-weight: 600;
