@@ -1,15 +1,16 @@
-import MainBanner from "@/pages/Home/MainBanner";
-import MainProduct from "@/pages/Home/MainProduct";
-import LineBanner from "@/pages/Home/LineBanner";
-import MainStore from "@/pages/Home/MainStore";
+import {MainBanner, MainProduct, LineBanner, MainStore} from "@/pages/Home/index";
+import {Footer} from "@/components/Footer/Footer";
+import {Header} from "@/components/Header/Header";
 
 function App() {
   return (
     <div className="App">
+      <Header />
       <MainBanner />
       <MainProduct />
       <LineBanner />
       <MainStore />
+      <Footer />
     </div>
   );
 }
