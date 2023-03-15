@@ -1,28 +1,29 @@
 import sajaLogo from "@/assets/Home/logo.png";
+import {Link} from "react-router-dom";
 import styled from "styled-components";
 
 export function Header() {
   return (
     <StyledHeader>
-      <a className="imgContainer" href="/">
+      <Link to="/" className="imgContainer">
         <img src={sajaLogo} alt="사자 로고" />
-      </a>
+      </Link>
       <nav>
         <ul>
           <li>
-            <a href="/">중고거래</a>
+            <Link to="/">중고거래</Link>
           </li>
           <li>
-            <a href="/">동네가게</a>
+            <Link to="/">동네가게</Link>
           </li>
           <li>
-            <a href="/">인기매물</a>
+            <Link to="/">인기매물</Link>
           </li>
         </ul>
       </nav>
       <input type="text" placeholder="물품이나 동네를 검색해보세요"></input>
       <div>
-        <a href="/">로그인</a>
+        <Link to="/">로그인</Link>
         <button>회원가입</button>
       </div>
     </StyledHeader>
