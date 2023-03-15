@@ -43,4 +43,4 @@ const MypageSide = styled.div`
     font-size: 14px;
   }
 `;
-export default SidebarTop;
+export {SidebarTop};

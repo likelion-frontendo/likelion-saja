@@ -15,4 +15,4 @@ const Wrap = styled.div`
   margin: 60px auto 0 auto;
   background-color: lightpink;
 `;
-export default Mypage;
+export {Mypage};
