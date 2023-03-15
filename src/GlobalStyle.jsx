@@ -18,5 +18,10 @@ export const GlobalStyle = createGlobalStyle`
         font-family: inherit;
       }
     }
+
+    a {
+      text-decoration: none; 
+      outline: none
+    }
   }
 `;
