@@ -10,7 +10,7 @@ export function FormInput({name, type, placeholder}) {
 }
 
 const StyledDiv = styled.div`
-  label {
+  & label {
     overflow: hidden;
     position: absolute;
     clip: rect(1px, 1px, 1px, 1px);
@@ -23,7 +23,7 @@ const StyledDiv = styled.div`
     white-space: nowrap;
   }
 
-  input {
+  & input {
     width: 340px;
     height: 50px;
     font-size: 16px;
