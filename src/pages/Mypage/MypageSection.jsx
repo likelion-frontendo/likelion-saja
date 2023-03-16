@@ -1,5 +1,5 @@
 import styled from "styled-components/macro";
-import {SectionProfileInfo, MannerTemperature, SectionInfoCount, Compliment} from "@/pages/Mypage/";
+import {SectionProfileInfo, MannerTemperature, SectionInfoCount, Compliment, MypageReview} from "@/pages/Mypage/";
 
 export function Section() {
   return (
@@ -8,13 +8,15 @@ export function Section() {
       <SectionProfileInfo></SectionProfileInfo>
       <MannerTemperature></MannerTemperature>
       <SectionInfoCount></SectionInfoCount>
-      <Compliment></Compliment>
+      <div className="SectionItemReview">
+        <Compliment></Compliment>
+        <MypageReview></MypageReview>
+      </div>
     </MypageSection>
   );
 }
 
 const MypageSection = styled.div`
-  background-color: lightcyan;
   width: 816px;
   height: 100vh;
   margin-left: 24px;
@@ -26,5 +28,8 @@ const MypageSection = styled.div`
     border-bottom: 1px solid #dcdee3;
     padding-bottom: 16px;
     text-align: center;
+  }
+  & .SectionItemReview {
+    display: flex;
   }
 `;

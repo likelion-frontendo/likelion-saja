@@ -15,8 +15,6 @@ const Wrap = styled.div`
   width: 1056px;
   height: 100vh;
   margin: 60px auto 0 auto;
-  background-color: lightpink;
-
   & .ListTitle {
     height: 60px;
     background-color: #f8e1db;
