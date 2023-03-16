@@ -33,11 +33,10 @@ export function Header() {
 const StyledHeader = styled.header`
   background-color: white;
   display: flex;
-  width: 1200px;
+  width: 100%;
   height: 64px;
-  justify-content: space-around;
+  justify-content: center;
   top: 0;
-  margin-top: 0;
   line-height: 64px;
   position: fixed;
   left: 50%;
@@ -50,9 +49,13 @@ const StyledHeader = styled.header`
     margin-left: 0;
   }
 
+  nav {
+    margin-left: 20px;
+  }
+
   li {
     float: left;
-    margin: 0 16px;
+    margin: 0;
   }
 
   button {
@@ -61,7 +64,7 @@ const StyledHeader = styled.header`
     width: 100px;
     height: 40px;
     margin: 12px 16px;
-    margin-right: 0;
+    margin: 0;
     border-radius: 8px;
     border: none;
     font-weight: 600;
@@ -71,6 +74,8 @@ const StyledHeader = styled.header`
   input {
     width: 400px;
     height: 40px;
+
+    margin: 0 24px;
     margin-top: 12px;
     border-radius: 6px;
     border: none;
@@ -87,6 +92,7 @@ const StyledHeader = styled.header`
     height: 24px;
     font-weight: 700;
     font-size: 18px;
+    margin: 0 20px;
   }
   a:hover {
     color: #eca997;
@@ -95,5 +101,6 @@ const StyledHeader = styled.header`
   .imgContainer {
     width: 150px;
     height: 64px;
+    margin-left: 0;
   }
 `;
