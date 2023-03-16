@@ -16,7 +16,7 @@ export function LineBanner() {
 const StyledLineBanner = styled.div`
   margin: 0 auto;
 
-  img {
+  & img {
     margin: 0 auto;
     display: block;
     width: 1056px;
