@@ -73,6 +73,7 @@ export function Footer() {
 }
 
 const StyledFooter = styled.footer`
+  background-color: white;
   display: flex;
   width: 768px;
   margin: 0 auto;

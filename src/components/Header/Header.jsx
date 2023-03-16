@@ -31,6 +31,7 @@ export function Header() {
 }
 
 const StyledHeader = styled.header`
+  background-color: white;
   display: flex;
   width: 1200px;
   height: 64px;
