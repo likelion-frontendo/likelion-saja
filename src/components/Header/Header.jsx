@@ -36,11 +36,13 @@ const StyledHeader = styled.header`
   width: 1200px;
   height: 64px;
   justify-content: space-around;
-  margin-top: 10px;
+  top: 0;
+  margin-top: 0;
   line-height: 64px;
   position: fixed;
   left: 50%;
   transform: translate(-50%, 0);
+  z-index: 1;
 
   img {
     width: 180px;

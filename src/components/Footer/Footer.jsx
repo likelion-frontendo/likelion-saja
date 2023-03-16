@@ -78,6 +78,7 @@ const StyledFooter = styled.footer`
   width: 768px;
   margin: 0 auto;
   justify-content: space-between;
+  padding-bottom: 100px;
 
   div {
     margin: 6px 0;
