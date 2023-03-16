@@ -1,6 +1,5 @@
 import styled from "styled-components/macro";
-import {SectionProfileInfo} from "@/pages/Mypage/SectionProfileInfo";
-import {MannerTemperature} from "@/pages/Mypage/MannerTemperature";
+import {SectionProfileInfo, MannerTemperature, SectionInfoCount} from "@/pages/Mypage/";
 
 export function Section() {
   return (
@@ -8,6 +7,7 @@ export function Section() {
       <h1>프로필</h1>
       <SectionProfileInfo></SectionProfileInfo>
       <MannerTemperature></MannerTemperature>
+      <SectionInfoCount></SectionInfoCount>
     </MypageSection>
   );
 }
