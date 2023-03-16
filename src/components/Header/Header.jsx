@@ -5,9 +5,12 @@ import styled from "styled-components";
 export function Header() {
   return (
     <StyledHeader>
-      <Link to="/" className="imgContainer">
-        <img src={sajaLogo} alt="사자 로고" />
-      </Link>
+      <h1>
+        <Link to="/" className="imgContainer">
+          <img src={sajaLogo} alt="사자 마켓" />
+        </Link>
+      </h1>
+
       <nav>
         <ul>
           <li>
