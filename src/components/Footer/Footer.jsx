@@ -120,7 +120,7 @@ const StyledFooter = styled.footer`
     float: left;
   }
 
-  .aContainer {
+  & .aContainer {
     margin-top: 20px;
   }
 `;
