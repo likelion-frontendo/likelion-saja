@@ -97,7 +97,6 @@ const StyledFooter = styled.footer`
 
   span {
     color: #868b94;
-
     font-size: 13.008px;
   }
 

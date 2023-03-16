@@ -74,7 +74,6 @@ const StyledHeader = styled.header`
   input {
     width: 400px;
     height: 40px;
-
     margin: 0 24px;
     margin-top: 12px;
     border-radius: 6px;
