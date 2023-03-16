@@ -8,80 +8,91 @@ import {Link} from "react-router-dom";
 export function Footer() {
   return (
     <StyledFooter>
-      <section className="container">
-        <section>
-          <div>
-            <span>
-              <b>대표</b> 김용현, 황도연
-            </span>
-            <span> | </span>
-            <span>
-              <b>사업자 번호</b> 375-87-00088
-            </span>
-          </div>
-          <div>
-            <span>
-              <b>직업정보제공사업 신고번호</b> 2016-서울서초-0051
-            </span>
-          </div>
-          <address>
+      <hr />
+      <div className="sectionContainer">
+        <section className="container">
+          <section>
             <div>
               <span>
-                <b>주소</b> 서울특별시 구로구 디지털로 30길 28, 609호(당근서비스)
+                <b>대표</b> 김용현, 황도연
+              </span>
+              <span> | </span>
+              <span>
+                <b>사업자 번호</b> 375-87-00088
               </span>
             </div>
-            <span>
-              <b>전화</b> 1544-9796
-            </span>
-            <span> | </span>
-            <span>
-              <b>고객문의</b> cs@daangnservice.com
-            </span>
-          </address>
+            <div>
+              <span>
+                <b>직업정보제공사업 신고번호</b> 2016-서울서초-0051
+              </span>
+            </div>
+            <address>
+              <div>
+                <span>
+                  <b>주소</b> 서울특별시 구로구 디지털로 30길 28, 609호(당근서비스)
+                </span>
+              </div>
+              <span>
+                <b>전화</b> 1544-9796
+              </span>
+              <span> | </span>
+              <span>
+                <b>고객문의</b> cs@daangnservice.com
+              </span>
+            </address>
+          </section>
+          <section className="aContainer">
+            <Link to={"#"}>제휴 문의</Link>
+            <Link to={"#"}>광고 문의</Link>
+            <Link to={"#"}>PR 문의</Link>
+            <Link to={"#"}>IR 문의</Link>
+          </section>
+          <section className="aContainer">
+            <Link to={"#"}>이용약관</Link>
+            <Link to={"#"} className="unique">
+              개인정보처리방침
+            </Link>
+            <Link to={"#"}>위치기반서비스 이용약관</Link>
+            <Link to={"#"}>이용자보호 비전과 계획</Link>
+          </section>
         </section>
-        <section className="aContainer">
-          <Link to={"#"}>제휴 문의</Link>
-          <Link to={"#"}>광고 문의</Link>
-          <Link to={"#"}>PR 문의</Link>
-          <Link to={"#"}>IR 문의</Link>
-        </section>
-        <section className="aContainer">
-          <Link to={"#"}>이용약관</Link>
-          <Link to={"#"} className="unique">
-            개인정보처리방침
+        <section className="container">
+          <Link to={"#"}>
+            <img src={facebook} alt="" />
           </Link>
-          <Link to={"#"}>위치기반서비스 이용약관</Link>
-          <Link to={"#"}>이용자보호 비전과 계획</Link>
+          <Link to={"#"}>
+            <img src={instargram} alt="" />
+          </Link>
+          <Link to={"#"}>
+            <img src={youtube} alt="" />
+          </Link>
+          <Link to={"#"}>
+            <img src={naverblog} alt="" />
+          </Link>
         </section>
-      </section>
-      <section className="container">
-        <Link to={"#"}>
-          <img src={facebook} alt="" />
-        </Link>
-        <Link to={"#"}>
-          <img src={instargram} alt="" />
-        </Link>
-        <Link to={"#"}>
-          <img src={youtube} alt="" />
-        </Link>
-        <Link to={"#"}>
-          <img src={naverblog} alt="" />
-        </Link>
-      </section>
+      </div>
     </StyledFooter>
   );
 }
 
 const StyledFooter = styled.footer`
   background-color: white;
-  display: flex;
-  width: 768px;
+
+  width: 100%;
   margin: 0 auto;
-  justify-content: space-between;
   padding-bottom: 100px;
 
-  div {
-    margin: 6px 0;
+  hr {
+    border: 1px solid #eaebee;
+  }
+
+  .sectionContainer {
+    position: relative;
+    justify-content: space-between;
+    width: 768px;
+    margin: 6px auto;
+    display: flex;
+    padding-top: 60px;
   }
 
   span {
