@@ -77,16 +77,15 @@ export function Footer() {
 
 const StyledFooter = styled.footer`
   background-color: white;
-
   width: 100%;
   margin: 0 auto;
   padding-bottom: 100px;
 
-  hr {
+  & hr {
     border: 1px solid #eaebee;
   }
 
-  .sectionContainer {
+  & .sectionContainer {
     position: relative;
     justify-content: space-between;
     width: 768px;
@@ -95,17 +94,17 @@ const StyledFooter = styled.footer`
     padding-top: 60px;
   }
 
-  span {
+  & span {
     color: #868b94;
     font-size: 13.008px;
   }
 
-  b {
+  & b {
     font-weight: 700;
     font-size: 13.008px;
   }
 
-  a {
+  & a {
     margin: 0 14px;
     text-decoration: none;
     margin-left: 0;
@@ -114,10 +113,10 @@ const StyledFooter = styled.footer`
     font-size: 13.008px;
   }
 
-  .unique {
+  & .unique {
     color: rgb(77, 81, 89);
   }
-  .container {
+  & .container {
     float: left;
   }
 

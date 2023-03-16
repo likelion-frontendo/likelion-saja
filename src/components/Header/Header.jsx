@@ -43,22 +43,22 @@ const StyledHeader = styled.header`
   transform: translate(-50%, 0);
   z-index: 1;
 
-  img {
+  & img {
     width: 180px;
     height: 64px;
     margin-left: 0;
   }
 
-  nav {
+  & nav {
     margin-left: 20px;
   }
 
-  li {
+  & li {
     float: left;
     margin: 0;
   }
 
-  button {
+  & button {
     background-color: #6c816d;
     color: white;
     width: 100px;
@@ -71,7 +71,7 @@ const StyledHeader = styled.header`
     font-size: 18px;
   }
 
-  input {
+  & input {
     width: 400px;
     height: 40px;
     margin: 0 24px;
@@ -84,7 +84,7 @@ const StyledHeader = styled.header`
     font-size: 16px;
   }
 
-  a {
+  & a {
     text-decoration-line: none;
     color: black;
     width: 64px;
@@ -93,11 +93,12 @@ const StyledHeader = styled.header`
     font-size: 18px;
     margin: 0 20px;
   }
-  a:hover {
+
+  & a:hover {
     color: #eca997;
   }
 
-  .imgContainer {
+  & .imgContainer {
     width: 150px;
     height: 64px;
     margin-left: 0;
