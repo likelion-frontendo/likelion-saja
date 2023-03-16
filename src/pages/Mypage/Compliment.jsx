@@ -83,9 +83,10 @@ const SectionCompliment = styled.div`
   }
   & div ul {
     width: 316px;
-    height: 332px;
+    height: 340px;
     background-image: url(${yellowbubble});
-    background-size: 320px 330px;
+    background-repeat: no-repeat;
+    background-size: 320px 340px;
     margin-top: 24px;
     color: #6c816d;
     /* padding: 24px 0 0 40px; */
@@ -104,7 +105,7 @@ const SectionCompliment = styled.div`
   }
   & div ul li {
     font-size: 14px;
-    padding: 12px 24px 10px 24px;
+    padding: 10px 24px 10px 24px;
     border-bottom: 1px solid #eee7c2;
     display: flex;
     justify-content: space-between;

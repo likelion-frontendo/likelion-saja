@@ -13,7 +13,7 @@ export function Mypage() {
 const Wrap = styled.div`
   display: flex;
   width: 1056px;
-  height: 100vh;
+  height: 1558px;
   margin: 60px auto 0 auto;
   & .ListTitle {
     height: 60px;

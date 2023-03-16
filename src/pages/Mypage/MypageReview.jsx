@@ -12,7 +12,7 @@ export function MypageReview() {
         <span>구매 후기</span>
       </div>
       <div>
-        <ul className="reviewlist">
+        <ul className="reviewList">
           <li>
             <img src={user01} alt="유저 이미지" className="userImage"></img>
             <span className="reviewBubble">거래 감사합니다~~!</span>
@@ -51,6 +51,9 @@ const BuyReview = styled.div`
     border-radius: 50%;
     object-fit: cover;
   }
+  & div ul {
+    padding-top: 16px;
+  }
   & div ul li {
     width: 396px;
     display: flex;
@@ -63,6 +66,7 @@ const BuyReview = styled.div`
     width: 330px;
     height: 50px;
     background-image: url(${yellowbubble});
+    background-repeat: no-repeat;
     background-size: 100%;
     margin-left: 24px;
     padding-left: 40px;
