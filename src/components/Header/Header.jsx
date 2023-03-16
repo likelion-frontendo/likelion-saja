@@ -31,43 +31,50 @@ export function Header() {
 }
 
 const StyledHeader = styled.header`
+  background-color: white;
   display: flex;
-  width: 1200px;
+  width: 100%;
   height: 64px;
-  justify-content: space-around;
-  margin-top: 10px;
+  justify-content: center;
+  top: 0;
   line-height: 64px;
   position: fixed;
   left: 50%;
   transform: translate(-50%, 0);
+  z-index: 1;
 
-  img {
+  & img {
     width: 180px;
     height: 64px;
     margin-left: 0;
   }
 
-  li {
-    float: left;
-    margin: 0 16px;
+  & nav {
+    margin-left: 20px;
   }
 
-  button {
+  & li {
+    float: left;
+    margin: 0;
+  }
+
+  & button {
     background-color: #6c816d;
     color: white;
     width: 100px;
     height: 40px;
     margin: 12px 16px;
-    margin-right: 0;
+    margin: 0;
     border-radius: 8px;
     border: none;
     font-weight: 600;
     font-size: 18px;
   }
 
-  input {
+  & input {
     width: 400px;
     height: 40px;
+    margin: 0 24px;
     margin-top: 12px;
     border-radius: 6px;
     border: none;
@@ -77,20 +84,23 @@ const StyledHeader = styled.header`
     font-size: 16px;
   }
 
-  a {
+  & a {
     text-decoration-line: none;
     color: black;
     width: 64px;
     height: 24px;
     font-weight: 700;
     font-size: 18px;
+    margin: 0 20px;
   }
-  a:hover {
+
+  & a:hover {
     color: #eca997;
   }
 
-  .imgContainer {
+  & .imgContainer {
     width: 150px;
     height: 64px;
+    margin-left: 0;
   }
 `;
