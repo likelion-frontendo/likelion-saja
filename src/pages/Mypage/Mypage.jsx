@@ -16,4 +16,15 @@ const Wrap = styled.div`
   height: 100vh;
   margin: 60px auto 0 auto;
   background-color: lightpink;
+
+  & .ListTitle {
+    height: 60px;
+    background-color: #f8e1db;
+    color: #6c816d;
+    font-weight: 500;
+  }
+  & .ListTitle span {
+    margin-left: 24px;
+    line-height: 60px;
+  }
 `;

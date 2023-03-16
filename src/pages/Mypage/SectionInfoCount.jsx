@@ -3,7 +3,7 @@ import styled from "styled-components/macro";
 export function SectionInfoCount() {
   return (
     <InfoCount>
-      <div className="InfoCountListTitle">
+      <div className="ListTitle">
         <span>내 정보</span>
       </div>
       <ul className="InfoCountListItem">
@@ -30,17 +30,9 @@ export function SectionInfoCount() {
 
 const InfoCount = styled.div`
   width: 100%;
-  margin-top: 40px;
-  & .InfoCountListTitle {
-    height: 60px;
-    background-color: #f8e1db;
+  margin-top: 60px;
+  & .ListTitle {
     border-radius: 12px 12px 0 0;
-    color: #6c816d;
-    font-weight: 500;
-  }
-  & .InfoCountListTitle span {
-    margin-left: 24px;
-    line-height: 60px;
   }
   & .InfoCountListItem {
     display: flex;
