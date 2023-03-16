@@ -15,7 +15,7 @@ const StyledLink = styled.div `
   align-items: center;
   flex-flow: column;
 
-    .register {
+    & .register {
       height: 54px;
       width: 340px;
       line-height: 54px;
