@@ -1,8 +1,8 @@
 import React from "react";
-import BannerImg from "@/assets/banner01.svg";
 import styled from "styled-components";
 import {Swiper, SwiperSlide} from "swiper/react";
 import {Link} from "react-router-dom";
+import BannerImg from "@/assets/banner01.svg";
 
 export function MainBanner() {
   return (
