@@ -1,25 +1,28 @@
 import React from "react";
 import styled from "styled-components";
 import {Swiper, SwiperSlide} from "swiper/react";
-import {Navigation, Pagination, Scrollbar, A11y, Autoplay} from "swiper";
-import {Link} from "react-router-dom";
-import BannerImg from "@/assets/banner01.svg";
+import {Autoplay} from "swiper";
+import "swiper/css";
+import BannerImg from "@/assets/Home/banner01.svg";
+import BannerImg2 from "@/assets/Home/banner02.svg";
+import BannerImg3 from "@/assets/Home/banner03.svg";
+import BannerImg4 from "@/assets/Home/banner04.svg";
 
 export function MainBanner() {
   return (
     <StyledBanner>
       <Swiper modules={[Autoplay]} autoplay={({speed: 500}, {disableOnInteraction: false})}>
         <SwiperSlide>
-          <img src={BannerImg} alt="동네가게 바로가기 배너" />
+          <img src={BannerImg} alt="동네가게 배너" />
         </SwiperSlide>
         <SwiperSlide>
-          <img src={BannerImg} alt="동네가게 바로가기 배너" />
+          <img src={BannerImg2} alt="당근 알바 배너" />
         </SwiperSlide>
         <SwiperSlide>
-          <img src={BannerImg} alt="동네가게 바로가기 배너" />
+          <img src={BannerImg3} alt="부동산 직거래 배너" />
         </SwiperSlide>
         <SwiperSlide>
-          <img src={BannerImg} alt="동네가게 바로가기 배너" />
+          <img src={BannerImg4} alt="중고차 직거래 배너" />
         </SwiperSlide>
       </Swiper>
     </StyledBanner>

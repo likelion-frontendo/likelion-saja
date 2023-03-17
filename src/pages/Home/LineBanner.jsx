@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import {Link} from "react-router-dom";
-import BannerImg from "@/assets/lineBanner.svg";
+import BannerImg from "@/assets/Home/lineBanner.svg";
 
 export function LineBanner() {
   return (
