@@ -25,7 +25,7 @@ export function Header() {
         </ul>
       </nav>
       <input type="text" placeholder="물품이나 동네를 검색해보세요"></input>
-      <div>
+      <div className="buttonContainer">
         <button aria-label="로그인" className="loginButton">
           로그인
         </button>
@@ -58,6 +58,7 @@ const StyledHeader = styled.header`
 
   & nav {
     margin-left: 20px;
+    min-width: 310px;
   }
 
   & li {
@@ -74,6 +75,10 @@ const StyledHeader = styled.header`
     border: none;
     font-weight: 600;
     font-size: 18px;
+  }
+
+  & .buttonContainer {
+    min-width: 200px;
   }
 
   & .loginButton {
