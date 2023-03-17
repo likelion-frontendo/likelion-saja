@@ -14,7 +14,7 @@ const StyledButton = styled.div `
   align-items: center;
   flex-flow: column;
 
-    button {
+    & button {
       height: 54px;
       width: 340px;
       line-height: 54px;

@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import test from "@/assets/test.jpg";
 import {Link} from "react-router-dom";
+import test from "@/assets/test.jpg";
 
 export function Store() {
   return (
@@ -36,7 +36,7 @@ const StyledStoreContainer = styled.div`
   width: 368px;
   border-bottom: 1px solid #eaebee;
 
-  .storeInner {
+  & .storeInner {
     display: flex;
     flex-direction: row;
     height: 125px;
@@ -45,26 +45,26 @@ const StyledStoreContainer = styled.div`
     margin: 8px 0;
   }
 
-  img {
+  & img {
     width: 80px;
     height: 80px;
     border-radius: 100px;
     object-fit: cover;
   }
 
-  .storeContainer {
+  & .storeContainer {
     display: flex;
     flex-direction: column;
     gap: 4px;
   }
 
-  .storeInfo {
+  & .storeInfo {
     display: flex;
     gap: 4px;
     align-items: center;
   }
 
-  .title {
+  & .title {
     font-style: normal;
     font-weight: 700;
     font-size: 18px;
@@ -72,7 +72,7 @@ const StyledStoreContainer = styled.div`
     color: #212124;
   }
 
-  .location {
+  & .location {
     font-style: normal;
     font-weight: 400;
     font-size: 14px;
@@ -80,7 +80,7 @@ const StyledStoreContainer = styled.div`
     color: #868b94;
   }
 
-  .description {
+  & .description {
     display: -webkit-box;
     overflow: hidden;
     width: 240px;
@@ -95,7 +95,7 @@ const StyledStoreContainer = styled.div`
     color: #212124;
   }
 
-  .storeExtraInfo {
+  & .storeExtraInfo {
     display: flex;
     flex-direction: row;
     gap: 4px;

@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import test from "@/assets/test.jpg";
 import {Link} from "react-router-dom";
+import test from "@/assets/test.jpg";
 
 export function Product() {
   return (
@@ -23,7 +23,7 @@ const StyledProductContainer = styled.div`
   width: 212px;
   height: 320px;
 
-  img {
+  & img {
     border-radius: 12px;
     box-shadow: inset 0px 0px 0px 1px rgba(0, 0, 0, 0.15);
     display: block;
@@ -32,7 +32,7 @@ const StyledProductContainer = styled.div`
     object-fit: cover;
   }
 
-  .title {
+  & .title {
     font-style: normal;
     margin-top: 12px;
     font-weight: 400;
@@ -46,7 +46,7 @@ const StyledProductContainer = styled.div`
     text-overflow: ellipsis;
   }
 
-  .price {
+  & .price {
     display: block;
     font-style: normal;
     color: #212529;
@@ -56,7 +56,7 @@ const StyledProductContainer = styled.div`
     line-height: 22px;
   }
 
-  .location {
+  & .location {
     display: block;
     font-style: normal;
     color: #212529;
@@ -65,7 +65,7 @@ const StyledProductContainer = styled.div`
     line-height: 20px;
   }
 
-  .interest {
+  & .interest {
     display: block;
     font-style: normal;
     margin-top: 3px;

@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import {Product} from "@/components/Product";
+import {Product} from "@/components";
 import {Link} from "react-router-dom";
 
 export function MainProduct() {
@@ -27,12 +27,12 @@ export function MainProduct() {
 }
 
 const StyledProduct = styled.div`
-  .inner {
+  & .inner {
     margin: 65px auto 85px;
     width: 1056px;
   }
 
-  h2 {
+  & h2 {
     font-style: normal;
     font-weight: 700;
     font-size: 40px;
@@ -42,7 +42,7 @@ const StyledProduct = styled.div`
     color: #212529;
   }
 
-  .productContainer {
+  & .productContainer {
     margin-top: 85px;
     display: grid;
     grid-template-rows: repeat(2, 1fr);
@@ -51,7 +51,7 @@ const StyledProduct = styled.div`
     justify-items: center;
   }
 
-  .popularProduct {
+  & .popularProduct {
     margin-top: 55px;
     display: block;
     text-align: center;

@@ -1,18 +1,15 @@
-import {MainBanner, MainProduct, LineBanner, MainStore} from "@/pages/Home/index";
-import {Footer} from "@/components/Footer/Footer";
-import {Header} from "@/components/Header/Header";
+import { Routes, Route } from 'react-router-dom';
+import {Home, Login} from '@/pages';
+import { Mypage } from './pages/Mypage/Mypage';
 
 function App() {
-  return (
-    <div className="App">
-      <Header />
-      <MainBanner />
-      <MainProduct />
-      <LineBanner />
-      <MainStore />
-      <Footer />
-    </div>
-  );
+  return <div className="App">
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/mypage" element={<Mypage />} />
+      </Routes>
+  </div>;
 }
 
 export default App;

@@ -1,7 +1,5 @@
 import styled from 'styled-components/macro';
-import { FormInput } from '@/pages/Login/FormInput';
-import { Button } from '@/pages/Login/Button';
-import { LinkButton } from '@/pages/Login/LinkButton';
+import { Button, FormInput, LinkButton } from '@/pages/Login/index';
 
 export function Login() {
   return(
