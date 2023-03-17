@@ -1,7 +1,9 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import styled from "styled-components";
 import {Product} from "@/components";
 import {Link} from "react-router-dom";
+import {app} from "@/firebase/app";
+import {getFirestore, collection, getDocs} from "firebase/firestore";
 
 export function MainProduct() {
   return (
@@ -9,7 +11,7 @@ export function MainProduct() {
       <div className="inner">
         <h2>중고거래 인기 매물</h2>
         <div className="productContainer">
-          <Product />
+          <Product title={"버버리가방"} price={"20,000원"} location={"부산 북구 만덕제2동"} interest={"34"} />
           <Product />
           <Product />
           <Product />

@@ -11,7 +11,7 @@ import BannerImg4 from "@/assets/Home/banner04.svg";
 export function MainBanner() {
   return (
     <StyledBanner>
-      <Swiper modules={[Autoplay]} autoplay={({speed: 500}, {disableOnInteraction: false})}>
+      <Swiper modules={[Autoplay]} autoplay={({speed: 500}, {disableOnInteraction: false})} loop={true}>
         <SwiperSlide>
           <img src={BannerImg} alt="동네가게 배너" />
         </SwiperSlide>
