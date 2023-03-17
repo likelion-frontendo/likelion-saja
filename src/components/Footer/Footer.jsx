@@ -13,30 +13,30 @@ export function Footer() {
         <section className="container">
           <section>
             <div>
-              <span>
+              <span tabIndex={0}>
                 <b>대표</b> 김용현, 황도연
               </span>
               <span> | </span>
-              <span>
+              <span tabIndex={0}>
                 <b>사업자 번호</b> 375-87-00088
               </span>
             </div>
             <div>
-              <span>
+              <span tabIndex={0}>
                 <b>직업정보제공사업 신고번호</b> 2016-서울서초-0051
               </span>
             </div>
             <address>
               <div>
-                <span>
+                <span tabIndex={0}>
                   <b>주소</b> 서울특별시 구로구 디지털로 30길 28, 609호(당근서비스)
                 </span>
               </div>
-              <span>
+              <span tabIndex={0}>
                 <b>전화</b> 1544-9796
               </span>
               <span> | </span>
-              <span>
+              <span tabIndex={0}>
                 <b>고객문의</b> cs@daangnservice.com
               </span>
             </address>
