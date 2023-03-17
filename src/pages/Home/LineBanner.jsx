@@ -7,7 +7,7 @@ export function LineBanner() {
   return (
     <StyledLineBanner>
       <Link to="/">
-        <img src={BannerImg} alt="비즈프로필 만들기 라인 배너" />
+        <img src={BannerImg} alt="우리동네 알바찾기 라인 배너" />
       </Link>
     </StyledLineBanner>
   );
