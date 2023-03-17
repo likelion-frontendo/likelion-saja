@@ -17,7 +17,7 @@ export function SidebarTop() {
 
 const MypageSide = styled.div`
   position: sticky;
-  top: 65px;
+  top: 80px;
   width: 216px;
   height: 560px;
   & .profile {

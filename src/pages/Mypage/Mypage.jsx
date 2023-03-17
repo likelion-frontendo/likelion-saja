@@ -1,20 +1,27 @@
 import styled from "styled-components/macro";
 import {SidebarTop, Section} from "@/pages/Mypage/";
+import {Header, Footer} from "@/components";
 
 export function Mypage() {
   return (
     <Wrap>
-      <SidebarTop></SidebarTop>
-      <Section></Section>
+      <Header></Header>
+      <div>
+        <SidebarTop></SidebarTop>
+        <Section></Section>
+      </div>
+      <Footer></Footer>
     </Wrap>
   );
 }
 
 const Wrap = styled.div`
-  display: flex;
   width: 1056px;
-  height: 1558px;
-  margin: 60px auto 0 auto;
+  margin: 120px auto 0 auto;
+  & > div {
+    display: flex;
+    margin-bottom: 80px;
+  }
   & .ListTitle {
     height: 60px;
     background-color: #f8e1db;

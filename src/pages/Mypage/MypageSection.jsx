@@ -18,9 +18,7 @@ export function Section() {
 
 const MypageSection = styled.div`
   width: 816px;
-  height: 100vh;
   margin-left: 24px;
-
   & > h1 {
     font-size: 18px;
     color: #6c816d;
