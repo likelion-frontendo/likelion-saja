@@ -1,14 +1,11 @@
 import React from "react";
 import styled from "styled-components";
-import {Link} from "react-router-dom";
 import BannerImg from "@/assets/Home/lineBanner.svg";
 
 export function LineBanner() {
   return (
     <StyledLineBanner>
-      <Link to="/">
-        <img src={BannerImg} alt="우리동네 알바찾기 라인 배너" />
-      </Link>
+      <img src={BannerImg} alt="우리동네 알바찾기 라인 배너" />
     </StyledLineBanner>
   );
 }
