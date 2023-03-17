@@ -5,9 +5,12 @@ import styled from "styled-components";
 export function Header() {
   return (
     <StyledHeader>
-      <Link to="/" className="imgContainer">
-        <img src={sajaLogo} alt="사자 로고" />
-      </Link>
+      <h1>
+        <Link to="/" className="imgContainer">
+          <img src={sajaLogo} alt="사자 마켓" />
+        </Link>
+      </h1>
+
       <nav>
         <ul>
           <li>
@@ -22,9 +25,13 @@ export function Header() {
         </ul>
       </nav>
       <input type="text" placeholder="물품이나 동네를 검색해보세요"></input>
-      <div>
-        <Link to="/">로그인</Link>
-        <button>회원가입</button>
+      <div className="buttonContainer">
+        <button aria-label="로그인" className="loginButton">
+          로그인
+        </button>
+        <button aria-label="회원가입" className="registerButton">
+          회원가입
+        </button>
       </div>
     </StyledHeader>
   );
@@ -51,6 +58,7 @@ const StyledHeader = styled.header`
 
   & nav {
     margin-left: 20px;
+    min-width: 310px;
   }
 
   & li {
@@ -59,8 +67,6 @@ const StyledHeader = styled.header`
   }
 
   & button {
-    background-color: #6c816d;
-    color: white;
     width: 100px;
     height: 40px;
     margin: 12px 16px;
@@ -69,6 +75,19 @@ const StyledHeader = styled.header`
     border: none;
     font-weight: 600;
     font-size: 18px;
+  }
+
+  & .buttonContainer {
+    min-width: 200px;
+  }
+
+  & .loginButton {
+    color: black;
+    background-color: white;
+  }
+  & .registerButton {
+    background-color: #6c816d;
+    color: white;
   }
 
   & input {
