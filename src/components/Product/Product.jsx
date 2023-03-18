@@ -10,7 +10,7 @@ export function Product(props) {
         <img src={test} alt="상품 이미지"></img>
       </Link>
       <span className="title">{props.title}</span>
-      <span className="price">{props.price}</span>
+      <span className="price">{props.price}벨</span>
       <span className="location">{props.location}</span>
       <span className="interest">관심 {props.interest}</span>
     </StyledProductContainer>
