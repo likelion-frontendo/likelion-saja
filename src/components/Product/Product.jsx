@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 import {Link} from "react-router-dom";
-import test from "@/assets/test.jpg";
 
 export function Product(props) {
   return (
