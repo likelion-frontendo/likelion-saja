@@ -16,8 +16,6 @@ export function UseProductList() {
         querySnapshot.forEach((doc) => {
           const product = {id: doc.id, ...doc.data()};
           productList.push(product);
-          console.log(productList);
-          console.log(product.imgUrl);
         });
         setProducts(productList);
       })
