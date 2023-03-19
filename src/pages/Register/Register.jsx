@@ -46,7 +46,7 @@ const StyledMain = styled.main `
   & h2 {
     font-weight: 600;
     font-size: 22px;
-    margin: 40px 0;
+    margin: 80px 0 40px 0;
   }
 
   & .description {
