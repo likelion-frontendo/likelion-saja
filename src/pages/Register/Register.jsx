@@ -1,4 +1,4 @@
-import { Label, Heading2, Heading3 } from '@/pages/Register'
+import { Heading2, Heading3, Input, Label } from '@/pages/Register'
 import styled from 'styled-components'
 
 export function Register() {
@@ -6,7 +6,10 @@ export function Register() {
     <>
       <StyledMain>
         <Heading2>회원가입</Heading2>
-        <Heading3><Label name="이메일" label="이메일"></Label></Heading3>
+        <Heading3>
+          <Label name="이메일" label="이메일"><sup>*</sup></Label>
+        </Heading3>
+        <Input name="이메일" type="text" style={{width: '300px', height: '40px'}} />
       </StyledMain>
     </>
   )

@@ -1,6 +1,6 @@
 export function Label({name, label, children, ...rest}) {
   
   return(
-    <Label htmlFor={name}>{label}{children}</Label>
+    <label htmlFor={name}>{label}{children}</label>
   )
 }
