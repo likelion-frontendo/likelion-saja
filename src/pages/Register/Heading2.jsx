@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 export function Heading2({children, ...rest}) {
   return(
-    <StyledHeading2>{children}</StyledHeading2>
+    <StyledHeading2 {...rest}>{children}</StyledHeading2>
   )
 }
 
