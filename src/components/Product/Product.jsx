@@ -3,16 +3,16 @@ import styled from "styled-components";
 import {Link} from "react-router-dom";
 import test from "@/assets/test.jpg";
 
-export function Product() {
+export function Product(props) {
   return (
     <StyledProductContainer>
       <Link to="/">
         <img src={test} alt="상품 이미지"></img>
       </Link>
-      <span className="title">버버리가방</span>
-      <span className="price">20,000원</span>
-      <span className="location">부산 북구 만덕제2동</span>
-      <span className="interest">관심 34</span>
+      <span className="title">{props.title}</span>
+      <span className="price">{props.price}벨</span>
+      <span className="location">{props.location}</span>
+      <span className="interest">관심 {props.interest}</span>
     </StyledProductContainer>
   );
 }
