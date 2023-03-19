@@ -1,13 +1,12 @@
 import React from "react";
 import styled from "styled-components";
 import {Link} from "react-router-dom";
-import test from "@/assets/test.jpg";
 
 export function Product(props) {
   return (
     <StyledProductContainer>
       <Link to="/">
-        <img src={test} alt="상품 이미지"></img>
+        <img src={props.imgUrl} alt="상품 이미지"></img>
       </Link>
       <span className="title">{props.title}</span>
       <span className="price">{props.price}벨</span>

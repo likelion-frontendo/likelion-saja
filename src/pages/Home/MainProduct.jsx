@@ -1,29 +1,17 @@
 import React, {useState, useEffect} from "react";
 import styled from "styled-components";
-import {Product} from "@/components";
+import {Product, UseProductList} from "@/components";
 import {Link} from "react-router-dom";
-import {app} from "@/firebase/app";
-import {getFirestore, collection, getDocs} from "firebase/firestore";
 
 export function MainProduct() {
   return (
     <StyledProduct>
       <div className="inner">
         <h2>중고거래 인기 매물</h2>
-        <div className="productContainer">
-          <Product title={"버버리가방"} price={"20,000원"} location={"부산 북구 만덕제2동"} interest={"34"} />
-          <Product />
-          <Product />
-          <Product />
-          <Product />
-          <Product />
-          <Product />
-          <Product />
-        </div>
+        <UseProductList />
         <Link to="/">
           <span className="popularProduct">인기매물 더 보기</span>
         </Link>
-        <UseProductList />
       </div>
     </StyledProduct>
   );
@@ -66,35 +54,3 @@ const StyledProduct = styled.div`
     color: #212529;
   }
 `;
-
-function UseProductList() {
-  const [products, setProducts] = useState([]);
-
-  useEffect(() => {
-    const db = getFirestore(app);
-    const productsRef = collection(db, "Products");
-
-    getDocs(productsRef)
-      .then((querySnapshot) => {
-        const productList = [];
-        querySnapshot.forEach((doc) => {
-          const product = {id: doc.id, ...doc.data()};
-          productList.push(product);
-          console.log(productList);
-        });
-        setProducts(productList);
-      })
-      .catch((error) => {
-        console.log("Error getting documents: ", error);
-      });
-  }, []);
-
-  return (
-    <div className="test">
-      {products.map((product) => (
-        // <img src={product.imgUrl && storage.refFromURL(product.imgUrl).getDownloadURL()} alt={product.title} />
-        <Product key={product.id} title={product.title} price={product.price} location={"부산 북구 만덕제2동"} interest={product.interest} />
-      ))}
-    </div>
-  );
-}
