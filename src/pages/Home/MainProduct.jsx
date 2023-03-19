@@ -1,9 +1,6 @@
-import React, {useState, useEffect} from "react";
 import styled from "styled-components";
-import {Product} from "@/components";
+import {Product, UseProductList} from "@/components";
 import {Link} from "react-router-dom";
-import {app} from "@/firebase/app";
-import {getFirestore, collection, getDocs} from "firebase/firestore";
 
 export function MainProduct() {
   return (
@@ -66,35 +63,3 @@ const StyledProduct = styled.div`
     color: #212529;
   }
 `;
-
-function UseProductList() {
-  const [products, setProducts] = useState([]);
-
-  useEffect(() => {
-    const db = getFirestore(app);
-    const productsRef = collection(db, "Products");
-
-    getDocs(productsRef)
-      .then((querySnapshot) => {
-        const productList = [];
-        querySnapshot.forEach((doc) => {
-          const product = {id: doc.id, ...doc.data()};
-          productList.push(product);
-          console.log(productList);
-        });
-        setProducts(productList);
-      })
-      .catch((error) => {
-        console.log("Error getting documents: ", error);
-      });
-  }, []);
-
-  return (
-    <div className="test">
-      {products.map((product) => (
-        // <img src={product.imgUrl && storage.refFromURL(product.imgUrl).getDownloadURL()} alt={product.title} />
-        <Product key={product.id} title={product.title} price={product.price} location={"부산 북구 만덕제2동"} interest={product.interest} />
-      ))}
-    </div>
-  );
-}
