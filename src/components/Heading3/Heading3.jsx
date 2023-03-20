@@ -6,7 +6,7 @@ export function Heading3({children, ...rest}) {
   )
 }
 
-const StyledHeading3 = styled.h2`
+const StyledHeading3 = styled.h3`
   font-size: 16px;
   font-weight: 600;
 `
