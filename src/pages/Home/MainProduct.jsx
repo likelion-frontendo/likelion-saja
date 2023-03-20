@@ -1,6 +1,5 @@
-import React, {useState, useEffect} from "react";
 import styled from "styled-components";
-import {Product, UseProductList} from "@/components";
+import {UseProductList} from "@/components";
 import {Link} from "react-router-dom";
 
 export function MainProduct() {
