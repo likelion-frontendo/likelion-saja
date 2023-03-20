@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import styled from "styled-components/macro";
 
 export function Button({children, onClick}) {
@@ -10,14 +9,6 @@ export function Button({children, onClick}) {
     </StyledButton>
   );
 }
-
-Button.defaultProps = {
-  isSecondary: false,
-};
-
-Button.propTypes = {
-  isSecondary: PropTypes.bool,
-};
 
 const StyledButton = styled.div `
   display: flex;
