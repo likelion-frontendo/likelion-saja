@@ -7,20 +7,10 @@ export function MainProduct() {
     <StyledProduct>
       <div className="inner">
         <h2>중고거래 인기 매물</h2>
-        <div className="productContainer">
-          <Product title={"버버리가방"} price={"20,000원"} location={"부산 북구 만덕제2동"} interest={"34"} />
-          <Product />
-          <Product />
-          <Product />
-          <Product />
-          <Product />
-          <Product />
-          <Product />
-        </div>
+        <UseProductList />
         <Link to="/">
           <span className="popularProduct">인기매물 더 보기</span>
         </Link>
-        <UseProductList />
       </div>
     </StyledProduct>
   );

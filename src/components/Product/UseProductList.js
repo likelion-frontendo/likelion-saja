@@ -29,7 +29,6 @@ export function UseProductList() {
   return (
     <div className="test">
       {products.map((product) => (
-        // <img src={product.imgUrl && storage.refFromURL(product.imgUrl).getDownloadURL()} alt={product.title} />
         <Product key={product.id} imgUrl={product.imgUrl} title={product.title} price={product.price} location={"부산 북구 만덕제2동"} interest={product.interest} />
       ))}
     </div>

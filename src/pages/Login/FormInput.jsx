@@ -1,10 +1,10 @@
 import styled from 'styled-components/macro'
 
-export function FormInput({name, type, placeholder}) {
+export function FormInput({name, ...rest}) {
   return (
     <StyledDiv>
-      <label htmlFor={name}>{name}</label>
-      <input id={name} name={name} type={type} placeholder={placeholder}/>
+      <label>{name}</label>
+      <input {...rest}/>
     </StyledDiv>
   )
 }
