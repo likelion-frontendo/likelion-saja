@@ -1,6 +1,6 @@
-import styled from "styled-components/macro";
-import profile from "@/assets/Mypage/유네찌.png";
 import {Link} from "react-router-dom";
+import profile from "@/assets/Mypage/유네찌.png";
+import styled from "styled-components/macro";
 
 export function SectionProfileInfo() {
   return (
@@ -60,25 +60,31 @@ const ProfileInfoTop = styled.div`
     height: 140px;
     border-radius: 50%;
   }
+
   & .UserInfoList {
     display: flex;
   }
+
   & .UserInfoList ul {
     font-size: 16px;
     color: #4d5159;
     margin: auto 0 auto 16px;
   }
+
   & .UserInfoList ul:nth-child(1) {
     color: #6c816d;
     font-weight: 600;
     padding-left: 24px;
   }
+
   & .UserInfoList ul:nth-child(2) li {
     font-weight: 400;
   }
+
   & .UserInfoList ul li {
     margin-top: 8px;
   }
+
   & .ProfileNum {
     color: #868b94;
     margin-left: 8px;

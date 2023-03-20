@@ -31,14 +31,17 @@ export function SectionInfoCount() {
 const InfoCount = styled.div`
   width: 100%;
   margin-top: 60px;
+
   & .ListTitle {
     border-radius: 12px 12px 0 0;
   }
+
   & .InfoCountListItem {
     display: flex;
     border-radius: 0 0 12px 12px;
     border: 1px solid #f8e1db;
   }
+
   & .InfoCountListItem li {
     width: 204px;
     height: 100px;
@@ -46,9 +49,11 @@ const InfoCount = styled.div`
     color: #4d5159;
     padding: 24px;
   }
+
   & .InfoCountListItem li:nth-child(4) {
     border: 0;
   }
+
   & .InfoCountNum {
     color: #6c816d;
     font-weight: 600;

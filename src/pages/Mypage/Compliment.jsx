@@ -1,8 +1,8 @@
-import styled from "styled-components/macro";
 import raccoon from "@/assets/Mypage/너굴.svg";
 import raccoonIcon from "@/assets/Mypage/너굴.png";
 import user from "@/assets/Mypage/user.png";
 import yellowbubble from "@/assets/Mypage/yellowbubble.svg";
+import styled from "styled-components/macro";
 
 export function Compliment() {
   return (
@@ -74,13 +74,16 @@ const SectionCompliment = styled.div`
     width: 396px;
     border-radius: 12px;
   }
+
   & div > img {
     margin-top: 24px;
   }
+
   & div {
     display: flex;
     align-items: flex-start;
   }
+
   & div ul {
     width: 316px;
     height: 340px;
@@ -89,20 +92,22 @@ const SectionCompliment = styled.div`
     background-size: 320px 340px;
     margin-top: 24px;
     color: #6c816d;
-    /* padding: 24px 0 0 40px; */
     padding-left: 17px;
   }
+
   & div ul p {
     font-weight: 600;
     margin-bottom: 8px;
     margin: 24px 0 12px 24px;
   }
+
   & div ul p img {
     width: 24px;
     height: 24px;
     margin-left: 4px;
     vertical-align: middle;
   }
+
   & div ul li {
     font-size: 14px;
     padding: 10px 24px 10px 24px;
@@ -110,12 +115,14 @@ const SectionCompliment = styled.div`
     display: flex;
     justify-content: space-between;
   }
+
   & div ul li .userIcon {
     width: 16px;
     height: 16px;
     vertical-align: middle;
     margin-right: 4px;
   }
+
   & div ul li:nth-child(8) {
     border: 0;
   }

@@ -1,9 +1,9 @@
-import styled from "styled-components/macro";
 import yellowbubble from "@/assets/Mypage/yellowbubble.svg";
 import user01 from "@/assets/Mypage/뽀야미.png";
 import user02 from "@/assets/Mypage/미첼.png";
 import user03 from "@/assets/Mypage/쭈니.png";
 import user04 from "@/assets/Mypage/유네찌.png";
+import styled from "styled-components/macro";
 
 export function MypageReview() {
   return (
@@ -45,15 +45,18 @@ const BuyReview = styled.div`
     width: 396px;
     border-radius: 12px;
   }
+
   & .userImage {
     width: 50px;
     height: 50px;
     border-radius: 50%;
     object-fit: cover;
   }
+
   & div ul {
     padding-top: 16px;
   }
+
   & div ul li {
     width: 396px;
     display: flex;
@@ -61,6 +64,7 @@ const BuyReview = styled.div`
     color: #6c816d;
     font-size: 14px;
   }
+
   & .reviewBubble {
     display: inline-block;
     width: 330px;
