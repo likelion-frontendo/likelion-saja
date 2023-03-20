@@ -1,5 +1,5 @@
-import { Heading2, RegisterForm, RegisterTerms } from '@/pages/Register'
-import { Header, Footer } from '@/components'
+import { RegisterForm, RegisterTerms } from '@/pages/Register'
+import { Header, Footer, Heading2 } from '@/components'
 import styled from 'styled-components'
 
 export function Register() {

@@ -1,4 +1,4 @@
-import {Button} from "@/pages/Register"
+import {Button} from "@/components";
 import styled from 'styled-components';
 import {ReactComponent as CheckIcon} from "@/assets/Register/checkbutton-off.svg";
 

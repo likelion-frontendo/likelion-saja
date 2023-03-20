@@ -1,4 +1,5 @@
-import {Form, RegisterFormInput, Label, Button, Heading3} from "@/pages/Register"
+import {RegisterFormInput} from "@/pages/Register"
+import {Form, Button, Label, Heading3} from "@/components";
 import styled from 'styled-components'
 
 export function RegisterForm() {

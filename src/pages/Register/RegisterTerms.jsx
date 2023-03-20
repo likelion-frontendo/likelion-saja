@@ -1,4 +1,5 @@
-import {Button, Label, Heading3, RegisterCheckListItem} from '@/pages/Register'
+import {RegisterCheckListItem} from '@/pages/Register'
+import {Button, Label, Heading3} from "@/components";
 import {ReactComponent as ChevronRightIcon} from "@/assets/Register/chevron-right.svg"
 import styled from 'styled-components'
 
