@@ -1,25 +1,8 @@
 import {app} from "@/firebase/app";
 import {getFirestore, collection, getDocs, where, query} from "firebase/firestore";
-import React, {useState, useEffect} from "react";
-import {Product} from "@/components";
+import {useState, useEffect} from "react";
 
-export function UseProductList() {
-  const {isLoading, products} = useProducts();
-
-  if (isLoading) {
-    return <div role="alert">로딩 중...</div>;
-  }
-
-  return (
-    <div className="productContainer">
-      {products.map((product, index) => (
-        <Product key={index} imgUrl={product.imgUrl} title={product.title} price={product.price} location={product.location} interest={product.interest} />
-      ))}
-    </div>
-  );
-}
-
-function useProducts() {
+export function useProducts() {
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
