@@ -1,15 +1,19 @@
-import { Routes, Route } from 'react-router-dom';
-import {Home, Login} from '@/pages';
-import { Mypage } from './pages/Mypage/Mypage';
+import {Routes, Route} from "react-router-dom";
+import {Home, Login} from "@/pages";
+import {Mypage} from "./pages/Mypage/Mypage";
+import {Post} from "./pages/Post/Post";
 
 function App() {
-  return <div className="App">
+  return (
+    <div className="App">
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/mypage" element={<Mypage />} />
+        <Route path="/post" element={<Post />} />
       </Routes>
-  </div>;
+    </div>
+  );
 }
 
 export default App;
