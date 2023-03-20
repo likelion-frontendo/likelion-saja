@@ -1,6 +1,6 @@
-import { Routes, Route } from 'react-router-dom';
-import {Home, Login, Register} from '@/pages';
-import { Mypage } from './pages/Mypage/Mypage';
+import {Routes, Route} from "react-router-dom";
+import {Home, Login, Register} from "@/pages";
+import {Mypage} from "./pages/Mypage/Mypage";
 
 function App() {
   return (
@@ -12,7 +12,7 @@ function App() {
         <Route path="/mypage" element={<Mypage />} />
       </Routes>
     </div>
-  )
+  );
 }
 
 export default App;
