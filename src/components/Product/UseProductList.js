@@ -1,6 +1,6 @@
 import {app} from "@/firebase/app";
 import {useEffect} from "react";
-import {useRecoilState} from "recoil";
+import {useRecoilValue, selector, useSetRecoilState} from "recoil";
 import {getFirestore, collection, getDocs} from "firebase/firestore";
 import {Product} from "@/components";
 import styled from "styled-components";
@@ -12,7 +12,15 @@ export function UseProductList() {
     default: [],
   });
 
-  const [productList, setProductList] = useRecoilState(productListState);
+  const setProductList = useSetRecoilState(productListState);
+
+  const productListSlice = selector({
+    key: "productListSlice",
+    get: ({get}) => {
+      const productList = get(productListState);
+      return productList.slice(0, 8);
+    },
+  });
 
   useEffect(() => {
     const db = getFirestore(app);
@@ -33,8 +41,8 @@ export function UseProductList() {
   }, [setProductList]);
 
   return (
-    <StyledProductListContainer className="test">
-      {productList.map((product) => (
+    <StyledProductListContainer className="productContainer">
+      {useRecoilValue(productListSlice).map((product) => (
         <Product key={product.id} imgUrl={product.imgUrl} title={product.title} price={product.price} location={"부산 북구 만덕제2동"} interest={product.interest} className="item" />
       ))}
     </StyledProductListContainer>
@@ -42,14 +50,12 @@ export function UseProductList() {
 }
 
 const StyledProductListContainer = styled.div`
-  width: 1024px;
-  margin: 0 auto;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  margin-top: 86px;
-
-  & .item {
-    width: 25%;
+  & .productContainer {
+    margin-top: 85px;
+    display: grid;
+    grid-template-rows: repeat(2, 1fr);
+    grid-template-columns: repeat(4, 1fr);
+    gap: 55px;
+    justify-items: center;
   }
 `;
