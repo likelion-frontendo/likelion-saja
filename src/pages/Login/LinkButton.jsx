@@ -1,10 +1,10 @@
 import styled from "styled-components/macro";
 import { Link } from 'react-router-dom';
 
-export function LinkButton() {
+export function LinkButton({to,children}) {
   return (
     <StyledLink>
-      <Link to="./" className="register" >회원가입</Link>
+      <Link to={to} className="register" >{children}</Link>
     </StyledLink>
   );
 }

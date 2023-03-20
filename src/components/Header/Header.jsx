@@ -48,7 +48,7 @@ const StyledHeader = styled.header`
   position: fixed;
   left: 50%;
   transform: translate(-50%, 0);
-  z-index: 1;
+  z-index: 999;
 
   & img {
     width: 180px;

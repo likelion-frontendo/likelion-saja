@@ -8,8 +8,8 @@ export function Login() {
         <form>
           <FormInput name="아이디" type="text" placeholder="아이디를 입력해주세요"></FormInput>
           <FormInput name="비밀번호" type="password" placeholder="비밀번호를 입력해주세요"></FormInput>
-          <Button></Button>
-          <LinkButton></LinkButton>
+          <Button>로그인</Button>
+          <LinkButton to="/">회원가입</LinkButton>
       </form>
     </StyledMain>
   )

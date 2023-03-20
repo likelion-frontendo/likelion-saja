@@ -1,6 +1,6 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import styled from "styled-components";
-import {Product} from "@/components";
+import {Product, UseProductList} from "@/components";
 import {Link} from "react-router-dom";
 
 export function MainProduct() {
@@ -8,16 +8,7 @@ export function MainProduct() {
     <StyledProduct>
       <div className="inner">
         <h2>중고거래 인기 매물</h2>
-        <div className="productContainer">
-          <Product />
-          <Product />
-          <Product />
-          <Product />
-          <Product />
-          <Product />
-          <Product />
-          <Product />
-        </div>
+        <UseProductList />
         <Link to="/">
           <span className="popularProduct">인기매물 더 보기</span>
         </Link>
