@@ -1,4 +1,4 @@
-import styled from "styled-components/macro";
+import {Link} from "react-router-dom";
 import {ReactComponent as Person} from "@/assets/Mypage/person.svg";
 import {ReactComponent as Buy} from "@/assets/Mypage/bag-frame.svg";
 import {ReactComponent as Receipt} from "@/assets/Mypage/receipt.svg";
@@ -6,7 +6,7 @@ import {ReactComponent as Heart} from "@/assets/Mypage/heart.svg";
 import {ReactComponent as Tag} from "@/assets/Mypage/tag.svg";
 import {ReactComponent as Gear} from "@/assets/Mypage/gear.svg";
 import {ReactComponent as Envelope} from "@/assets/Mypage/envelope.svg";
-import {Link} from "react-router-dom";
+import styled from "styled-components/macro";
 
 export function SidebarBottom() {
   return (
@@ -74,26 +74,32 @@ const SidebarList = styled.div`
     line-height: 40px;
     padding-left: 18px;
   }
+
   & ul li {
     margin: 18px 0 0 18px;
     color: #4d5159;
   }
+
   & ul li span {
     transition: all 0.2s ease-in-out;
   }
+
   .listIcon {
     fill: #4d5159;
     margin: -2px 4px 0 0;
     vertical-align: middle;
     transition: fill 0.2s ease-in-out;
   }
+
   .listTop {
     padding: 6px 0 18px 0;
   }
+
   .listBottom {
     padding-top: 6px;
     border-top: 1px solid #dcdee3;
   }
+
   & ul li:hover .listIcon,
   & ul li:hover {
     fill: #eca997;
