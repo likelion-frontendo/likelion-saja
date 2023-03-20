@@ -1,11 +1,27 @@
 import {app} from "@/firebase/app";
 import {getFirestore, collection, getDocs, where, query} from "firebase/firestore";
-import {useState, useEffect} from "react";
+import {useEffect} from "react";
+import {atom, useRecoilState} from "recoil";
+
+const productsAtom = atom({
+  key: "products",
+  default: [],
+});
+
+const isLoadingAtom = atom({
+  key: "isLoading",
+  default: true,
+});
+
+const errorAtom = atom({
+  key: "error",
+  default: null,
+});
 
 export function useProducts() {
-  const [products, setProducts] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [productsState, setProductsState] = useRecoilState(productsAtom);
+  const [isLoadingState, setIsLoadingState] = useRecoilState(isLoadingAtom);
+  const [errorState, setErrorState] = useRecoilState(errorAtom);
 
   useEffect(() => {
     const db = getFirestore(app);
@@ -43,15 +59,15 @@ export function useProducts() {
             });
           })
           .then((usersWithProductInfo) => {
-            setProducts(usersWithProductInfo);
-            setIsLoading(false);
+            setProductsState(usersWithProductInfo);
+            setIsLoadingState(false);
           });
       })
       .catch((error) => {
         console.log("Error getting documents: ", error);
-        setError(error);
+        setErrorState(error);
       });
   }, []);
 
-  return {isLoading, error, products};
+  return {isLoadingState, errorState, productsState};
 }
