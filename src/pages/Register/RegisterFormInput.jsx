@@ -1,5 +1,5 @@
 import { useId } from 'react'
-import {Label, Input, Heading3} from "@/pages/Register"
+import {Label, Input, Heading3} from "@/components";
 
 export function RegisterFormInput({label, name, type, children, ...rest}){
 

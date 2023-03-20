@@ -1,6 +1,6 @@
-import styled from "styled-components/macro";
-import profile from "@/assets/Mypage/유네찌.png";
 import {SidebarBottom} from "@/pages/Mypage/SidebarBottom";
+import profile from "@/assets/Mypage/유네찌.png";
+import styled from "styled-components/macro";
 
 export function SidebarTop() {
   return (
@@ -16,8 +16,10 @@ export function SidebarTop() {
 }
 
 const MypageSide = styled.div`
+  position: sticky;
+  top: 80px;
   width: 216px;
-  height: 598px;
+  height: 560px;
 
   & .profile {
     height: 220px;
@@ -27,17 +29,20 @@ const MypageSide = styled.div`
     text-align: center;
     padding-top: 24px;
   }
+
   & .profile img {
     border-radius: 50%;
     width: 100px;
     height: 100px;
   }
+
   & .profile .profileName {
     margin-top: 16px;
     color: #6c816d;
     font-size: 16px;
     font-weight: 600;
   }
+
   & .profile .profileNum {
     margin-top: 8px;
     color: #868b94;
