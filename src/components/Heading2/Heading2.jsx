@@ -9,5 +9,4 @@ export function Heading2({children, ...rest}) {
 const StyledHeading2 = styled.h2`
   font-size: 22px;
   font-weight: 600;
-  color: #333333;
 `

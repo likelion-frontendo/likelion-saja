@@ -1,9 +1,11 @@
 import styled from "styled-components/macro";
 
-export function Button() {
+export function Button({children, onClick}) {
   return (
     <StyledButton>
-      <button type="button">로그인</button>
+      <button onClick={onClick}>
+        {children}
+      </button>
     </StyledButton>
   );
 }
