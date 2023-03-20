@@ -1,10 +1,18 @@
 import {app} from "@/firebase/app";
+import {useEffect} from "react";
+import {useRecoilState} from "recoil";
 import {getFirestore, collection, getDocs} from "firebase/firestore";
-import React, {useState, useEffect} from "react";
 import {Product} from "@/components";
+import styled from "styled-components";
+import {atom} from "recoil";
 
 export function UseProductList() {
-  const [products, setProducts] = useState([]);
+  const productListState = atom({
+    key: "productListState",
+    default: [],
+  });
+
+  const [productList, setProductList] = useRecoilState(productListState);
 
   useEffect(() => {
     const db = getFirestore(app);
@@ -16,21 +24,32 @@ export function UseProductList() {
         querySnapshot.forEach((doc) => {
           const product = {id: doc.id, ...doc.data()};
           productList.push(product);
-          console.log(productList);
-          console.log(product.imgUrl);
         });
-        setProducts(productList);
+        setProductList(productList);
       })
       .catch((error) => {
         console.log("Error getting documents: ", error);
       });
-  }, []);
+  }, [setProductList]);
 
   return (
-    <div className="test">
-      {products.map((product) => (
-        <Product key={product.id} imgUrl={product.imgUrl} title={product.title} price={product.price} location={"부산 북구 만덕제2동"} interest={product.interest} />
+    <StyledProductListContainer className="test">
+      {productList.map((product) => (
+        <Product key={product.id} imgUrl={product.imgUrl} title={product.title} price={product.price} location={"부산 북구 만덕제2동"} interest={product.interest} className="item" />
       ))}
-    </div>
+    </StyledProductListContainer>
   );
 }
+
+const StyledProductListContainer = styled.div`
+  width: 1024px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-top: 86px;
+
+  & .item {
+    width: 25%;
+  }
+`;
