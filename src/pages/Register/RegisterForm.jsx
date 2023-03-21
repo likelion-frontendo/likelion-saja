@@ -173,8 +173,8 @@ export function RegisterForm() {
             <span>/</span>
             <input type="text" placeholder="DD" style={{width: '33%', height: "38px", textAlign: 'center', border: 'none'}} maxLength="2" />
           </div>
-        </div>
-        <RegisterFormInput label="생년월일" name="year" type="date"/> */}
+        </div> */}
+        <RegisterFormInput label="생년월일" name="year" type="date"/>
         <div className="registerFormInput">
           <Heading3 className="registerHeading">
             <Label className="registerLabel">주소<sup>*</sup></Label>
@@ -222,7 +222,7 @@ const StyledSection = styled.section`
     height: 44px;
     margin-right: 8px;
     font-size: 16px;
-    padding: 9px 0 9px 20px;
+    padding: 9px 20px;
   }
 
   & .registerButtonShort {
