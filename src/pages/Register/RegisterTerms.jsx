@@ -1,18 +1,40 @@
-import {RegisterCheckListItem} from '@/pages/Register'
+// import {RegisterCheckListItem} from '@/pages/Register'
 import {Button, Label, Heading3} from "@/components";
 import {ReactComponent as ChevronRightIcon} from "@/assets/Register/chevron-right.svg"
 import {ReactComponent as CheckIcon} from "@/assets/Register/checkbutton-off.svg";
 import styled from 'styled-components'
-import { atom, useRecoilState } from 'recoil';
+import { useState } from 'react';
 
-export const checkAllAtoms = atom({
-  key: 'checkAll',
-  default: false
-})
 
 export function RegisterTerms() {
+  
+  const [checkedAll, setCheckedAll] = useState(false);
+  const [checkedTerms, setCheckedTerms] = useState(false);
+  const [checkedAge, setCheckedAge] = useState(false);
+  const [checkedMarketing, setCheckedMarketing] = useState(false);
 
-  const [checkAll, setCheckAll] = useRecoilState(checkAllAtoms);
+
+  function handleCheckedAll() {
+    setCheckedAll(!checkedAll);
+    setCheckedTerms(!checkedAll);
+    setCheckedAge(!checkedAll);
+    setCheckedMarketing(!checkedAll);
+  }
+
+  function handleCheckedTerms() {
+    setCheckedTerms(!checkedTerms);
+    setCheckedAll(checkedTerms && checkedAge && checkedMarketing);
+  };
+  
+ function handleCheckedAge() {
+    setCheckedAge(!checkedAge);
+    setCheckedAll(checkedTerms && checkedAge && checkedMarketing);
+  };
+  
+  function handleCheckedMarketing() {
+    setCheckedMarketing(!checkedMarketing);
+    setCheckedAll(checkedTerms && checkedAge && checkedMarketing);
+  };
 
   return(
     <StyledSection>
@@ -21,34 +43,24 @@ export function RegisterTerms() {
       </Heading3>
       <ul className="checkList">
         <li className="checkListItem">
-          <Button><CheckIcon className="check" /></Button>
+          <Button><CheckIcon className={checkedAll ? 'check fill' : 'check'} onClick={handleCheckedAll}/></Button>
           <span className="checkAll" >모두 동의</span>
         </li>
         <li className="checkListItem">
-          <Button><CheckIcon className="check" /></Button>
+          <Button><CheckIcon className={checkedTerms ? 'check fill' : 'check'} onClick={handleCheckedTerms}/></Button>
           <span className="checkOne">(필수) 이용약관 및 동의사항</span>
           <Button className="detailsButton">약관보기<ChevronRightIcon /></Button>
         </li>
         <li className="checkListItem">
-          <Button><CheckIcon className="check" /></Button>
+          <Button><CheckIcon className={checkedAge ? 'check fill' : 'check'} onClick={handleCheckedAge}/></Button>
           <span className="checkOne">(필수) 본인은 만 14세 이상입니다</span>
           <Button className="detailsButton">약관보기<ChevronRightIcon /></Button>
         </li>
         <li className="checkListItem">
-          <Button><CheckIcon className="check" /></Button>
+          <Button><CheckIcon className={checkedMarketing ? 'check fill' : 'check'} onClick={handleCheckedMarketing}/></Button>
           <span className="checkOne">(선택) 마케팅 정보 수신 동의</span>
           <Button className="detailsButton">약관보기<ChevronRightIcon /></Button>
         </li>
-        {/*<RegisterCheckListItem className="checkAll" content="모두 동의" onClick={()=>setCheckAll(true)} />
-        <RegisterCheckListItem className="checkOne" content="(필수) 이용약관 및 동의사항">
-          <Button className="detailsButton">약관보기<ChevronRightIcon /></Button>
-        </RegisterCheckListItem>
-        <RegisterCheckListItem className="checkOne" content="(선택) 마케팅 정보 수신 동의">
-          <Button className="detailsButton">약관보기<ChevronRightIcon /></Button>
-        </RegisterCheckListItem>
-        <RegisterCheckListItem className="checkOne" content="(필수) 본인은 만 14세 이상입니다.">
-          <Button className="detailsButton">약관보기<ChevronRightIcon /></Button>
-        </RegisterCheckListItem> */}
       </ul>
     </StyledSection>
   )
@@ -89,6 +101,10 @@ const StyledSection = styled.section`
   & .check {
     position: absolute;
     cursor: pointer;
+  }
+
+  & .fill {
+    fill: #6C816D;
   }
 
   & .checkAll {
