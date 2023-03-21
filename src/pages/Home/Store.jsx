@@ -1,14 +1,13 @@
 import React from "react";
 import styled from "styled-components";
 import {Link} from "react-router-dom";
-import test from "@/assets/test.jpg";
 
 export function Store(props) {
   return (
     <StyledStoreContainer>
       <div className="storeInner">
         <Link to="/">
-          <img src={test} alt="상품 이미지"></img>
+          <img src={props.imgUrl} alt="상품 이미지"></img>
         </Link>
         <div className="storeContainer">
           <div className="storeInfo">
