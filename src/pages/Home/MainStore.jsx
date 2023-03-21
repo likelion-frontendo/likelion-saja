@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import {Store} from "@/pages/Home/Store";
+import {UserStoreList} from "./UserStoreList";
 
 export function MainStore() {
   return (
@@ -15,18 +15,7 @@ export function MainStore() {
           <button aria-label="뷰티/미용">뷰티/미용</button>
           <button aria-label="헬스/필라테스/요가">헬스/필라테스/요가</button>
         </div>
-        <div className="storeList">
-          <Store />
-          <Store />
-          <Store />
-          <Store />
-          <Store />
-          <Store />
-          <Store />
-          <Store />
-          <Store />
-          <Store />
-        </div>
+        <UserStoreList />
       </div>
     </StyledStore>
   );
