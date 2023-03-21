@@ -7,7 +7,7 @@ export function MainProduct() {
     <StyledProduct>
       <div className="inner">
         <h2>중고거래 인기 매물</h2>
-        <UseProductList />
+        <UseProductList count={7} />
         <Link to="/">
           <span className="popularProduct">인기매물 더 보기</span>
         </Link>
