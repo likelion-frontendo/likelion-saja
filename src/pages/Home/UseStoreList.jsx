@@ -1,6 +1,5 @@
 import React from "react";
-import {Store} from "@/pages/Home/Store";
-import {useStores} from "@/pages/Home/index";
+import {Store, useStores} from "@/pages/Home/index";
 
 export function UserStoreList() {
   const {isLoading, stores} = useStores();
