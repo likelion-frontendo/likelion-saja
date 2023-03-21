@@ -1,6 +1,6 @@
-import styled from "styled-components/macro";
 import {Header, Footer} from "@/components";
 import {PostSection} from "@/pages/Post/PostSection";
+import styled from "styled-components/macro";
 
 export function Post() {
   return (

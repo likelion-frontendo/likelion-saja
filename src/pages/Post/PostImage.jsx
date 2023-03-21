@@ -1,6 +1,6 @@
 import {useState} from "react";
-import styled from "styled-components/macro";
 import {ReactComponent as CameraIcon} from "@/assets/Post/camera-fill.svg";
+import styled from "styled-components/macro";
 
 export function PostImage() {
   const [images, setImages] = useState([]);
@@ -26,13 +26,13 @@ export function PostImage() {
     <PostImageSection>
       <div>
         <label for="file">
-          <CameraIcon className="postImageIcon fileUpload" />
+          <CameraIcon className="PostImageIcon FileUpload" />
         </label>
         <input type="file" name="file" id="file" accept=".jpg,.jpeg,.png,.gif,.bmp" multiple required onChange={handleImageChange}></input>
       </div>
-      <div className="previewImage">
+      <div className="PreviewImage">
         {images.map((image, index) => (
-          <div key={index} className="previewImageItem">
+          <div key={index} className="PreviewImageItem">
             <img src={image.url} alt={image.name} />
             <button onClick={() => handleImageDelete(index)}>X</button>
           </div>
@@ -45,7 +45,8 @@ export function PostImage() {
 const PostImageSection = styled.div`
   margin-top: 60px;
   display: flex;
-  & .postImageIcon {
+
+  & .PostImageIcon {
     width: 160px;
     height: 160px;
     border: 1px solid #6c816d;
@@ -56,23 +57,29 @@ const PostImageSection = styled.div`
     padding: 40px;
     margin-right: 24px;
     cursor: pointer;
+
     &:hover {
       fill: #f8e1db;
     }
   }
+
   #file {
     display: none;
   }
+
   button {
     background-color: #eca997;
     color: #fff;
     border: none;
     border-radius: 10px;
-    margin: -320px 0 0 -30px;
+    margin: -20px 0 0 -30px;
     padding: 5px 10px;
-    cursor: pointer;
+    position: absolute;
+    top: 20px;
+    right: 0;
   }
-  .previewImage {
+
+  .PreviewImage {
     border: 1px solid #6c816d;
     border-radius: 12px;
     width: 872px;
@@ -81,13 +88,16 @@ const PostImageSection = styled.div`
     align-items: center;
     padding: 24px;
   }
-  .previewImage img {
+
+  .PreviewImage img {
     width: 100px;
     height: 100px;
     border-radius: 12px;
     object-fit: cover;
   }
-  .previewImageItem {
+
+  .PreviewImageItem {
     margin-right: 40px;
+    position: relative;
   }
 `;
