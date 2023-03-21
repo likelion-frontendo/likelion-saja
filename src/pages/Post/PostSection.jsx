@@ -1,5 +1,4 @@
-import {PostImage} from "@/pages/Post/PostImage";
-import {PostText} from "@/pages/Post/PostText";
+import {PostImage, PostText, PlaceSearchBox} from "@/pages/Post";
 import styled from "styled-components/macro";
 
 export function PostSection() {
@@ -8,10 +7,13 @@ export function PostSection() {
       <h1>내 물건 팔기</h1>
       <PostImage></PostImage>
       <PostText></PostText>
+      <PlaceSearchBox></PlaceSearchBox>
     </Section>
   );
 }
 const Section = styled.div`
+  margin-bottom: 80px;
+
   & > h1 {
     font-size: 18px;
     color: #6c816d;
