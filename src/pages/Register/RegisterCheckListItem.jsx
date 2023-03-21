@@ -3,10 +3,10 @@ import styled from 'styled-components';
 import {ReactComponent as CheckIcon} from "@/assets/Register/checkbutton-off.svg";
 
 
-export function RegisterCheckListItem({content, children, ...rest}) {
+export function RegisterCheckListItem({content, onClick, children, ...rest}) {
   return(
     <StyledLi>
-      <Button><CheckIcon className="check" /></Button>
+      <Button><CheckIcon className="check" onClick={onClick}  /></Button>
       <span{...rest}>{content}</span>
       {children}
     </StyledLi>
