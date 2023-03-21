@@ -1,11 +1,13 @@
-import styled from "styled-components/macro";
 import {PostImage} from "@/pages/Post/PostImage";
+import {PostText} from "@/pages/Post/PostText";
+import styled from "styled-components/macro";
 
 export function PostSection() {
   return (
     <Section>
       <h1>내 물건 팔기</h1>
       <PostImage></PostImage>
+      <PostText></PostText>
     </Section>
   );
 }
