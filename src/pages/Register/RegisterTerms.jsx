@@ -1,16 +1,45 @@
 import {RegisterCheckListItem} from '@/pages/Register'
 import {Button, Label, Heading3} from "@/components";
 import {ReactComponent as ChevronRightIcon} from "@/assets/Register/chevron-right.svg"
+import {ReactComponent as CheckIcon} from "@/assets/Register/checkbutton-off.svg";
 import styled from 'styled-components'
+import { atom, useRecoilState } from 'recoil';
+
+export const checkAllAtoms = atom({
+  key: 'checkAll',
+  default: false
+})
 
 export function RegisterTerms() {
+
+  const [checkAll, setCheckAll] = useRecoilState(checkAllAtoms);
+
   return(
     <StyledSection>
       <Heading3>
         <Label className="registerLabel">이용약관동의<sup>*</sup></Label>
       </Heading3>
       <ul className="checkList">
-        <RegisterCheckListItem className="checkAll" content="모두 동의" />
+        <li className="checkListItem">
+          <Button><CheckIcon className="check" /></Button>
+          <span className="checkAll" >모두 동의</span>
+        </li>
+        <li className="checkListItem">
+          <Button><CheckIcon className="check" /></Button>
+          <span className="checkOne">(필수) 이용약관 및 동의사항</span>
+          <Button className="detailsButton">약관보기<ChevronRightIcon /></Button>
+        </li>
+        <li className="checkListItem">
+          <Button><CheckIcon className="check" /></Button>
+          <span className="checkOne">(필수) 본인은 만 14세 이상입니다</span>
+          <Button className="detailsButton">약관보기<ChevronRightIcon /></Button>
+        </li>
+        <li className="checkListItem">
+          <Button><CheckIcon className="check" /></Button>
+          <span className="checkOne">(선택) 마케팅 정보 수신 동의</span>
+          <Button className="detailsButton">약관보기<ChevronRightIcon /></Button>
+        </li>
+        {/*<RegisterCheckListItem className="checkAll" content="모두 동의" onClick={()=>setCheckAll(true)} />
         <RegisterCheckListItem className="checkOne" content="(필수) 이용약관 및 동의사항">
           <Button className="detailsButton">약관보기<ChevronRightIcon /></Button>
         </RegisterCheckListItem>
@@ -19,7 +48,7 @@ export function RegisterTerms() {
         </RegisterCheckListItem>
         <RegisterCheckListItem className="checkOne" content="(필수) 본인은 만 14세 이상입니다.">
           <Button className="detailsButton">약관보기<ChevronRightIcon /></Button>
-        </RegisterCheckListItem>
+        </RegisterCheckListItem> */}
       </ul>
     </StyledSection>
   )
@@ -51,8 +80,10 @@ const StyledSection = styled.section`
     margin: 40px 0;
   }
 
-  & .checkList > li {
+  & .checkListItem {
     margin-bottom: 24px;
+    display: flex;
+    align-items: center;
   }
 
   & .check {
@@ -85,5 +116,17 @@ const StyledSection = styled.section`
     margin-left: 4px;
     height: 10px;
     width: 10px;
+  }
+
+  & button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    width: 24px;
+    height: 24px;
+    border: none;
+    margin-right: 8px;
+    background: transparent;
   }
 `

@@ -1,12 +1,16 @@
 import {Button} from "@/components";
 import styled from 'styled-components';
 import {ReactComponent as CheckIcon} from "@/assets/Register/checkbutton-off.svg";
-
+import { useRecoilValue, atom } from 'recoil';
+import { checkAllAtoms } from './RegisterTerms';
 
 export function RegisterCheckListItem({content, onClick, children, ...rest}) {
+
+  const check = useRecoilValue(checkAllAtoms);
+
   return(
     <StyledLi>
-      <Button><CheckIcon className="check" onClick={onClick}  /></Button>
+      <Button onClick={onClick}><CheckIcon className="check" fill={check === true ? 'green' : 'gray'} /></Button>
       <span{...rest}>{content}</span>
       {children}
     </StyledLi>
