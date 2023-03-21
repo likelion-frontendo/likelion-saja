@@ -8,7 +8,7 @@ export function UseProductList(props) {
     return <div role="alert">로딩 중...</div>;
   }
 
-  const slicedProducts = productsState.slice(0, props.count); // 0부터 7까지의 요소를 가지는 새로운 배열을 생성
+  const slicedProducts = productsState.slice(0, props.count);
 
   return (
     <div className="productContainer">

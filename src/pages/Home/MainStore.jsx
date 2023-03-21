@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import {UserStoreList} from "./UserStoreList";
+import {UserStoreList} from "@/pages/Home/index";
 
 export function MainStore() {
   return (
