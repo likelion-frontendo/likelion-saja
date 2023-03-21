@@ -1,17 +1,38 @@
-import {SidebarTop} from "@/pages/Mypage/SidebarTop";
+import {SidebarTop, Section} from "@/pages/Mypage/";
+import {Header, Footer} from "@/components";
 import styled from "styled-components/macro";
 
 export function Mypage() {
   return (
     <Wrap>
-      <SidebarTop></SidebarTop>
+      <Header></Header>
+      <div>
+        <SidebarTop></SidebarTop>
+        <Section></Section>
+      </div>
+      <Footer></Footer>
     </Wrap>
   );
 }
 
 const Wrap = styled.div`
   width: 1056px;
-  height: 100vh;
-  margin: 60px auto 0 auto;
-  background-color: lightpink;
+  margin: 120px auto 0 auto;
+
+  & > div {
+    display: flex;
+    margin-bottom: 80px;
+  }
+
+  & .ListTitle {
+    height: 60px;
+    background-color: #f8e1db;
+    color: #6c816d;
+    font-weight: 500;
+  }
+
+  & .ListTitle span {
+    margin-left: 24px;
+    line-height: 60px;
+  }
 `;
