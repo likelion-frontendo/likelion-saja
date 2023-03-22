@@ -19,9 +19,23 @@ export function PostImage() {
     }
   };
 
+  function handleDrop(e) {
+    e.preventDefault();
+    const newFiles = Array.from(e.dataTransfer.files);
+    const newImages = newFiles
+      .filter((file) => file.type === "image/jpeg" || file.type === "image/png" || file.type === "image/gif" || file.type === "image/bmp")
+      .map((file) => ({name: file.name, url: URL.createObjectURL(file)}));
+    if (images.length + newImages.length <= 6) {
+      setImages([...images, ...newImages]);
+    } else {
+      alert("최대 6개 까지 업로드할 수 있습니다.");
+    }
+  }
+
   const handleImageDelete = (index) => {
     setImages(images.filter((image, i) => i !== index));
   };
+
   return (
     <PostImageSection>
       <div>
@@ -30,7 +44,7 @@ export function PostImage() {
         </label>
         <input type="file" name="file" id="file" accept=".jpg,.jpeg,.png,.gif,.bmp" multiple required onChange={handleImageChange}></input>
       </div>
-      <div className="PreviewImage">
+      <div className="PreviewImage" onDrop={handleDrop} onDragOver={(e) => e.preventDefault()}>
         {images.map((image, index) => (
           <div key={index} className="PreviewImageItem">
             <img src={image.url} alt={image.name} />

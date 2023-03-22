@@ -33,13 +33,13 @@ const StyledModal = styled.div `
       position: relative;
     }
 
-      & .close {
-        position: absolute;
-        top: 105px;
-        right: 24px;
-        color: #6C816D;
-        font-size: 16px;
-        font-weight: bold;
-        cursor: pointer;
-      }
+    & .close {
+      position: absolute;
+      top: 105px;
+      right: 24px;
+      color: #6C816D;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
 `

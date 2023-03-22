@@ -43,7 +43,6 @@ const PlaceSearch = styled.div`
     border: 0;
     background-color: #fff;
     color: #6c816d;
-    cursor: pointer;
     width: 100px;
     position: absolute;
     right: 0px;
