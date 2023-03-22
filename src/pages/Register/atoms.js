@@ -42,6 +42,11 @@ export const passwordConfirmVisibleAtom = atom({
   default: false,
 });
 
+export const nameVisibleAtom = atom({
+  key: "nameVisibleAtom",
+  default: false,
+});
+
 export const mobileVisibleAtom = atom({
   key: "mobileConfirmVisibleAtom",
   default: false,
@@ -69,7 +74,34 @@ export const passConfirmWarningAtom = atom({
   default: "",
 });
 
+export const nameWarningAtom = atom({
+  key: "nameWarningAtom",
+  default: "",
+});
+
 export const mobileWarningAtom = atom({
   key: "mobileWarningAtom",
   default: "",
+});
+
+// 다중선택state
+
+export const checkedAllAtom = atom({
+  key: "checkedAllAtom",
+  default: false,
+});
+
+export const checkedTermsAtom = atom({
+  key: "checkedTermsAtom",
+  default: false,
+});
+
+export const checkedAgeAtom = atom({
+  key: "checkedAgeAtom",
+  default: false,
+});
+
+export const checkedMarketingAtom = atom({
+  key: "checkedMarketingAtom",
+  default: false,
 });
