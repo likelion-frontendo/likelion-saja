@@ -1,28 +1,24 @@
 import React from "react";
 import styled from "styled-components";
 import {Link} from "react-router-dom";
-import test from "@/assets/test.jpg";
 
-export function Store() {
+export function Store(props) {
   return (
     <StyledStoreContainer>
       <div className="storeInner">
         <Link to="/">
-          <img src={test} alt="상품 이미지"></img>
+          <img src={props.imgUrl} alt="상품 이미지"></img>
         </Link>
         <div className="storeContainer">
           <div className="storeInfo">
-            <span className="title">임은하푸드 인천창고</span>
-            <span className="location">천곡동</span>
+            <span className="title">{props.title}</span>
+            <span className="location">{props.location}</span>
           </div>
-          <span className="description">
-            임은하푸드는 전국에 수산물 창고를 둔 곳입니다. 매일 아침 창고 소식을 전해요. 단골맺기를 하시면 소식 알람이 간답니다. 꼭 저희에게 구매하지 않더라도, 시장가시기 전에 그 날 시세 보시면 좋을
-            거에요. 간혹
-          </span>
+          <span className="description">{props.description}</span>
           <div className="storeExtraInfo">
-            <span>후기 1,713</span>
-            <span>단골 26,497</span>
-            <span>수산물</span>
+            <span>후기 {props.review}</span>
+            <span>단골 {props.regular}</span>
+            <span>{props.type}</span>
           </div>
         </div>
       </div>
