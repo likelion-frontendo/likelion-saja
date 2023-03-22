@@ -1,25 +1,31 @@
 import styled from 'styled-components/macro';
 import { Button, LinkButton, LoginModal } from '@/pages/Login/index';
 import { Form, Input, Label, Header, Footer, Heading2 } from '@/components/index';
+import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
-import {  signInWithEmailAndPassword } from "firebase/auth";
+import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "@/firebase/app";
 
 export function Login() {
   const [loginEmail, setLoginEmail] = useState('');
   const [loginPassword, setLoginPassword] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const movePage = useNavigate();
   
   const login = async () => {
     try {
-      const user = await signInWithEmailAndPassword(
+      const userCredential  = await signInWithEmailAndPassword(
         auth,
         loginEmail,
         loginPassword
       );
+
       console.log('로그인 성공!');
-      console.log(user);
+      console.log(userCredential.user);
+      movePage('/');
     } catch(error) {
+      console.log(error.message);
+      console.log("이런 사용자는 존재하지 않음");
       setIsModalOpen(true);
     }
   };
@@ -27,6 +33,7 @@ export function Login() {
   const closeModal = () => {
     setIsModalOpen(false);
   };
+
 
   return(
     <>
