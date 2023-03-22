@@ -49,7 +49,7 @@ const PostImageSection = styled.div`
   & .PostImageIcon {
     width: 160px;
     height: 160px;
-    border: 1px solid #6c816d;
+    border: 2px solid #a5b2a6;
     border-radius: 12px;
     fill: #dcdee3;
     align-items: center;
@@ -80,7 +80,7 @@ const PostImageSection = styled.div`
   }
 
   .PreviewImage {
-    border: 1px solid #6c816d;
+    border: 2px solid #a5b2a6;
     border-radius: 12px;
     width: 872px;
     height: 160px;
