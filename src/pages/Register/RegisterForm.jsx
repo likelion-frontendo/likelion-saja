@@ -1,30 +1,47 @@
 import {RegisterFormInput} from "@/pages/Register"
 import {Form, Button, Label, Heading3} from "@/components";
+import { useRecoilState } from "recoil";
+import {
+  emailAtom, 
+  passwordAtom, 
+  passwordConfirmAtom, 
+  nameAtom, 
+  mobileAtom, 
+  emailVisibleAtom, 
+  passwordVisibleAtom, 
+  passwordConfirmVisibleAtom, 
+  mobileVisibleAtom,
+  emailWarningAtom,
+  passwordWarningAtom,
+  passwordConfirmWarningAtom,
+  mobileWarning,
+  mobileWarningAtom
+} from "@/pages/Register/atoms";
 import styled from 'styled-components'
-import { useState } from 'react';
+
 
 export function RegisterForm() {
 
   // 인풋값을 추척할 state
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [passwordConfirm, setPasswordConfirm] = useState('');
-  const [name, setName] = useState('');
-  const [mobile, setMobile] = useState('');
+  const [email, setEmail] = useRecoilState(emailAtom);
+  const [password, setPassword] = useRecoilState(passwordAtom);
+  const [passwordConfirm, setPasswordConfirm] = useRecoilState(passwordConfirmAtom);
+  const [name, setName] = useRecoilState(nameAtom);
+  const [mobile, setMobile] = useRecoilState(mobileAtom);
   // const [birthday, setBirthday] = useState('');
 
-  const [emailVisible, setEmailVisible] = useState(false);
-  const [passwordVisible, setPasswordVisible] = useState(false);
-  const [passwordConfirmVisible, setPasswordConfirmVisible] = useState(false);
-  const [mobileVisible, setMobileVisible] = useState(false);
+  const [emailVisible, setEmailVisible] = useRecoilState(emailVisibleAtom);
+  const [passwordVisible, setPasswordVisible] = useRecoilState(passwordVisibleAtom);
+  const [passwordConfirmVisible, setPasswordConfirmVisible] = useRecoilState(passwordConfirmVisibleAtom);
+  const [mobileVisible, setMobileVisible] = useRecoilState(mobileVisibleAtom);
 
-  const [emailWarning, setEmailWarning] = useState("");
-  const [passwordWarning, setPasswordWarning] = useState("");
-  const [passwordConfirmWarning, setPasswordConfirmWarning] = useState("");
-  const [mobileWarning, setMobileWarning] = useState("");
+  const [emailWarning, setEmailWarning] = useRecoilState(emailWarningAtom);
+  const [passwordWarning, setPasswordWarning] = useRecoilState(passwordConfirmAtom);
+  const [passwordConfirmWarning, setPasswordConfirmWarning] = useRecoilState(passwordConfirmAtom);
+  const [mobileWarning, setMobileWarning] = useRecoilState(mobileWarningAtom);
 
   function emailValidation(email){
-    let emailRegex = new RegExp("([!#-'*+/-9=?A-Z^-~-]+(\.[!#-'*+/-9=?A-Z^-~-]+)*|\"\(\[\]!#-[^-~ \t]|(\\[\t -~]))+\")@([!#-'*+/-9=?A-Z^-~-]+(\.[!#-'*+/-9=?A-Z^-~-]+)*|\[[\t -Z^-~]*])");
+    const emailRegex = /^\S+@\S+\.\S+$/;
     let warningMessage = '';
 
     if(!emailRegex.test(email)) {
