@@ -13,10 +13,10 @@ export function ProductDetailBody(props) {
       <section className="userInfo"></section>
       <hr />
       <section className="productDescription">
-        <span className="title">{props.title} </span>
-        <span className="price">{props.price}벨 </span>
-        <span className="description">{props.description} </span>
-        <span className="interest">관심 {props.interest} </span>
+        <span className="titleDescription">{props.title} </span>
+        <span className="priceDescription">{props.price}벨 </span>
+        <span className="descriptionDescription">{props.description} </span>
+        <span className="interestDescription">관심 {props.interest} </span>
       </section>
       <hr />
       <section className="popularProduct">
@@ -35,6 +35,14 @@ const StyledProductDetail = styled.div`
     width: 678px;
     border: 1px solid #eaebee;
   }
+  & .productContainer {
+    display: grid;
+    grid-template-rows: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+    justify-items: center;
+    margin-right: 0;
+  }
 
   & .productImg {
     margin: 64px auto 0 auto;
@@ -43,8 +51,8 @@ const StyledProductDetail = styled.div`
   }
   & .productDescription {
     width: 678px;
-    height: 160px;
-    margin: 36px auto;
+    height: 148px;
+    margin: 36px auto 0 auto;
     line-height: 30px;
   }
 
@@ -55,37 +63,37 @@ const StyledProductDetail = styled.div`
     border-radius: 8px;
   }
 
-  & .title {
+  & .titleDescription {
     font-style: normal;
     font-weight: 600;
     font-size: 20px;
-    line-height: 36px;
+    line-height: 24px;
   }
 
-  & .price {
+  & .priceDescription {
     display: block;
     font-style: normal;
     color: #212529;
     margin-top: 3px;
     font-weight: 700;
     font-size: 15px;
-    line-height: 60px;
+    line-height: 30px;
   }
 
-  & .description {
+  & .descriptionDescription {
     display: block;
     font-style: normal;
     font-weight: 400;
     font-size: 17px;
-    line-height: 27px;
+    line-height: 30px;
   }
 
-  & .interest {
+  & .interestDescription {
     display: block;
     font-style: normal;
     margin-top: 3px;
     font-size: 12px;
-    line-height: 42px;
+    line-height: 3 px;
     color: #868e96;
   }
   & .popularProduct {
@@ -102,7 +110,7 @@ const StyledProductDetail = styled.div`
 
   & .textContainer span,
   a {
-    margin: 36px 0;
+    margin: 36px 0 0 0;
   }
 
   & .textContainer span {
