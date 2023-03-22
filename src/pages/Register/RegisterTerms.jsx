@@ -3,7 +3,7 @@ import {Button, Label, Heading3} from "@/components";
 import {ReactComponent as ChevronRightIcon} from "@/assets/Register/chevron-right.svg"
 import {ReactComponent as CheckIcon} from "@/assets/Register/checkbutton-off.svg";
 import styled from 'styled-components'
-import { useState } from 'react';
+import { useState, useEffect} from 'react';
 
 
 export function RegisterTerms() {
@@ -13,6 +13,9 @@ export function RegisterTerms() {
   const [checkedAge, setCheckedAge] = useState(false);
   const [checkedMarketing, setCheckedMarketing] = useState(false);
 
+  useEffect(()=>{
+    setCheckedAll(checkedTerms && checkedAge && checkedMarketing);
+  }, [checkedTerms, checkedAge, checkedMarketing]);
 
   function handleCheckedAll() {
     setCheckedAll(!checkedAll);
@@ -23,17 +26,14 @@ export function RegisterTerms() {
 
   function handleCheckedTerms() {
     setCheckedTerms(!checkedTerms);
-    setCheckedAll(checkedTerms && checkedAge && checkedMarketing);
   };
   
  function handleCheckedAge() {
     setCheckedAge(!checkedAge);
-    setCheckedAll(checkedTerms && checkedAge && checkedMarketing);
   };
   
   function handleCheckedMarketing() {
     setCheckedMarketing(!checkedMarketing);
-    setCheckedAll(checkedTerms && checkedAge && checkedMarketing);
   };
 
   return(
