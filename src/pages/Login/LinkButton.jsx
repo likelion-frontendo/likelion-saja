@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 export function LinkButton({to,children}) {
   return (
     <StyledLink>
-      <Link to={to} className="register" >{children}</Link>
+      <Link to={to} className="login" >{children}</Link>
     </StyledLink>
   );
 }
@@ -15,7 +15,7 @@ const StyledLink = styled.div `
   align-items: center;
   flex-flow: column;
 
-    & .register {
+    & .login {
       height: 54px;
       width: 340px;
       line-height: 54px;

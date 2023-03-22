@@ -1,6 +1,7 @@
 import {Routes, Route} from "react-router-dom";
-import {Home, Login, ProductDetail, Register} from "@/pages";
-import {Mypage} from "./pages/Mypage/Mypage";
+
+import {Home, Login, ProductDetail, Register, Mypage, Post} from "@/pages";
+// import {Mypage} from "./pages/Mypage/Mypage";
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/mypage" element={<Mypage />} />
         <Route path="/" element={<ProductDetail />} />
+        <Route path="/post" element={<Post />} />
       </Routes>
     </div>
   );
