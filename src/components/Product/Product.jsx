@@ -17,7 +17,7 @@ export function Product(props) {
 }
 
 const StyledProductContainer = styled.div`
-  display: flex;
+  display: inline-flex;
   flex-direction: column;
   width: 212px;
   height: 320px;
@@ -31,6 +31,10 @@ const StyledProductContainer = styled.div`
     object-fit: cover;
   }
 
+  & a {
+    margin: 0;
+  }
+
   & .title {
     font-style: normal;
     margin-top: 12px;
@@ -39,7 +43,6 @@ const StyledProductContainer = styled.div`
     line-height: 24px;
     color: #212529;
     display: -webkit-box;
-    overflow: hidden;
     -webkit-line-clamp: 1;
     -webkit-box-orient: vertical;
     text-overflow: ellipsis;
