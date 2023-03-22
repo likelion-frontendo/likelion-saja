@@ -1,7 +1,6 @@
 import {Routes, Route} from "react-router-dom";
 
 import {Home, Login, ProductDetail, Register, Mypage, Post} from "@/pages";
-// import {Mypage} from "./pages/Mypage/Mypage";
 
 function App() {
   return (
