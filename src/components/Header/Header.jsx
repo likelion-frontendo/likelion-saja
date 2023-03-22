@@ -26,10 +26,10 @@ export function Header() {
       </nav>
       <input type="text" placeholder="물품이나 동네를 검색해보세요"></input>
       <div className="buttonContainer">
-        <button aria-label="로그인" className="loginButton">
+        <button type="button" aria-label="로그인" className="loginButton">
           로그인
         </button>
-        <button aria-label="회원가입" className="registerButton">
+        <button type="button" aria-label="회원가입" className="registerButton">
           회원가입
         </button>
       </div>
