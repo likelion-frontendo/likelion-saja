@@ -1,5 +1,5 @@
 import {Header, Footer} from "@/components";
-import {PostSection} from "@/pages/Post/PostSection";
+import {PostSection} from "@/pages/Post";
 import styled from "styled-components/macro";
 
 export function Post() {

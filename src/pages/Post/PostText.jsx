@@ -41,12 +41,19 @@ const TextBox = styled.div`
   }
 
   & Input {
-    border: 1px solid #6c816d;
+    border: 2px solid #a5b2a6;
     padding-left: 16px;
+    &:focus {
+      outline: none;
+    }
   }
 
   & textarea {
     padding: 24px;
+    border: 2px solid #a5b2a6;
+    &:focus {
+      outline: none;
+    }
   }
 
   & .TextTitle {
