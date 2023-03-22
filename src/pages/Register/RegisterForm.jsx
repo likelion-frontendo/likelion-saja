@@ -1,24 +1,9 @@
 import {RegisterFormInput} from "@/pages/Register"
 import {Form, Button, Label, Heading3} from "@/components";
-import { useRecoilState } from "recoil";
-import {
-  emailAtom, 
-  passwordAtom, 
-  passwordConfirmAtom, 
-  nameAtom, 
-  mobileAtom, 
-  emailVisibleAtom, 
-  passwordVisibleAtom, 
-  passwordConfirmVisibleAtom, 
-  mobileVisibleAtom,
-  emailWarningAtom,
-  passwordWarningAtom,
-  passwordConfirmWarningAtom,
-  mobileWarning,
-  mobileWarningAtom
-} from "@/pages/Register/atoms";
 import styled from 'styled-components'
-
+import { useEffect, useState } from 'react';
+import { useRecoilState, useSetRecoilState } from 'recoil';
+import { emailAtom, mobileAtom, nameAtom, nameVisibleAtom, nameWarningAtom, passwordAtom, passwordConfirmAtom } from './atoms';
 
 export function RegisterForm() {
 
@@ -30,18 +15,21 @@ export function RegisterForm() {
   const [mobile, setMobile] = useRecoilState(mobileAtom);
   // const [birthday, setBirthday] = useState('');
 
-  const [emailVisible, setEmailVisible] = useRecoilState(emailVisibleAtom);
-  const [passwordVisible, setPasswordVisible] = useRecoilState(passwordVisibleAtom);
-  const [passwordConfirmVisible, setPasswordConfirmVisible] = useRecoilState(passwordConfirmVisibleAtom);
-  const [mobileVisible, setMobileVisible] = useRecoilState(mobileVisibleAtom);
+  const [emailVisible, setEmailVisible] = useState(false);
+  const [passwordVisible, setPasswordVisible] = useState(false);
+  const [passwordConfirmVisible, setPasswordConfirmVisible] = useState(false);
+  const [mobileVisible, setMobileVisible] = useState(false);
+  const [nameVisible, setNameVisible] = useRecoilState(nameVisibleAtom);
 
-  const [emailWarning, setEmailWarning] = useRecoilState(emailWarningAtom);
-  const [passwordWarning, setPasswordWarning] = useRecoilState(passwordConfirmAtom);
-  const [passwordConfirmWarning, setPasswordConfirmWarning] = useRecoilState(passwordConfirmAtom);
-  const [mobileWarning, setMobileWarning] = useRecoilState(mobileWarningAtom);
+  const [emailWarning, setEmailWarning] = useState("");
+  const [passwordWarning, setPasswordWarning] = useState("");
+  const [passwordConfirmWarning, setPasswordConfirmWarning] = useState("");
+  const [mobileWarning, setMobileWarning] = useState("");
+  const [nameWarning, setNameWarning] = useRecoilState(nameWarningAtom);
+
 
   function emailValidation(email){
-    const emailRegex = /^\S+@\S+\.\S+$/;
+    let emailRegex = new RegExp("([!#-'*+/-9=?A-Z^-~-]+(\.[!#-'*+/-9=?A-Z^-~-]+)*|\"\(\[\]!#-[^-~ \t]|(\\[\t -~]))+\")@([!#-'*+/-9=?A-Z^-~-]+(\.[!#-'*+/-9=?A-Z^-~-]+)*|\[[\t -Z^-~]*])");
     let warningMessage = '';
 
     if(!emailRegex.test(email)) {
@@ -75,8 +63,6 @@ export function RegisterForm() {
       setPasswordVisible(false);
       setPasswordWarning(warningMessage);
     }
-
-    // return warningMessage;
   }
 
   function passwordConfirmValidation(passwordConfirm) {
@@ -102,6 +88,19 @@ export function RegisterForm() {
       setMobileVisible(true);
     } else {
       setMobileVisible(false);
+    }
+  }
+
+  function nameValidation(name) {
+    const nameRegex = /^[가-힣]{2,5}$/;
+    let warning = "";
+    if(!nameRegex.test(name)) {
+      warning = "올바른 이름이 아닙니다";
+      setNameWarning(warning);
+      setNameVisible(true);
+      console.log(setNameWarning);
+    } else {
+      setNameVisible(false);
     }
   }
 
@@ -174,7 +173,9 @@ export function RegisterForm() {
         <RegisterFormInput label="비밀번호 확인" name="password" type="password" placeholder="비밀번호를 한번 더 입력해주세요" onChange={(e) => {setPasswordConfirm(e.target.value); passwordConfirmValidation(passwordConfirm);}}>
           <span className={passwordConfirmVisible === true ? "registerWarning showWarning" : "registerWarning"}>{passwordConfirmWarning}</span>
         </RegisterFormInput>
-        <RegisterFormInput label="이름" name="name" type="text" placeholder="이름을 입력해주세요" onChange={(e) => {setName(e.target.value);}} />
+        <RegisterFormInput label="이름" name="name" type="text" placeholder="이름을 입력해주세요" onChange={(e) => {setName(e.target.value); nameValidation(e.target.value)}}>
+          <span className={nameVisible === true ? "registerWarning showWarning" : "registerWarning"}>{nameWarning}</span>
+        </RegisterFormInput>
         <RegisterFormInput label="휴대폰" name="mobile" type="text" placeholder="숫자만 입력해주세요" maxLength="11" onChange={handleMobileValidation}/*(e) => {setMobile(e.target.value); mobileValidation(e.target.value)}*/>
           <Button className="registerButtonShort">인증번호 받기</Button>
           <span className={mobileVisible === true ? "registerWarning showWarning" : "registerWarning"}>{mobileWarning}</span>

@@ -3,15 +3,17 @@ import {Button, Label, Heading3} from "@/components";
 import {ReactComponent as ChevronRightIcon} from "@/assets/Register/chevron-right.svg"
 import {ReactComponent as CheckIcon} from "@/assets/Register/checkbutton-off.svg";
 import styled from 'styled-components'
-import { useState, useEffect} from 'react';
+import { useEffect} from 'react';
+import { checkedAllAtom, checkedTermsAtom, checkedAgeAtom, checkedMarketingAtom } from './atoms';
+import { useRecoilState } from 'recoil';
 
 
 export function RegisterTerms() {
   
-  const [checkedAll, setCheckedAll] = useState(false);
-  const [checkedTerms, setCheckedTerms] = useState(false);
-  const [checkedAge, setCheckedAge] = useState(false);
-  const [checkedMarketing, setCheckedMarketing] = useState(false);
+  const [checkedAll, setCheckedAll] = useRecoilState(checkedAllAtom);
+  const [checkedTerms, setCheckedTerms] = useRecoilState(checkedTermsAtom);
+  const [checkedAge, setCheckedAge] = useRecoilState(checkedAgeAtom);
+  const [checkedMarketing, setCheckedMarketing] = useRecoilState(checkedMarketingAtom);
 
   useEffect(()=>{
     setCheckedAll(checkedTerms && checkedAge && checkedMarketing);
