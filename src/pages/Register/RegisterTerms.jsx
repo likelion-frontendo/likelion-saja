@@ -1,25 +1,66 @@
-import {RegisterCheckListItem} from '@/pages/Register'
+// import {RegisterCheckListItem} from '@/pages/Register'
 import {Button, Label, Heading3} from "@/components";
 import {ReactComponent as ChevronRightIcon} from "@/assets/Register/chevron-right.svg"
+import {ReactComponent as CheckIcon} from "@/assets/Register/checkbutton-off.svg";
 import styled from 'styled-components'
+import { useState } from 'react';
+
 
 export function RegisterTerms() {
+  
+  const [checkedAll, setCheckedAll] = useState(false);
+  const [checkedTerms, setCheckedTerms] = useState(false);
+  const [checkedAge, setCheckedAge] = useState(false);
+  const [checkedMarketing, setCheckedMarketing] = useState(false);
+
+
+  function handleCheckedAll() {
+    setCheckedAll(!checkedAll);
+    setCheckedTerms(!checkedAll);
+    setCheckedAge(!checkedAll);
+    setCheckedMarketing(!checkedAll);
+  }
+
+  function handleCheckedTerms() {
+    setCheckedTerms(!checkedTerms);
+    setCheckedAll(checkedTerms && checkedAge && checkedMarketing);
+  };
+  
+ function handleCheckedAge() {
+    setCheckedAge(!checkedAge);
+    setCheckedAll(checkedTerms && checkedAge && checkedMarketing);
+  };
+  
+  function handleCheckedMarketing() {
+    setCheckedMarketing(!checkedMarketing);
+    setCheckedAll(checkedTerms && checkedAge && checkedMarketing);
+  };
+
   return(
     <StyledSection>
       <Heading3>
         <Label className="registerLabel">이용약관동의<sup>*</sup></Label>
       </Heading3>
       <ul className="checkList">
-        <RegisterCheckListItem className="checkAll" content="모두 동의" />
-        <RegisterCheckListItem className="checkOne" content="(필수) 이용약관 및 동의사항">
+        <li className="checkListItem">
+          <Button><CheckIcon className={checkedAll ? 'check fill' : 'check'} onClick={handleCheckedAll}/></Button>
+          <span className="checkAll" >모두 동의</span>
+        </li>
+        <li className="checkListItem">
+          <Button><CheckIcon className={checkedTerms ? 'check fill' : 'check'} onClick={handleCheckedTerms}/></Button>
+          <span className="checkOne">(필수) 이용약관 및 동의사항</span>
           <Button className="detailsButton">약관보기<ChevronRightIcon /></Button>
-        </RegisterCheckListItem>
-        <RegisterCheckListItem className="checkOne" content="(선택) 마케팅 정보 수신 동의">
+        </li>
+        <li className="checkListItem">
+          <Button><CheckIcon className={checkedAge ? 'check fill' : 'check'} onClick={handleCheckedAge}/></Button>
+          <span className="checkOne">(필수) 본인은 만 14세 이상입니다</span>
           <Button className="detailsButton">약관보기<ChevronRightIcon /></Button>
-        </RegisterCheckListItem>
-        <RegisterCheckListItem className="checkOne" content="(필수) 본인은 만 14세 이상입니다.">
+        </li>
+        <li className="checkListItem">
+          <Button><CheckIcon className={checkedMarketing ? 'check fill' : 'check'} onClick={handleCheckedMarketing}/></Button>
+          <span className="checkOne">(선택) 마케팅 정보 수신 동의</span>
           <Button className="detailsButton">약관보기<ChevronRightIcon /></Button>
-        </RegisterCheckListItem>
+        </li>
       </ul>
     </StyledSection>
   )
@@ -51,13 +92,19 @@ const StyledSection = styled.section`
     margin: 40px 0;
   }
 
-  & .checkList > li {
+  & .checkListItem {
     margin-bottom: 24px;
+    display: flex;
+    align-items: center;
   }
 
   & .check {
     position: absolute;
     cursor: pointer;
+  }
+
+  & .fill {
+    fill: #6C816D;
   }
 
   & .checkAll {
@@ -85,5 +132,17 @@ const StyledSection = styled.section`
     margin-left: 4px;
     height: 10px;
     width: 10px;
+  }
+
+  & button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    width: 24px;
+    height: 24px;
+    border: none;
+    margin-right: 8px;
+    background: transparent;
   }
 `
