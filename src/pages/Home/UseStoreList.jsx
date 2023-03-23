@@ -1,14 +1,15 @@
 import React from "react";
 import {Store, useStores} from "@/pages/Home/index";
 
-export function UserStoreList() {
+export function UserStoreList({selectedType}) {
   const {isLoading, stores} = useStores();
 
   if (isLoading) {
     return <div role="alert">로딩 중...</div>;
   }
 
-  const slicedStores = stores.slice(0, 10);
+  const filteredStores = selectedType === "전체" ? stores : stores.filter((store) => store.type === selectedType);
+  const slicedStores = filteredStores.slice(0, 10);
 
   return (
     <div className="storeList">

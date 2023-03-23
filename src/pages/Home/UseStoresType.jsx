@@ -9,7 +9,7 @@ const buttonClassAtom = atom({
 
 const typeList = ["전체", "식당", "카페", "용달/이사", "뷰티/미용", "헬스/필라테스/요가"];
 
-export function UserStoresType() {
+export function UserStoresType({onSelectType}) {
   const [isActive, setIsActive] = useState(false);
   const [stateClass, setStateClass] = useRecoilState(buttonClassAtom);
 
@@ -24,6 +24,7 @@ export function UserStoresType() {
       updatedIsActive[key] = false;
     }
     setIsActive({...updatedIsActive, [type]: true});
+    onSelectType(type);
   };
 
   return (
