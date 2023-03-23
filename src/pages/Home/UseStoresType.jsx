@@ -1,6 +1,7 @@
 import {useState, useEffect} from "react";
-import styled from "styled-components";
 import {atom, useRecoilState} from "recoil";
+import styled from "styled-components";
+import {Button} from "@/components";
 
 const buttonClassAtom = atom({
   key: "buttonClassAtom",
@@ -30,9 +31,9 @@ export function UserStoresType({onSelectType}) {
   return (
     <StyledStoreButtons>
       {typeList.map((type, i) => (
-        <button key={i} className={isActive[type] ? "active" : ""} onClick={() => handleClick(type)}>
+        <Button key={i} className={isActive[type] ? "active" : ""} onClick={() => handleClick(type)}>
           {type}
-        </button>
+        </Button>
       ))}
     </StyledStoreButtons>
   );
