@@ -1,13 +1,11 @@
 import React from "react";
 import styled from "styled-components";
-import {Link, useParams} from "react-router-dom";
+import {Link} from "react-router-dom";
 
 export function Product(props) {
-  const {productId} = useParams();
-
   return (
     <StyledProductContainer>
-      <Link to={`/productDetail/${productId}`}>
+      <Link to={`/productDetail/${props.id}`}>
         <img src={props.imgUrl} alt="상품 이미지"></img>
       </Link>
       <span className="title">{props.title}</span>
