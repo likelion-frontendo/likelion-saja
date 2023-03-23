@@ -1,21 +1,21 @@
-import React from "react";
+import React, {useState} from "react";
 import styled from "styled-components";
-import {UserStoreList} from "@/pages/Home/index";
+import {Heading2} from "@/components";
+import {UserStoreList, UserStoresType} from "@/pages/Home";
 
 export function MainStore() {
+  const [selectedType, setSelectedType] = useState("전체");
+
+  const handleSelectType = (classification) => {
+    setSelectedType(classification);
+  };
+
   return (
     <StyledStore>
       <div className="inner">
-        <h2>다양한 동네 가게를 볼 수 있어요</h2>
-        <div className="storeButtons">
-          <button aria-label="전체">전체</button>
-          <button aria-label="식당">식당</button>
-          <button aria-label="카페">카페</button>
-          <button aria-label="용달/이사">용달/이사</button>
-          <button aria-label="뷰티/미용">뷰티/미용</button>
-          <button aria-label="헬스/필라테스/요가">헬스/필라테스/요가</button>
-        </div>
-        <UserStoreList />
+        <Heading2>다양한 동네 가게를 볼 수 있어요</Heading2>
+        <UserStoresType onSelectType={handleSelectType} />
+        <UserStoreList selectedType={selectedType} />
       </div>
     </StyledStore>
   );
@@ -36,21 +36,6 @@ const StyledStore = styled.div`
     line-height: 48px;
     text-align: center;
     color: #212124;
-  }
-
-  & .storeButtons {
-    display: flex;
-    margin-top: 40px;
-    gap: 8px;
-    justify-content: center;
-  }
-
-  & button {
-    padding: 8px 18px 10px;
-    background-color: white;
-    height: 38px;
-    border: 1px solid #eaebee;
-    border-radius: 100px;
   }
 
   & .storeList {
