@@ -1,5 +1,5 @@
 import React from "react";
-import {Store, useStores} from "@/pages/Home/index";
+import {Store, useStores} from "@/pages/Home";
 
 export function UserStoreList({selectedType}) {
   const {isLoading, stores} = useStores();

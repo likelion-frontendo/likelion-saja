@@ -1,15 +1,16 @@
-import sajaLogo from "@/assets/Home/logo.png";
-import {Link} from "react-router-dom";
 import styled from "styled-components";
+import {Link} from "react-router-dom";
+import {Image, Heading1, Button, Input} from "@/components";
+import sajaLogo from "@/assets/Home/logo.png";
 
 export function Header() {
   return (
     <StyledHeader>
-      <h1>
+      <Heading1>
         <Link to="/" className="imgContainer">
-          <img src={sajaLogo} alt="사자 마켓" />
+          <Image src={sajaLogo} alt="사자 마켓" />
         </Link>
-      </h1>
+      </Heading1>
 
       <nav>
         <ul>
@@ -24,14 +25,14 @@ export function Header() {
           </li>
         </ul>
       </nav>
-      <input type="text" placeholder="물품이나 동네를 검색해보세요"></input>
+      <Input type="text" placeholder="물품이나 동네를 검색해보세요"></Input>
       <div className="buttonContainer">
-        <button type="button" aria-label="로그인" className="loginButton">
+        <Button type="button" aria-label="로그인" className="loginButton">
           로그인
-        </button>
-        <button type="button" aria-label="회원가입" className="registerButton">
+        </Button>
+        <Button type="button" aria-label="회원가입" className="registerButton">
           회원가입
-        </button>
+        </Button>
       </div>
     </StyledHeader>
   );

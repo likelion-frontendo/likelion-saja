@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import styled from "styled-components";
-import {UserStoreList} from "@/pages/Home/index";
-import {UserStoresType} from "./UseStoresType";
+import {Heading2} from "@/components";
+import {UserStoreList, UserStoresType} from "@/pages/Home";
 
 export function MainStore() {
   const [selectedType, setSelectedType] = useState("전체");
@@ -13,7 +13,7 @@ export function MainStore() {
   return (
     <StyledStore>
       <div className="inner">
-        <h2>다양한 동네 가게를 볼 수 있어요</h2>
+        <Heading2>다양한 동네 가게를 볼 수 있어요</Heading2>
         <UserStoresType onSelectType={handleSelectType} />
         <UserStoreList selectedType={selectedType} />
       </div>
