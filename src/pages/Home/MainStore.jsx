@@ -6,8 +6,8 @@ import {UserStoresType} from "./UseStoresType";
 export function MainStore() {
   const [selectedType, setSelectedType] = useState("전체");
 
-  const handleSelectType = (type) => {
-    setSelectedType(type);
+  const handleSelectType = (classification) => {
+    setSelectedType(classification);
   };
 
   return (

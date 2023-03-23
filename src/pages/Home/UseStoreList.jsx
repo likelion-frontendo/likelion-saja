@@ -8,7 +8,7 @@ export function UserStoreList({selectedType}) {
     return <div role="alert">로딩 중...</div>;
   }
 
-  const filteredStores = selectedType === "전체" ? stores : stores.filter((store) => store.type === selectedType);
+  const filteredStores = selectedType === "전체" ? stores : stores.filter((store) => store.classification === selectedType);
   const slicedStores = filteredStores.slice(0, 10);
 
   return (
