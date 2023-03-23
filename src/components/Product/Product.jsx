@@ -1,12 +1,13 @@
 import React from "react";
-import styled from "styled-components";
 import {Link} from "react-router-dom";
+import styled from "styled-components";
+import {Image} from "@/components";
 
 export function Product(props) {
   return (
     <StyledProductContainer>
       <Link to={`/productDetail/${props.id}`}>
-        <img src={props.imgUrl} alt="상품 이미지"></img>
+        <Image src={props.imgUrl} alt="상품 이미지"></Image>
       </Link>
       <span className="title">{props.title}</span>
       <span className="price">{props.price}벨</span>

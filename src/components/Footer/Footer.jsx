@@ -1,9 +1,10 @@
+import {Link} from "react-router-dom";
+import styled from "styled-components";
+import {Image} from "@/components";
 import facebook from "@/assets/Home/facebook.png";
 import instargram from "@/assets/Home/instargram.png";
 import youtube from "@/assets/Home/youtube.png";
 import naverblog from "@/assets/Home/naverblog.png";
-import styled from "styled-components";
-import {Link} from "react-router-dom";
 
 export function Footer() {
   return (
@@ -58,16 +59,16 @@ export function Footer() {
         </section>
         <section className="container">
           <Link to={"#"}>
-            <img src={facebook} alt="" />
+            <Image src={facebook} alt="페이스북" />
           </Link>
           <Link to={"#"}>
-            <img src={instargram} alt="" />
+            <Image src={instargram} alt="인스타그램" />
           </Link>
           <Link to={"#"}>
-            <img src={youtube} alt="" />
+            <Image src={youtube} alt="유튜브" />
           </Link>
           <Link to={"#"}>
-            <img src={naverblog} alt="" />
+            <Image src={naverblog} alt="네이버 블로그" />
           </Link>
         </section>
       </div>
@@ -116,6 +117,7 @@ const StyledFooter = styled.footer`
   & .unique {
     color: rgb(77, 81, 89);
   }
+
   & .container {
     float: left;
   }

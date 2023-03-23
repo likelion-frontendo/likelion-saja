@@ -1,7 +1,7 @@
-import {app} from "@/firebase/app";
-import {getFirestore, collection, getDocs, where, query} from "firebase/firestore";
 import {useEffect} from "react";
 import {atom, useRecoilState} from "recoil";
+import {app} from "@/firebase/app";
+import {getFirestore, collection, getDocs, where, query} from "firebase/firestore";
 
 const productsAtom = atom({
   key: "products",
