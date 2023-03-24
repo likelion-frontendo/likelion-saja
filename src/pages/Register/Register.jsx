@@ -1,38 +1,38 @@
 import { RegisterForm, RegisterTerms } from '@/pages/Register'
 import { Header, Footer, Heading2, Button } from '@/components'
-import { useRecoilValue } from "recoil";
+import { useRecoilValue, useRecoilState } from "recoil";
 import styled from 'styled-components'
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
 import { auth } from "@/firebase/app";
+import { updateProfile } from "firebase/auth";
 import { 
-  emailAtom, 
-  passwordAtom, 
-  passwordConfirmAtom,
-  emailVisibleAtom, 
-  passwordVisibleAtom,
-  passwordConfirmVisibleAtom,
-  mobileAtom,
-  mobileVisibleAtom,
+  emailAtom, emailVisibleAtom,
+  passwordAtom, passwordVisibleAtom,
+  passwordConfirmAtom, passwordConfirmVisibleAtom,
+  nameAtom, nameVisibleAtom,
+  mobileAtom, mobileVisibleAtom,
   checkedTermsAtom,
   checkedAgeAtom,
-  nameAtom,
-  nameVisibleAtom,
+  imageURLAtom,
 } from './atoms';
 
 export function Register() {
 
-  const email = useRecoilValue(emailAtom);
-  const emailVisible = useRecoilValue(emailVisibleAtom );
-  const password = useRecoilValue(passwordAtom);
-  const passwordVisible = useRecoilValue(passwordVisibleAtom);
-  const passwordConfirm = useRecoilValue(passwordConfirmAtom);
-  const passwordConfirmVisible = useRecoilValue(passwordConfirmVisibleAtom);
-  const mobile = useRecoilValue(mobileAtom);
-  const mobileVisible = useRecoilValue(mobileVisibleAtom);
+  const [email, setEmail] = useRecoilState(emailAtom)
+  const [emailVisible, setEmailVisible] = useRecoilState(emailVisibleAtom)
+  const [password, setPassword] = useRecoilState(passwordAtom)
+  const [passwordVisible, setPasswordVisible] = useRecoilState(passwordVisibleAtom)
+  const [passwordConfirm, setPasswordConfirm] = useRecoilState(passwordConfirmAtom);
+  const [passwordConfirmVisible, setPasswordConfirmVisible] = useRecoilState(passwordConfirmVisibleAtom);
+  const [name, setName] = useRecoilState(nameAtom);
+  const [nameVisible, setNameVisible] = useRecoilState(nameVisibleAtom);
+  const [mobile, setMobileAtom] = useRecoilState(mobileAtom);
+  const [mobileVisible, setMobileVisibleAtom] = useRecoilState(mobileVisibleAtom);
+  const [imageURL, setimageURL] = useRecoilState(imageURLAtom);
+
   const checkedTerms = useRecoilValue(checkedTermsAtom);
   const checkedAge = useRecoilValue(checkedAgeAtom);
-  const name = useRecoilValue(nameAtom);
-  const nameVisible = useRecoilValue(nameVisibleAtom);
+
 
   function handleCheckRegister() {
     if(email === "" || emailVisible === true) {
@@ -58,19 +58,39 @@ export function Register() {
       return;
     } else {
       console.log('이야 이걸 통과하네ㅋ');
-      registerUser() 
+      registerUser();
     }
   }
 
-  // 파이어베이스에 회원가입
+  /* 파이어베이스 회원가입 기능 */
   async function registerUser() {
     try {
       const user = await createUserWithEmailAndPassword(
         auth,
         email,
-        password
+        password,
       )
       console.log(user);
+      updateUser(user.name, imageURL);
+    } catch(error) {
+      console.log(error.message);
+    }
+  }
+
+  onAuthStateChanged(auth, (user) => {
+    if(user) {
+      updateUser(user.name, imageURL);
+    }
+  })
+
+  async function updateUser(name, photoURL) {
+    try{
+      const update = updateProfile(auth.currentUser, {
+        displayName: name, 
+        photoURL: photoURL,
+      }) 
+      console.log("프로필 업데이트 성공!")
+      console.log(auth.currentUser);
     } catch(error) {
       console.log(error.message);
     }

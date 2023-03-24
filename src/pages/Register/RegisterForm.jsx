@@ -3,7 +3,11 @@ import {Form, Button, Label, Heading3} from "@/components";
 import styled from 'styled-components'
 import { useEffect, useState } from 'react';
 import { useRecoilState, useSetRecoilState } from 'recoil';
-import { emailAtom, mobileAtom, nameAtom, nameVisibleAtom, nameWarningAtom, passwordAtom, passwordConfirmAtom } from './atoms';
+import { emailAtom, imageAtom, imageURLAtom, mobileAtom, nameAtom, birthdayAtom, nameVisibleAtom, nameWarningAtom, passwordAtom, passwordConfirmAtom, emailWarningAtom, passwordWarningAtom, passwordConfirmWarningAtom, mobileWarningAtom, mobileVisibleAtom, passwordConfirmVisibleAtom, passwordVisibleAtom, emailVisibleAtom } from './atoms';
+import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
+import {storage} from "@/firebase/app";
+import { useAuth } from './useAuth';
+import { upload } from './upload';
 
 export function RegisterForm() {
 
@@ -13,20 +17,23 @@ export function RegisterForm() {
   const [passwordConfirm, setPasswordConfirm] = useRecoilState(passwordConfirmAtom);
   const [name, setName] = useRecoilState(nameAtom);
   const [mobile, setMobile] = useRecoilState(mobileAtom);
-  // const [birthday, setBirthday] = useState('');
+  const [birthday, setBirthday] = useRecoilState(birthdayAtom);
+  const [image, setImage] = useRecoilState(imageAtom);
+  const [imageURL, setImageURL] = useRecoilState(imageURLAtom);
 
-  const [emailVisible, setEmailVisible] = useState(false);
-  const [passwordVisible, setPasswordVisible] = useState(false);
-  const [passwordConfirmVisible, setPasswordConfirmVisible] = useState(false);
-  const [mobileVisible, setMobileVisible] = useState(false);
+  const [emailVisible, setEmailVisible] = useRecoilState(emailVisibleAtom);
+  const [passwordVisible, setPasswordVisible] = useRecoilState(passwordVisibleAtom);
+  const [passwordConfirmVisible, setPasswordConfirmVisible] = useRecoilState(passwordConfirmVisibleAtom);
+  const [mobileVisible, setMobileVisible] = useRecoilState(mobileVisibleAtom);
   const [nameVisible, setNameVisible] = useRecoilState(nameVisibleAtom);
 
-  const [emailWarning, setEmailWarning] = useState("");
-  const [passwordWarning, setPasswordWarning] = useState("");
-  const [passwordConfirmWarning, setPasswordConfirmWarning] = useState("");
-  const [mobileWarning, setMobileWarning] = useState("");
+  const [emailWarning, setEmailWarning] = useRecoilState(emailWarningAtom);
+  const [passwordWarning, setPasswordWarning] = useRecoilState(passwordWarningAtom);
+  const [passwordConfirmWarning, setPasswordConfirmWarning] = useRecoilState(passwordConfirmWarningAtom);
+  const [mobileWarning, setMobileWarning] = useRecoilState(mobileWarningAtom);
   const [nameWarning, setNameWarning] = useRecoilState(nameWarningAtom);
 
+  const currentUser = useAuth();
 
   function emailValidation(email){
     let emailRegex = new RegExp("([!#-'*+/-9=?A-Z^-~-]+(\.[!#-'*+/-9=?A-Z^-~-]+)*|\"\(\[\]!#-[^-~ \t]|(\\[\t -~]))+\")@([!#-'*+/-9=?A-Z^-~-]+(\.[!#-'*+/-9=?A-Z^-~-]+)*|\[[\t -Z^-~]*])");
@@ -104,6 +111,12 @@ export function RegisterForm() {
     }
   }
 
+  function handleBirthdayValidation(e) {
+    const bday = e.target.value;
+    setBirthday(bday);
+  }
+
+
   function handleMobileValidation(e) {
     const mobile = e.target.value;
     const numberOnly = /^[0-9]*$/;
@@ -121,44 +134,13 @@ export function RegisterForm() {
     mobileValidation(mobile);
   }
 
-  /* function handleBirthdayYearValidataion(e) {
-    const year = e.target.value;
-    const numberOnly = /^[0-9]*$/;
-    if(!numberOnly.test(year)) {
-      e.target.value = year.slice(0, -1);
-      return;
-    }  
-
-    if(year < 1900 || year > 2100) {
-      console.log('연을 다시 확인해주세요');
+  function handleProfileImage(e){
+    if(e.target.files[0]) {
+      setImage(e.target.files[0]);
+      const newURL = upload(image);
+      setImageURL(newURL);
     }
   }
-
-  function handleBirthdayMonthValidataion(e) {
-    const month = e.target.value;
-    const numberOnly = /^[0-9]*$/;
-    if(!numberOnly.test(month)) {
-      e.target.value = month.slice(0, -1);
-      return;
-    } 
-
-    if(month < 1 || month > 12) {
-      console.log('월을 다시 확인해주세요');
-    }
-  }
-
-  function handleBirthdayDayValidataion(e) {
-    const day = e.target.value;
-    const numberOnly = /^[0-9]*$/;
-    if(!numberOnly.test(day)) {
-      e.target.value = day.slice(0, -1);
-      return;
-    } 
-
-    if(day < 1 || day > 31) {
-      console.log('월을 다시 확인해주세요');
-    }
-  } */
 
   return(
     <StyledSection className="registerTop">
@@ -180,30 +162,19 @@ export function RegisterForm() {
           <Button className="registerButtonShort">인증번호 받기</Button>
           <span className={mobileVisible === true ? "registerWarning showWarning" : "registerWarning"}>{mobileWarning}</span>
         </RegisterFormInput>
-        {/* <div style={{display: 'flex', alignItems: 'center',}}>
-          <Heading3 className="registerHeading">
-            <Label className="registerLabel">생년월일<sup>*</sup></Label>
-          </Heading3>
-          <div style={{display: 'flex', alignItems: 'center', justifyContent:'center', width: "333px", height: "44px", border: "1px solid #333333", borderRadius: '4px'}}>
-            <input type="text" placeholder="YYYY" style={{width: '33%', height: "38px", textAlign: 'center', border: 'none'}} maxLength="4" onChange={handleBirthdayYearValidataion}/>
-            <span>/</span>
-            <input type="text" placeholder="MM" style={{width: '33%', height: "38px", textAlign: 'center', border: 'none'}} maxLength="2" onChange={handleBirthdayMonthValidataion}/>
-            <span>/</span>
-            <input type="text" placeholder="DD" style={{width: '33%', height: "38px", textAlign: 'center', border: 'none'}} maxLength="2" />
-          </div>
-        </div> */}
-        <RegisterFormInput label="생년월일" name="year" type="date"/>
-        <div className="registerFormInput">
+        <RegisterFormInput label="생년월일" name="year" type="date" onChange={handleBirthdayValidation}/>
+        {/* <div className="registerFormInput">
           <Heading3 className="registerHeading">
             <Label className="registerLabel">주소<sup>*</sup></Label>
           </Heading3>
           <Button className="registerButtonLong">주소 검색</Button>
-        </div>
+        </div> */}
         <div className="registerFormInput">
           <Heading3 className="registerHeading">
             <Label className="registerLabel">프로필 사진<sup>*</sup></Label>
           </Heading3>
-          <Button className="registerButtonLong">프로필 등록</Button>
+          <input type="file" onChange={handleProfileImage} />
+          <Button className="registerButtonLong" >프로필 등록</Button>
         </div>
       </Form>
   </StyledSection>
