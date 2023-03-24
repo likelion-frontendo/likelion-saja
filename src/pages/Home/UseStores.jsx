@@ -1,5 +1,6 @@
 import {useEffect} from "react";
 import {atom, selector, useRecoilState, useRecoilValue} from "recoil";
+import {makeIsLoadingSelector, makeErrorSelector} from "@/components";
 import {app} from "@/firebase/app";
 import {getFirestore, collection, getDocs} from "firebase/firestore";
 
@@ -8,25 +9,8 @@ const storesAtom = atom({
   default: [],
 });
 
-const isLoadingSelector = selector({
-  key: "isLoadingState",
-  get: ({get}) => {
-    const stores = get(storesAtom);
-    return stores.length === 0;
-  },
-});
-
-const errorSelector = selector({
-  key: "errorState",
-  get: ({get}) => {
-    const stores = get(storesAtom);
-    if (stores.length === 0) {
-      return "Error fetching stores";
-    } else {
-      return null;
-    }
-  },
-});
+const isLoadingSelector = makeIsLoadingSelector(storesAtom);
+const errorSelector = makeErrorSelector(storesAtom);
 
 export function useStores() {
   const [stores, setStores] = useRecoilState(storesAtom);

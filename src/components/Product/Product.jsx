@@ -12,7 +12,6 @@ export function Product(props) {
       <span className="title">{props.title}</span>
       <span className="price">{props.price}벨</span>
       <span className="location">{props.location}</span>
-      <span className="interest">관심 {props.interest}</span>
     </StyledProductContainer>
   );
 }
