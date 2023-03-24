@@ -1,24 +1,43 @@
 import {useEffect} from "react";
-import {atom, useRecoilState, useRecoilValue} from "recoil";
+import {atom, selector, useRecoilState, useRecoilValue} from "recoil";
 import {app} from "@/firebase/app";
 import {getFirestore, collection, getDocs} from "firebase/firestore";
-import {makeIsLoadingSelector, makeErrorSelector} from "@/components";
 
 const productsAtom = atom({
   key: "products",
   default: [],
 });
 
+const isLoadingSelector = selector({
+  key: "productsIsLoading",
+  get: ({get}) => {
+    const stores = get(productsAtom);
+    return stores.length === 0;
+  },
+});
+
+const errorSelector = selector({
+  key: "productsError",
+  get: ({get}) => {
+    const stores = get(productsAtom);
+    if (stores.length === 0) {
+      return "Error fetching stores";
+    } else {
+      return null;
+    }
+  },
+});
+
 export function useProducts() {
   const [productsState, setProductsState] = useRecoilState(productsAtom);
-  const isLoading = useRecoilValue(makeIsLoadingSelector(productsAtom));
-  const error = useRecoilValue(makeErrorSelector(productsAtom));
+  const isLoading = useRecoilValue(isLoadingSelector);
+  const error = useRecoilValue(errorSelector);
 
   useEffect(() => {
     const db = getFirestore(app);
-    const productRef = collection(db, "Products");
+    const productsRef = collection(db, "Products");
 
-    getDocs(productRef).then((querySnapshot) => {
+    getDocs(productsRef).then((querySnapshot) => {
       const products = [];
 
       querySnapshot.forEach((doc) => {

@@ -2,9 +2,9 @@ import React from "react";
 import {Product, useProducts} from "@/components";
 
 export function UseProductList(props) {
-  const {isLoadingState, productsState} = useProducts();
+  const {isLoading, productsState} = useProducts();
 
-  if (isLoadingState) {
+  if (isLoading) {
     return <div role="alert">로딩 중...</div>;
   }
 
