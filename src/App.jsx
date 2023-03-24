@@ -5,13 +5,13 @@ function App() {
   return (
     <div className="App">
       <Routes>
-        <Route path="/home" element={<Home />} />
+        <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/mypage" element={<Mypage />} />
         <Route path="/productDetail/:id" element={<ProductDetail />} />
         <Route path="/post" element={<Post />} />
-        <Route path="/" element={<PopularProduct />} />
+        <Route path="/popularProduct" element={<PopularProduct />} />
       </Routes>
     </div>
   );

@@ -22,7 +22,7 @@ export function ProductDetailBody(props) {
       <section className="popularProduct">
         <div className="textContainer">
           <span>당근마켓 인기중고</span>
-          <Link to="/">더 구경하기</Link>
+          <Link to="/PopularProduct">더 구경하기</Link>
         </div>
         <UseProductList count={6} />
       </section>
