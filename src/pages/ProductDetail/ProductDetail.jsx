@@ -1,7 +1,7 @@
 import {Header, Footer} from "@/components";
 import {useParams} from "react-router-dom";
 import {UseProductDetail} from "./UseProductDetail";
-import {Helmet} from "react-helmet";
+import {Helmet} from "react-helmet-async";
 
 export function ProductDetail() {
   const {id} = useParams();

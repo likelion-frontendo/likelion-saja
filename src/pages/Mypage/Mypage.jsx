@@ -1,6 +1,6 @@
 import {SidebarTop, Section} from "@/pages/Mypage/";
 import {Header, Footer} from "@/components";
-import {Helmet} from "react-helmet";
+import {Helmet} from "react-helmet-async";
 import styled from "styled-components/macro";
 
 export function Mypage() {

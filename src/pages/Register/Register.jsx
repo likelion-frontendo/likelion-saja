@@ -1,6 +1,6 @@
 import {RegisterForm, RegisterTerms} from "@/pages/Register";
 import {Header, Footer, Heading2, Button} from "@/components";
-import {Helmet} from "react-helmet";
+import {Helmet} from "react-helmet-async";
 import styled from "styled-components";
 
 export function Register() {

@@ -5,7 +5,7 @@ import {useNavigate} from "react-router-dom";
 import {useState} from "react";
 import {signInWithEmailAndPassword} from "firebase/auth";
 import {auth} from "@/firebase/app";
-import {Helmet} from "react-helmet";
+import {Helmet} from "react-helmet-async";
 
 export function Login() {
   const [loginEmail, setLoginEmail] = useState("");

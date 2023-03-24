@@ -1,5 +1,5 @@
 import {MainBanner, MainProduct, LineBanner, MainStore} from "@/pages/Home";
-import {Helmet} from "react-helmet";
+import {Helmet} from "react-helmet-async";
 import {Header, Footer} from "@/components";
 
 export function Home() {

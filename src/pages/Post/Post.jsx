@@ -1,6 +1,6 @@
 import {Header, Footer} from "@/components";
 import {PostSection} from "@/pages/Post";
-import {Helmet} from "react-helmet";
+import {Helmet} from "react-helmet-async";
 import styled from "styled-components/macro";
 
 export function Post() {
