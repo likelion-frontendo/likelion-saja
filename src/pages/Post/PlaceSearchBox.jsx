@@ -1,8 +1,8 @@
-import { useState } from "react";
+import {useState} from "react";
 import styled from "styled-components/macro";
-import { Button } from "@/components/Button/Button";
-import { Input } from "@/components/Input/Input";
-import { ReactComponent as RightArrow } from "@/assets/Post/right.svg";
+import {Button} from "@/components/Button/Button";
+import {Input} from "@/components/Input/Input";
+import {ReactComponent as RightArrow} from "@/assets/Post/right.svg";
 
 export function PlaceSearchBox() {
   const [postcodePopup, setPostcodePopup] = useState(null);
