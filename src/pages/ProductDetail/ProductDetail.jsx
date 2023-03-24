@@ -1,8 +1,10 @@
 import {Header, Footer} from "@/components";
+import {useParams} from "react-router-dom";
 import {UseProductDetail} from "./UseProductDetail";
 import {Helmet} from "react-helmet";
 
 export function ProductDetail() {
+  const {id} = useParams();
   return (
     <div className="ProductDetail">
       <Helmet>
@@ -19,7 +21,7 @@ export function ProductDetail() {
         <meta property="og:description" content="사자마켓-중고 거래 장터 whit.프론트엔도" />
       </Helmet>
       <Header />
-      <UseProductDetail />
+      <UseProductDetail id={id} />
       <Footer />
     </div>
   );

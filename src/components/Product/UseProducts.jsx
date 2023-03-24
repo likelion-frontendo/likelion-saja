@@ -1,7 +1,7 @@
 import {useEffect} from "react";
-import {atom, useRecoilState} from "recoil";
+import {atom, selector, useRecoilState, useRecoilValue} from "recoil";
 import {app} from "@/firebase/app";
-import {getFirestore, collection, getDocs, where, query} from "firebase/firestore";
+import {getFirestore, collection, getDocs} from "firebase/firestore";
 
 const productsAtom = atom({
   key: "products",
@@ -18,56 +18,47 @@ const errorAtom = atom({
   default: null,
 });
 
+export const makeIsLoadingSelector = (atom) =>
+  selector({
+    key: `isLoadingSelector_${atom.key}`,
+    get: ({get}) => {
+      const value = get(atom);
+      return value.length === 0;
+    },
+  });
+
+export const makeErrorSelector = (atom) =>
+  selector({
+    key: `errorSelector_${atom.key}`,
+    get: ({get}) => {
+      const value = get(atom);
+      if (value.length === 0) {
+        return `Error fetching ${atom.key}`;
+      } else {
+        return null;
+      }
+    },
+  });
+
 export function useProducts() {
   const [productsState, setProductsState] = useRecoilState(productsAtom);
-  const [isLoadingState, setIsLoadingState] = useRecoilState(isLoadingAtom);
-  const [errorState, setErrorState] = useRecoilState(errorAtom);
+  const isLoading = useRecoilValue(makeIsLoadingSelector(productsAtom));
+  const error = useRecoilValue(makeErrorSelector(productsAtom));
 
   useEffect(() => {
     const db = getFirestore(app);
-    const productsRef = collection(db, "Products");
+    const productRef = collection(db, "Products");
 
-    getDocs(productsRef)
-      .then((querySnapshot) => {
-        const queryPromises = [];
-        const products = [];
+    getDocs(productRef).then((querySnapshot) => {
+      const products = [];
 
-        querySnapshot.forEach((doc) => {
-          const product = {id: doc.id, ...doc.data()};
-          const userId = product.userId;
-          products.push(product);
-
-          const queryPromise = new Promise(async (resolve, reject) => {
-            const usersSnapshot = await getDocs(query(collection(db, "Users"), where("id", "==", userId)));
-            resolve(usersSnapshot.docs);
-          });
-
-          queryPromises.push(queryPromise);
-        });
-
-        Promise.all(queryPromises)
-          .then((userDocs) => {
-            const users = [];
-            userDocs.forEach(([doc]) => {
-              users.push({id: doc.id, ...doc.data()});
-            });
-            return users;
-          })
-          .then((users) => {
-            return users.map((user) => {
-              return {...products.find((product) => product.userId === user.id), location: user.location};
-            });
-          })
-          .then((usersWithProductInfo) => {
-            setProductsState(usersWithProductInfo);
-            setIsLoadingState(false);
-          });
-      })
-      .catch((error) => {
-        console.log("Error getting documents: ", error);
-        setErrorState(error);
+      querySnapshot.forEach((doc) => {
+        const product = {id: doc.id, ...doc.data()};
+        products.push(product);
       });
+      setProductsState(products);
+    });
   }, []);
 
-  return {isLoadingState, errorState, productsState};
+  return {isLoading, error, productsState};
 }
