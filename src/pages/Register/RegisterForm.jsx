@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import { useRecoilState } from 'recoil';
 import { emailAtom, imageAtom, imageURLAtom, mobileAtom, nameAtom, birthdayAtom, nameVisibleAtom, nameWarningAtom, passwordAtom, passwordConfirmAtom, emailWarningAtom, passwordWarningAtom, passwordConfirmWarningAtom, mobileWarningAtom, mobileVisibleAtom, passwordConfirmVisibleAtom, passwordVisibleAtom, emailVisibleAtom } from './atoms';
 import { storage } from "@/firebase/app";
-import { ref } from "firebase/storage";
+import { ref, uploadBytes } from "firebase/storage";
 import { useLayoutEffect } from 'react';
 
 export function RegisterForm() {
@@ -125,12 +125,19 @@ export function RegisterForm() {
   /* 이미지 입력값 업데이트 */
   function handleProfileImage(e) {
     setImage(e.target.files[0]);
+    if(image !== null) {
+      // 저장된 이미지를 스토어로 보낸다 
+      updateImageToFirebase(image);
+    }
   }
 
   /* 파이어베이스 업로드하기 */
-  function updateImageToFirebase(file){
-    const fileRef = ref(storage, `profiles/${file}`);
+  async function updateImageToFirebase(file){
+    const fileRef = ref(storage, `profiles/${file.name}`);
+    const snapshot = await uploadBytes(fileRef, file);
+    console.log("업로드 성공!");
   }
+
 
   useLayoutEffect(() => {
     emailValidation(email);
@@ -174,6 +181,7 @@ export function RegisterForm() {
           <span className={mobileVisible === true ? "registerWarning showWarning" : "registerWarning"}>{mobileWarning}</span>
         </RegisterFormInput>
         <RegisterFormInput label="생년월일" name="year" type="date" onChange={handleBirthdayValue}/>
+        {/* <RegisterFormInput label="생년월일" name="year" type="text" onChange={handleBirthdayValue}/> */}
         <div className="registerFormInput">
           <Heading3 className="registerHeading">
             <Label className="registerLabel">프로필 사진<sup>*</sup></Label>
