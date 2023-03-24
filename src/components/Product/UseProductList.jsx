@@ -2,9 +2,9 @@ import React from "react";
 import {Product, useProducts} from "@/components";
 
 export function UseProductList(props) {
-  const {isLoadingState, productsState} = useProducts();
+  const {isLoading, productsState} = useProducts();
 
-  if (isLoadingState) {
+  if (isLoading) {
     return <div role="alert">로딩 중...</div>;
   }
 
@@ -13,7 +13,7 @@ export function UseProductList(props) {
   return (
     <div className="productContainer">
       {slicedProducts.map((product, index) => (
-        <Product key={index} imgUrl={product.imgUrl} title={product.title} price={product.price} location={product.location} />
+        <Product key={index} id={product.id} imgUrl={product.imgUrl} title={product.title} price={product.price} location={product.location} />
       ))}
     </div>
   );
