@@ -1,17 +1,14 @@
 import {RegisterFormInput} from "@/pages/Register"
 import {Form, Button, Label, Heading3} from "@/components";
 import styled from 'styled-components'
-import { useEffect, useState } from 'react';
-import { useRecoilState, useSetRecoilState } from 'recoil';
+import { useRecoilState } from 'recoil';
 import { emailAtom, imageAtom, imageURLAtom, mobileAtom, nameAtom, birthdayAtom, nameVisibleAtom, nameWarningAtom, passwordAtom, passwordConfirmAtom, emailWarningAtom, passwordWarningAtom, passwordConfirmWarningAtom, mobileWarningAtom, mobileVisibleAtom, passwordConfirmVisibleAtom, passwordVisibleAtom, emailVisibleAtom } from './atoms';
-import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
-import {storage} from "@/firebase/app";
-import { useAuth } from './useAuth';
-import { upload } from './upload';
+import { storage } from "@/firebase/app";
+import { ref } from "firebase/storage";
+import { useLayoutEffect } from 'react';
 
 export function RegisterForm() {
 
-  // 인풋값을 추척할 state
   const [email, setEmail] = useRecoilState(emailAtom);
   const [password, setPassword] = useRecoilState(passwordAtom);
   const [passwordConfirm, setPasswordConfirm] = useRecoilState(passwordConfirmAtom);
@@ -33,10 +30,10 @@ export function RegisterForm() {
   const [mobileWarning, setMobileWarning] = useRecoilState(mobileWarningAtom);
   const [nameWarning, setNameWarning] = useRecoilState(nameWarningAtom);
 
-  const currentUser = useAuth();
-
+  /* 이메일 유효성 검사 */
   function emailValidation(email){
-    let emailRegex = new RegExp("([!#-'*+/-9=?A-Z^-~-]+(\.[!#-'*+/-9=?A-Z^-~-]+)*|\"\(\[\]!#-[^-~ \t]|(\\[\t -~]))+\")@([!#-'*+/-9=?A-Z^-~-]+(\.[!#-'*+/-9=?A-Z^-~-]+)*|\[[\t -Z^-~]*])");
+    console.log(email);
+    const emailRegex = /^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i;
     let warningMessage = '';
 
     if(!emailRegex.test(email)) {
@@ -48,32 +45,22 @@ export function RegisterForm() {
     };
   }
 
+  /* 비밀번호 유효성 검사 */
   function passwordValidation(password) {
 
-    const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,16}$/;
     let warningMessage = '';
 
-    if (password.length < 8) {
+    if (password.length < 7) {
       warningMessage = '비밀번호는 최소 8자리여야 합니다';
       setPasswordVisible(true);
       setPasswordWarning(warningMessage);
-    } else if (password.length > 16) {
-      warningMessage = '비밀번호는 최대 16자리여야 합니다';
-      setPasswordVisible(true);
-      setPasswordWarning(warningMessage);
-    } else if (!passwordRegex.test(password)) {
-      warningMessage = '비밀번호는 영어소문자, 영어대문자, 숫자, 특수문자가 들어가야 합니다';
-      setPasswordVisible(true);
-      setPasswordWarning(warningMessage);
     } else {
-      warningMessage = '이 비밀번호는 사용이 가능합니다';
       setPasswordVisible(false);
-      setPasswordWarning(warningMessage);
     }
   }
 
+  /* 비밀번호 중복 유효성 검사 */
   function passwordConfirmValidation(passwordConfirm) {
-
     let warningMessage = '';
 
     if(passwordConfirm !== password) {
@@ -85,6 +72,20 @@ export function RegisterForm() {
     }
   }
 
+  /* 이름 유효성 검사 */
+  function nameValidation(name) {
+    const nameRegex = /^[가-힣]{2,5}$/;
+    let warning = "";
+    if(!nameRegex.test(name)) {
+      warning = "올바른 이름이 아닙니다";
+      setNameWarning(warning);
+      setNameVisible(true);
+    } else {
+      setNameVisible(false);
+    }
+  }
+
+  /* 휴대폰 유효성 검사 */
   function mobileValidation(mobile) {
     const mobileRegex = /^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/;
     let warning = '';
@@ -98,25 +99,7 @@ export function RegisterForm() {
     }
   }
 
-  function nameValidation(name) {
-    const nameRegex = /^[가-힣]{2,5}$/;
-    let warning = "";
-    if(!nameRegex.test(name)) {
-      warning = "올바른 이름이 아닙니다";
-      setNameWarning(warning);
-      setNameVisible(true);
-      console.log(setNameWarning);
-    } else {
-      setNameVisible(false);
-    }
-  }
-
-  function handleBirthdayValidation(e) {
-    const bday = e.target.value;
-    setBirthday(bday);
-  }
-
-
+  /* 휴대폰 잘못된 문자입력 방지 */
   function handleMobileValidation(e) {
     const mobile = e.target.value;
     const numberOnly = /^[0-9]*$/;
@@ -131,50 +114,72 @@ export function RegisterForm() {
     }
 
     setMobile(mobile);
-    mobileValidation(mobile);
   }
 
-  function handleProfileImage(e){
-    if(e.target.files[0]) {
-      setImage(e.target.files[0]);
-      const newURL = upload(image);
-      setImageURL(newURL);
-    }
+  /* 생년월일 입력값 업데이트 */
+  function handleBirthdayValue(e) {
+    setBirthday(e.target.value);
+    console.log(birthday);
   }
+
+  /* 이미지 입력값 업데이트 */
+  function handleProfileImage(e) {
+    setImage(e.target.files[0]);
+  }
+
+  /* 파이어베이스 업로드하기 */
+  function updateImageToFirebase(file){
+    const fileRef = ref(storage, `profiles/${file}`);
+  }
+
+  useLayoutEffect(() => {
+    emailValidation(email);
+  }, [email]);
+
+  useLayoutEffect(() => {
+    passwordValidation(password);
+  }, [password]);
+
+  useLayoutEffect(() => {
+    console.log(passwordConfirm)
+    passwordConfirmValidation(passwordConfirm);
+  }, [passwordConfirm]);
+
+  useLayoutEffect(() => {
+    nameValidation(name);
+  }, [name]);
+
+  useLayoutEffect(() => {
+    mobileValidation(mobile);
+  }, [mobile]);
 
   return(
     <StyledSection className="registerTop">
       <Form className="registerForm" legend="회원가입">
-        <RegisterFormInput label="이메일" name="email" type="email" placeholder="예시) frontendo@saja.com" onChange={(e) => {setEmail(e.target.value); emailValidation(email)}}>
+        <RegisterFormInput label="이메일" name="email" type="email" placeholder="예시) frontendo@saja.com" onChange={(e) => {setEmail(e.target.value);}}>
           <Button className="registerButtonShort">중복확인</Button>
           <span className={emailVisible === true ? "registerWarning showWarning" : "registerWarning"}>{emailWarning}</span>
         </RegisterFormInput>
-        <RegisterFormInput label="비밀번호" name="password" type="password" placeholder="비밀번호를 입력해주세요" onChange={(e)=>{setPassword(e.target.value); passwordValidation(password)}}>
+        <RegisterFormInput label="비밀번호" name="password" type="password" placeholder="비밀번호를 입력해주세요" onChange={(e)=>{setPassword(e.target.value);}}>
           <span className={passwordVisible === true ? "registerWarning showWarning" : "registerWarning"}>{passwordWarning}</span>
         </RegisterFormInput>
-        <RegisterFormInput label="비밀번호 확인" name="password" type="password" placeholder="비밀번호를 한번 더 입력해주세요" onChange={(e) => {setPasswordConfirm(e.target.value); passwordConfirmValidation(passwordConfirm);}}>
+        <RegisterFormInput label="비밀번호 확인" name="password" type="password" placeholder="비밀번호를 한번 더 입력해주세요" onChange={(e) => {setPasswordConfirm(e.target.value);}}>
           <span className={passwordConfirmVisible === true ? "registerWarning showWarning" : "registerWarning"}>{passwordConfirmWarning}</span>
         </RegisterFormInput>
-        <RegisterFormInput label="이름" name="name" type="text" placeholder="이름을 입력해주세요" onChange={(e) => {setName(e.target.value); nameValidation(e.target.value)}}>
+        <RegisterFormInput label="이름" name="name" type="text" placeholder="이름을 입력해주세요" onChange={(e) => {setName(e.target.value);}}>
           <span className={nameVisible === true ? "registerWarning showWarning" : "registerWarning"}>{nameWarning}</span>
         </RegisterFormInput>
-        <RegisterFormInput label="휴대폰" name="mobile" type="text" placeholder="숫자만 입력해주세요" maxLength="11" onChange={handleMobileValidation}/*(e) => {setMobile(e.target.value); mobileValidation(e.target.value)}*/>
+        <RegisterFormInput label="휴대폰" name="mobile" type="text" placeholder="숫자만 입력해주세요" maxLength="11" onChange={handleMobileValidation}>
           <Button className="registerButtonShort">인증번호 받기</Button>
           <span className={mobileVisible === true ? "registerWarning showWarning" : "registerWarning"}>{mobileWarning}</span>
         </RegisterFormInput>
-        <RegisterFormInput label="생년월일" name="year" type="date" onChange={handleBirthdayValidation}/>
-        {/* <div className="registerFormInput">
-          <Heading3 className="registerHeading">
-            <Label className="registerLabel">주소<sup>*</sup></Label>
-          </Heading3>
-          <Button className="registerButtonLong">주소 검색</Button>
-        </div> */}
+        <RegisterFormInput label="생년월일" name="year" type="date" onChange={handleBirthdayValue}/>
         <div className="registerFormInput">
           <Heading3 className="registerHeading">
             <Label className="registerLabel">프로필 사진<sup>*</sup></Label>
           </Heading3>
           <input type="file" onChange={handleProfileImage} />
-          <Button className="registerButtonLong" >프로필 등록</Button>
+          {/* <Button className="registerButtonLong" >프로필 등록</Button> */}
         </div>
       </Form>
   </StyledSection>
