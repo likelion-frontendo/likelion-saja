@@ -7,5 +7,6 @@ export async function upload(file) {
   const snapshot = await uploadBytes(fileRef, file);
   console.log("업로드됨!");
   const photoURL = await getDownloadURL(fileRef);
+  console.log(photoURL);
   return photoURL;
 }

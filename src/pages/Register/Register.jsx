@@ -3,8 +3,8 @@ import { Header, Footer, Heading2, Button } from '@/components'
 import { useRecoilValue, useRecoilState } from "recoil";
 import styled from 'styled-components'
 import { createUserWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
-import { auth } from "@/firebase/app";
-import { updateProfile } from "firebase/auth";
+import { getFirestore, collection, setDoc, doc } from 'firebase/firestore';
+import { auth, db } from "@/firebase/app";
 import { 
   emailAtom, emailVisibleAtom,
   passwordAtom, passwordVisibleAtom,
@@ -14,7 +14,9 @@ import {
   checkedTermsAtom,
   checkedAgeAtom,
   imageURLAtom,
+  currentUserAtom,
 } from './atoms';
+import { useEffect } from 'react';
 
 export function Register() {
 
@@ -32,7 +34,7 @@ export function Register() {
 
   const checkedTerms = useRecoilValue(checkedTermsAtom);
   const checkedAge = useRecoilValue(checkedAgeAtom);
-
+  const userObject = useCurrentUser();
 
   function handleCheckRegister() {
     if(email === "" || emailVisible === true) {
@@ -59,6 +61,7 @@ export function Register() {
     } else {
       console.log('이야 이걸 통과하네ㅋ');
       registerUser();
+      addUserCollection(name, mobile, email);
     }
   }
 
@@ -70,30 +73,29 @@ export function Register() {
         email,
         password,
       )
-      console.log(user);
-      updateUser(user.name, imageURL);
+      console.log("회원가입 성공!");
     } catch(error) {
       console.log(error.message);
     }
   }
 
-  onAuthStateChanged(auth, (user) => {
-    if(user) {
-      updateUser(user.name, imageURL);
-    }
-  })
+  async function addUserCollection(name, mobile, email) {
+    await setDoc(doc(db, "users", "a"), {
+      name: name,
+      mobile: mobile,
+      email: email,
+    })
+  }
 
-  async function updateUser(name, photoURL) {
-    try{
-      const update = updateProfile(auth.currentUser, {
-        displayName: name, 
-        photoURL: photoURL,
-      }) 
-      console.log("프로필 업데이트 성공!")
-      console.log(auth.currentUser);
-    } catch(error) {
-      console.log(error.message);
-    }
+  function useCurrentUser() {
+    const [currentUser, setCurrentUser] = useRecoilState(currentUserAtom);
+    useEffect(() => {
+      const userData = onAuthStateChanged(auth, (user) => {
+        setCurrentUser(user);
+      });
+      return userData;
+    }, []);
+    return currentUser;
   }
 
   return(
