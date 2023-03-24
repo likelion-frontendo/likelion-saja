@@ -12,15 +12,7 @@ export function UseProductDetail(props) {
 
   return (
     <div className="imgContainer">
-      <ProductDetailBody
-        id={product.id}
-        imgUrl={product.imgUrl}
-        title={product.title}
-        price={product.price}
-        location={product.location}
-        interest={product.interest}
-        description={product.description}
-      />
+      <ProductDetailBody id={product.id} imgUrl={product.imgUrl} title={product.title} price={product.price} location={product.location} description={product.description} />
     </div>
   );
 }
