@@ -13,7 +13,11 @@ export function UseProductList(props) {
   return (
     <div className="productContainer">
       {slicedProducts.map((product, index) => (
+<<<<<<< HEAD
         <Product key={index} imgUrl={product.imgUrl} title={product.title} price={product.price} location={product.location} />
+=======
+        <Product key={index} id={product.id} imgUrl={product.imgUrl} title={product.title} price={product.price} location={product.location} interest={product.interest} />
+>>>>>>> 49671ab7ca94c22bc30903cfba86181f2a1dc10a
       ))}
     </div>
   );
