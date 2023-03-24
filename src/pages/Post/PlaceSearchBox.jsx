@@ -1,15 +1,38 @@
-// import {useState} from "react";
-import {Button} from "@/components/Button/Button";
-import {Input} from "@/components/Input/Input";
-import {ReactComponent as RightArrow} from "@/assets/Post/right.svg";
+import { useState } from "react";
 import styled from "styled-components/macro";
+import { Button } from "@/components/Button/Button";
+import { Input } from "@/components/Input/Input";
+import { ReactComponent as RightArrow } from "@/assets/Post/right.svg";
 
 export function PlaceSearchBox() {
+  const [postcodePopup, setPostcodePopup] = useState(null);
+  const [address, setAddress] = useState("");
+
+  const handlePostcodePopup = () => {
+    if (!postcodePopup) {
+      const script = document.createElement("script");
+      script.src = "https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js";
+      script.onload = () => {
+        const newPostcodePopup = new window.daum.Postcode({
+          oncomplete: (data) => {
+            setAddress(data.address);
+            setPostcodePopup(null);
+          },
+        });
+        newPostcodePopup.open();
+        setPostcodePopup(newPostcodePopup);
+      };
+      document.head.appendChild(script);
+    } else {
+      postcodePopup.open();
+    }
+  };
+
   return (
     <PlaceSearch>
       <div className="PlaceSearchInputBox">
-        <Input value="거래장소 선택하기"></Input>
-        <Button>
+        <Input value={address || "거래장소 선택하기"} onClick={handlePostcodePopup} />
+        <Button onClick={handlePostcodePopup}>
           장소 선택 <RightArrow className="RightArrow"></RightArrow>
         </Button>
       </div>
