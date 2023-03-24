@@ -14,7 +14,7 @@ export function ProductDetailBody(props) {
       <hr />
       <section className="productDescription">
         <span className="titleDescription">{props.title} </span>
-        <span className="priceDescription">{props.price}벨 </span>
+        <span className="priceDescription">{props.price.toLocaleString(navigator.language)}벨 </span>
         <span className="descriptionDescription">{props.description} </span>
         <span className="interestDescription">관심 {props.interest} </span>
       </section>
