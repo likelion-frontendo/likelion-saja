@@ -6,7 +6,7 @@ import {Image} from "@/components";
 export function Product(props) {
   return (
     <StyledProductContainer>
-      <Link to="/">
+      <Link to={`/productDetail/${props.id}`}>
         <Image src={props.imgUrl} alt="상품 이미지"></Image>
       </Link>
       <span className="title">{props.title}</span>
