@@ -5,7 +5,7 @@ import { useRecoilState } from 'recoil';
 import { emailAtom, imageAtom, imageURLAtom, mobileAtom, nameAtom, birthdayAtom, nameVisibleAtom, nameWarningAtom, passwordAtom, passwordConfirmAtom, emailWarningAtom, passwordWarningAtom, passwordConfirmWarningAtom, mobileWarningAtom, mobileVisibleAtom, passwordConfirmVisibleAtom, passwordVisibleAtom, emailVisibleAtom } from './atoms';
 import { storage } from "@/firebase/app";
 import { ref, uploadBytes } from "firebase/storage";
-import { useLayoutEffect } from 'react';
+import { useEffect } from 'react';
 
 export function RegisterForm() {
 
@@ -32,7 +32,6 @@ export function RegisterForm() {
 
   /* 이메일 유효성 검사 */
   function emailValidation(email){
-    console.log(email);
     const emailRegex = /^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i;
     let warningMessage = '';
 
@@ -133,30 +132,30 @@ export function RegisterForm() {
 
   /* 파이어베이스 업로드하기 */
   async function updateImageToFirebase(file){
+    //파이어스토어 안에서 이미지 경로 설정
     const fileRef = ref(storage, `profiles/${file.name}`);
+    //파이어스토어의 해당 경로로 이미지를 업로드 해주는 코드
     const snapshot = await uploadBytes(fileRef, file);
     console.log("업로드 성공!");
   }
 
-
-  useLayoutEffect(() => {
+  useEffect(() => {
     emailValidation(email);
   }, [email]);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     passwordValidation(password);
   }, [password]);
 
-  useLayoutEffect(() => {
-    console.log(passwordConfirm)
+  useEffect(() => {
     passwordConfirmValidation(passwordConfirm);
   }, [passwordConfirm]);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     nameValidation(name);
   }, [name]);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     mobileValidation(mobile);
   }, [mobile]);
 
