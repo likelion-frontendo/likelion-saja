@@ -41,11 +41,6 @@ export const imageURLAtom = atom({
   default: "",
 });
 
-export const currentUserAtom = atom({
-  key: "currentUserAtom",
-  default: null,
-});
-
 // input 입력값 통과 유무
 export const emailVisibleAtom = atom({
   key: "emailVisibleAtom",

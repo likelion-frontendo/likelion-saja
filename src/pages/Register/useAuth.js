@@ -1,4 +1,4 @@
-import {useEffect, useState} from "react";
+/* import {useEffect, useState} from "react";
 import {onAuthStateChanged} from "firebase/auth";
 import {auth} from "@/firebase/app";
 import {useRecoilState} from "recoil";
@@ -13,4 +13,4 @@ export function useAuth() {
     return unsub;
   }, []);
   return currentUser;
-}
+} */

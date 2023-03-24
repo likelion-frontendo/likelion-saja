@@ -34,7 +34,18 @@ export function Register() {
 
   const checkedTerms = useRecoilValue(checkedTermsAtom);
   const checkedAge = useRecoilValue(checkedAgeAtom);
-  const userObject = useCurrentUser();
+  /* const userObject = useCurrentUser();
+
+  function useCurrentUser() {
+    const [currentUser, setCurrentUser] = useRecoilState(currentUserAtom);
+    useEffect(() => {
+      const userData = onAuthStateChanged(auth, (user) => {
+        setCurrentUser(user);
+      });
+      return userData;
+    }, []);
+    return currentUser;
+  } */
 
   function handleCheckRegister() {
     if(email === "" || emailVisible === true) {
@@ -85,17 +96,6 @@ export function Register() {
       mobile: mobile,
       email: email,
     })
-  }
-
-  function useCurrentUser() {
-    const [currentUser, setCurrentUser] = useRecoilState(currentUserAtom);
-    useEffect(() => {
-      const userData = onAuthStateChanged(auth, (user) => {
-        setCurrentUser(user);
-      });
-      return userData;
-    }, []);
-    return currentUser;
   }
 
   return(
