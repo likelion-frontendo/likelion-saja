@@ -14,9 +14,25 @@ import {
   checkedTermsAtom,
   checkedAgeAtom,
   imageURLAtom,
-  currentUserAtom,
+  currentUserAtom
 } from './atoms';
 import { useEffect } from 'react';
+
+  function useCurrentUser() {
+    const [currentUser, setCurrentUser] = useRecoilState(currentUserAtom);
+    
+    useEffect(() => {
+      onAuthStateChanged(auth, (user) => {
+        if(user) {
+          const currentUser = {uid: user.uid, email: user.email};
+          console.log(currentUser);
+          setCurrentUser(currentUser);
+        }
+      });
+    }, [setCurrentUser]);
+
+    return currentUser;
+  }
 
 export function Register() {
 
@@ -31,23 +47,12 @@ export function Register() {
   const [mobile, setMobileAtom] = useRecoilState(mobileAtom);
   const [mobileVisible, setMobileVisibleAtom] = useRecoilState(mobileVisibleAtom);
   const [imageURL, setimageURL] = useRecoilState(imageURLAtom);
-
+  const [currentUser, setCurrentUser] = useRecoilState(currentUserAtom);
+  
   const checkedTerms = useRecoilValue(checkedTermsAtom);
   const checkedAge = useRecoilValue(checkedAgeAtom);
-  /* const userObject = useCurrentUser();
 
-  function useCurrentUser() {
-    const [currentUser, setCurrentUser] = useRecoilState(currentUserAtom);
-    useEffect(() => {
-      const userData = onAuthStateChanged(auth, (user) => {
-        setCurrentUser(user);
-      });
-      return userData;
-    }, []);
-    return currentUser;
-  } */
-
-  function handleCheckRegister() {
+  async function handleCheckRegister() {
     if(email === "" || emailVisible === true) {
       console.log('응 이메일 탈락~');
       return;
@@ -71,8 +76,9 @@ export function Register() {
       return;
     } else {
       console.log('이야 이걸 통과하네ㅋ');
-      registerUser();
-      addUserCollection(name, mobile, email);
+      await registerUser();
+      await addUserCollection(name, mobile, email);
+      console.log(currentUser);
     }
   }
 
@@ -84,7 +90,7 @@ export function Register() {
         email,
         password,
       )
-      console.log("회원가입 성공!");
+      console.log("회원가입 성공!", user);
     } catch(error) {
       console.log(error.message);
     }
@@ -96,6 +102,7 @@ export function Register() {
       mobile: mobile,
       email: email,
     })
+    console.log("사용자 정보 추가");
   }
 
   return(
