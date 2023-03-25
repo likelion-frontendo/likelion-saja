@@ -14,25 +14,26 @@ import {
   checkedTermsAtom,
   checkedAgeAtom,
   imageURLAtom,
-  currentUserAtom
+  currentUserAtom,
+  birthdayAtom
 } from './atoms';
-import { useEffect } from 'react';
 
-  function useCurrentUser() {
+import { uidAtom } from './uid';
+
+  /* function useCurrentUser() {
     const [currentUser, setCurrentUser] = useRecoilState(currentUserAtom);
     
     useEffect(() => {
       onAuthStateChanged(auth, (user) => {
         if(user) {
-          const currentUser = {uid: user.uid, email: user.email};
-          console.log(currentUser);
-          setCurrentUser(currentUser);
+          const loginUser = {uid: user.uid, email: user.email};
+          setCurrentUser(loginUser);
         }
       });
     }, [setCurrentUser]);
 
     return currentUser;
-  }
+  } */
 
 export function Register() {
 
@@ -47,10 +48,17 @@ export function Register() {
   const [mobile, setMobileAtom] = useRecoilState(mobileAtom);
   const [mobileVisible, setMobileVisibleAtom] = useRecoilState(mobileVisibleAtom);
   const [imageURL, setimageURL] = useRecoilState(imageURLAtom);
+  const [birthday, setBirthday] = useRecoilState(birthdayAtom);
   const [currentUser, setCurrentUser] = useRecoilState(currentUserAtom);
+  const [uid, setUid] = useRecoilState(uidAtom);
   
   const checkedTerms = useRecoilValue(checkedTermsAtom);
   const checkedAge = useRecoilValue(checkedAgeAtom);
+  // const userObject = useCurrentUser();
+
+  function checkAtom() {
+    console.log(uid);
+  }
 
   async function handleCheckRegister() {
     if(email === "" || emailVisible === true) {
@@ -77,31 +85,27 @@ export function Register() {
     } else {
       console.log('이야 이걸 통과하네ㅋ');
       await registerUser();
-      await addUserCollection(name, mobile, email);
-      console.log(currentUser);
     }
   }
 
   /* 파이어베이스 회원가입 기능 */
   async function registerUser() {
     try {
-      const user = await createUserWithEmailAndPassword(
-        auth,
-        email,
-        password,
-      )
-      console.log("회원가입 성공!", user);
+      const result = await createUserWithEmailAndPassword(auth, email, password);
+      addUserCollection(result.user.uid, name, mobile, email, birthday )
     } catch(error) {
       console.log(error.message);
     }
   }
 
-  async function addUserCollection(name, mobile, email) {
-    await setDoc(doc(db, "users", "a"), {
+  async function addUserCollection(uid, name, mobile, email, birthday) {
+    await setDoc(doc(db, "users", uid), {
       name: name,
       mobile: mobile,
       email: email,
+      birthday: birthday,
     })
+    setUid(uid);
     console.log("사용자 정보 추가");
   }
 
@@ -114,6 +118,7 @@ export function Register() {
         <RegisterForm />
         <RegisterTerms />
         <Button className="registerButton" onClick={handleCheckRegister}>가입하기</Button>
+        <Button className="registerButton" onClick={checkAtom}>상태변수 검사</Button>
       </StyledMain>
       <Footer></Footer>
     </>
