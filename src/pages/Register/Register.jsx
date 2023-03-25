@@ -13,7 +13,8 @@ import {
   mobileAtom, mobileVisibleAtom,
   checkedTermsAtom,
   checkedAgeAtom,
-  imageURLAtom,
+  profileImageAtom,
+  profileImageURLAtom,
   currentUserAtom,
   birthdayAtom
 } from './atoms';
@@ -47,7 +48,8 @@ export function Register() {
   const [nameVisible, setNameVisible] = useRecoilState(nameVisibleAtom);
   const [mobile, setMobileAtom] = useRecoilState(mobileAtom);
   const [mobileVisible, setMobileVisibleAtom] = useRecoilState(mobileVisibleAtom);
-  const [imageURL, setimageURL] = useRecoilState(imageURLAtom);
+  const [profileImageURL, setProfileImageURL] = useRecoilState(profileImageURLAtom);
+  const [profileImage, setProfileImage] = useRecoilState(profileImageAtom);
   const [birthday, setBirthday] = useRecoilState(birthdayAtom);
   const [currentUser, setCurrentUser] = useRecoilState(currentUserAtom);
   const [uid, setUid] = useRecoilState(uidAtom);
@@ -92,18 +94,19 @@ export function Register() {
   async function registerUser() {
     try {
       const result = await createUserWithEmailAndPassword(auth, email, password);
-      addUserCollection(result.user.uid, name, mobile, email, birthday )
+      addUserCollection(result.user.uid, name, mobile, email, birthday, profileImageURL)
     } catch(error) {
       console.log(error.message);
     }
   }
 
-  async function addUserCollection(uid, name, mobile, email, birthday) {
+  async function addUserCollection(uid, name, mobile, email, birthday, profileImageURL) {
     await setDoc(doc(db, "users", uid), {
       name: name,
       mobile: mobile,
       email: email,
       birthday: birthday,
+      profileImageURL: profileImageURL,
     })
     setUid(uid);
     console.log("사용자 정보 추가");

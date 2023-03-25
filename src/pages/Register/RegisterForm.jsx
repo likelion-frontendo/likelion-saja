@@ -2,9 +2,9 @@ import {RegisterFormInput} from "@/pages/Register"
 import {Form, Button, Label, Heading3} from "@/components";
 import styled from 'styled-components'
 import { useRecoilState } from 'recoil';
-import { emailAtom, imageAtom, imageURLAtom, mobileAtom, nameAtom, birthdayAtom, nameVisibleAtom, nameWarningAtom, passwordAtom, passwordConfirmAtom, emailWarningAtom, passwordWarningAtom, passwordConfirmWarningAtom, mobileWarningAtom, mobileVisibleAtom, passwordConfirmVisibleAtom, passwordVisibleAtom, emailVisibleAtom } from './atoms';
+import { emailAtom, profileImageAtom, profileImageURLAtom, mobileAtom, nameAtom, birthdayAtom, nameVisibleAtom, nameWarningAtom, passwordAtom, passwordConfirmAtom, emailWarningAtom, passwordWarningAtom, passwordConfirmWarningAtom, mobileWarningAtom, mobileVisibleAtom, passwordConfirmVisibleAtom, passwordVisibleAtom, emailVisibleAtom } from './atoms';
 import { storage } from "@/firebase/app";
-import { ref, uploadBytes } from "firebase/storage";
+import { ref, uploadBytes, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { useEffect } from 'react';
 
 export function RegisterForm() {
@@ -15,8 +15,8 @@ export function RegisterForm() {
   const [name, setName] = useRecoilState(nameAtom);
   const [mobile, setMobile] = useRecoilState(mobileAtom);
   const [birthday, setBirthday] = useRecoilState(birthdayAtom);
-  const [image, setImage] = useRecoilState(imageAtom);
-  const [imageURL, setImageURL] = useRecoilState(imageURLAtom);
+  const [profileImageURL, setProfileImageURL] = useRecoilState(profileImageURLAtom);
+  const [profileImage, setProfileImage] = useRecoilState(profileImageAtom);
 
   const [emailVisible, setEmailVisible] = useRecoilState(emailVisibleAtom);
   const [passwordVisible, setPasswordVisible] = useRecoilState(passwordVisibleAtom);
@@ -121,7 +121,44 @@ export function RegisterForm() {
     console.log(birthday);
   }
 
-  /* 이미지 입력값 업데이트 */
+  useEffect(() => {
+    function uploadFile() {
+      const name = new Date().getTime() + profileImage.name;
+      const storageRef = ref(storage, 'profiles/' + name);
+      const uploadTask = uploadBytesResumable(storageRef, profileImage);
+
+      uploadTask.on(
+        'state_changed',
+        (snapshot) => {
+          const progress =
+            (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+          console.log('Upload is ' + progress + '% done');
+          switch (snapshot.state) {
+            case 'paused':
+              console.log('Upload is paused');
+              break;
+            case 'running':
+              console.log('Upload is running');
+              break;
+              default:
+                break;
+          }
+        },
+        (error) => {
+          console.log(error);
+        },
+        () => {
+          getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+            console.log(downloadURL);
+            setProfileImageURL(downloadURL);
+          });
+        }
+      );
+    }
+    profileImage && uploadFile();
+  }, [profileImage]);
+
+  /* // 이미지 입력값 업데이트
   function handleProfileImage(e) {
     setImage(e.target.files[0]);
     if(image !== null) {
@@ -130,14 +167,14 @@ export function RegisterForm() {
     }
   }
 
-  /* 파이어베이스 업로드하기 */
+  // 파이어베이스 업로드하기
   async function updateImageToFirebase(file){
     //파이어스토어 안에서 이미지 경로 설정
     const fileRef = ref(storage, `profiles/${file.name}`);
     //파이어스토어의 해당 경로로 이미지를 업로드 해주는 코드
     const snapshot = await uploadBytes(fileRef, file);
     console.log("업로드 성공!");
-  }
+  } */
 
   useEffect(() => {
     emailValidation(email);
@@ -185,7 +222,7 @@ export function RegisterForm() {
           <Heading3 className="registerHeading">
             <Label className="registerLabel">프로필 사진<sup>*</sup></Label>
           </Heading3>
-          <input type="file" onChange={handleProfileImage} />
+          <input type="file" onChange={(e) => setProfileImage(e.target.files[0])/* handleProfileImage */} />
           {/* <Button className="registerButtonLong" >프로필 등록</Button> */}
         </div>
       </Form>
