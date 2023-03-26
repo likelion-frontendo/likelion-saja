@@ -46,7 +46,7 @@ export function useProducts() {
       });
       setProductsState(products);
     });
-  }, []);
+  }, [setProductsState]);
 
   return {isLoading, error, productsState};
 }
