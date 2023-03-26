@@ -1,18 +1,23 @@
 // import {RegisterCheckListItem} from '@/pages/Register'
-import {Button, Label, Heading3} from "@/components";
-import {ReactComponent as ChevronRightIcon} from "@/assets/Register/chevron-right.svg"
-import {ReactComponent as CheckIcon} from "@/assets/Register/checkbutton-off.svg";
+import {useEffect} from 'react';
+import {useRecoilState} from 'recoil';
+import {checkedAllAtom, checkedTermsAtom, checkedAgeAtom, checkedMarketingAtom} from './atoms/termsAtoms';
 import styled from 'styled-components'
-import { useState } from 'react';
+import {Button, Label, Heading3} from "@/components";
+import {ReactComponent as CheckIcon} from "@/assets/Register/checkbutton-off.svg";
+import {ReactComponent as ChevronRightIcon} from "@/assets/Register/chevron-right.svg"
 
 
 export function RegisterTerms() {
   
-  const [checkedAll, setCheckedAll] = useState(false);
-  const [checkedTerms, setCheckedTerms] = useState(false);
-  const [checkedAge, setCheckedAge] = useState(false);
-  const [checkedMarketing, setCheckedMarketing] = useState(false);
+  const [checkedAll, setCheckedAll] = useRecoilState(checkedAllAtom);
+  const [checkedTerms, setCheckedTerms] = useRecoilState(checkedTermsAtom);
+  const [checkedAge, setCheckedAge] = useRecoilState(checkedAgeAtom);
+  const [checkedMarketing, setCheckedMarketing] = useRecoilState(checkedMarketingAtom);
 
+  useEffect(()=>{
+    setCheckedAll(checkedTerms && checkedAge && checkedMarketing);
+  }, [checkedTerms, checkedAge, checkedMarketing]);
 
   function handleCheckedAll() {
     setCheckedAll(!checkedAll);
@@ -23,17 +28,14 @@ export function RegisterTerms() {
 
   function handleCheckedTerms() {
     setCheckedTerms(!checkedTerms);
-    setCheckedAll(checkedTerms && checkedAge && checkedMarketing);
   };
   
  function handleCheckedAge() {
     setCheckedAge(!checkedAge);
-    setCheckedAll(checkedTerms && checkedAge && checkedMarketing);
   };
   
   function handleCheckedMarketing() {
     setCheckedMarketing(!checkedMarketing);
-    setCheckedAll(checkedTerms && checkedAge && checkedMarketing);
   };
 
   return(

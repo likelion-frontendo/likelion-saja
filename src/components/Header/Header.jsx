@@ -3,7 +3,7 @@ import {Link} from "react-router-dom";
 import {Image, Heading1, Button, Input} from "@/components";
 import sajaLogo from "@/assets/Home/logo.png";
 
-export function Header() {
+export function Header() {  
   return (
     <StyledHeader>
       <Heading1>
