@@ -3,10 +3,19 @@ import {Input} from "@/components/Input/Input";
 import styled from "styled-components/macro";
 
 export function PostText() {
-  const [InputPrice, setInputPrice] = useState("");
+  const [PriceValue, setPriceValue] = useState(0);
 
-  function handleInputChange(e) {
-    setInputPrice(e.target.value);
+  function addComma(price) {
+    let returnString = price?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    return returnString;
+  }
+  function onChangePoints(e) {
+    const inputText = e.target.value;
+    const {value} = e.target;
+    const fillteredText = inputText.replace(/[^0-9]/g, "");
+    let str = value.replaceAll(",", "");
+    setPriceValue(str);
+    setPriceValue(fillteredText);
   }
 
   return (
@@ -14,8 +23,8 @@ export function PostText() {
       <div className="TextTitleInput">
         <Input placeholder="글 제목" className="TextTitle"></Input>
         <div className="PriceBox">
-          <span style={{color: InputPrice ? "#000" : "#dcdee3"}}>₩</span>
-          <Input pattern="[0-9]*" value={InputPrice} placeholder="가격" onChange={handleInputChange} className="TextPrice"></Input>
+          <span style={{color: PriceValue ? "#4d5159" : "#dcdee3"}}>벨</span>
+          <Input value={addComma(PriceValue || "")} placeholder="가격" onChange={onChangePoints} className="TextPrice" pattern="\d*" maxlength="12"></Input>
         </div>
       </div>
       <textarea placeholder=" 게시글의 내용을 적어주세요. (판매 금지 물품은 게시가 제한될 수 있어요.)" className="TextareaBox"></textarea>
@@ -37,6 +46,7 @@ const TextBox = styled.div`
     & span {
       position: absolute;
       left: 40px;
+      font-weight: 600;
     }
   }
 
@@ -67,7 +77,7 @@ const TextBox = styled.div`
     height: 40px;
     border-radius: 8px;
     margin-left: 24px;
-    padding-left: 40px;
+    padding-left: 34px;
   }
 
   & .TextareaBox {

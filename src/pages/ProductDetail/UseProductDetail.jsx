@@ -2,19 +2,17 @@ import React from "react";
 import {useProducts} from "@/components";
 import {ProductDetailBody} from "@/pages/ProductDetail/ProductDetailBody";
 
-export function UseProductDetail() {
+export function UseProductDetail(props) {
   const {isLoadingState, productsState} = useProducts();
   if (isLoadingState) {
     return <div role="alert">로딩 중...</div>;
   }
 
-  const slicedProducts = productsState.slice(0, 1);
+  const product = productsState.find((p) => p.id === props.id);
 
   return (
     <div className="imgContainer">
-      {slicedProducts.map((product, index) => (
-        <ProductDetailBody key={index} imgUrl={product.imgUrl} title={product.title} price={product.price} location={product.location} interest={product.interest} description={product.description} />
-      ))}
+      <ProductDetailBody id={product.id} imgUrl={product.imgUrl} title={product.title} price={product.price} location={product.location} description={product.description} />
     </div>
   );
 }

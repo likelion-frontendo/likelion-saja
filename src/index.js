@@ -5,17 +5,20 @@ import reportWebVitals from "./reportWebVitals";
 import {GlobalStyle} from "./GlobalStyle";
 import {BrowserRouter} from "react-router-dom";
 import {RecoilRoot} from "recoil";
+import {HelmetProvider} from "react-helmet-async";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <React.StrictMode>
-    <BrowserRouter>
-      <RecoilRoot>
-        <GlobalStyle />
-        <App />
-      </RecoilRoot>
-    </BrowserRouter>
-  </React.StrictMode>
+  <>
+    <HelmetProvider>
+      <BrowserRouter>
+        <RecoilRoot>
+          <GlobalStyle />
+          <App />
+        </RecoilRoot>
+      </BrowserRouter>
+    </HelmetProvider>
+  </>
 );
 
 reportWebVitals();
