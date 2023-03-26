@@ -10,7 +10,7 @@ export function UseProductList(props) {
   useEffect(() => {
     const timer = setTimeout(() => {
       setShowLoading(false);
-    }, 2000);
+    }, 1000);
     return () => clearTimeout(timer);
   }, []);
 
@@ -27,7 +27,7 @@ export function UseProductList(props) {
   return (
     <div className="productContainer">
       {slicedProducts.map((product, index) => (
-        <Product key={index} imgUrl={product.imgUrl} title={product.title} price={product.price} location={product.location} />
+        <Product key={index} id={product.id} imgUrl={product.imgUrl} title={product.title} price={product.price} location={product.location} />
       ))}
     </div>
   );
