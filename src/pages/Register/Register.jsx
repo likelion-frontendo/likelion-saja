@@ -3,6 +3,7 @@ import { emailAtom, passwordAtom, passwordConfirmAtom, nameAtom, mobileAtom, bir
 import { emailVisibleAtom, passwordVisibleAtom, passwordConfirmVisibleAtom, nameVisibleAtom, mobileVisibleAtom } from './atoms/checkInputValueAtom';
 import { checkedTermsAtom, checkedAgeAtom } from './atoms/termsAtoms';
 import { uidAtom } from './atoms/uidAtom';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components'
 import { auth, db } from "@/firebase/app";
 import { setDoc, doc } from 'firebase/firestore';
@@ -10,21 +11,6 @@ import { Helmet } from 'react-helmet-async';
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { RegisterForm, RegisterTerms } from '@/pages/Register'
 import { Header, Footer, Heading2, Button } from '@/components'
-
-  /* function useCurrentUser() {
-    const [currentUser, setCurrentUser] = useRecoilState(currentUserAtom);
-    
-    useEffect(() => {
-      onAuthStateChanged(auth, (user) => {
-        if(user) {
-          const loginUser = {uid: user.uid, email: user.email};
-          setCurrentUser(loginUser);
-        }
-      });
-    }, [setCurrentUser]);
-
-    return currentUser;
-  } */
 
 export function Register() {
 
@@ -46,7 +32,8 @@ export function Register() {
   
   const checkedTerms = useRecoilValue(checkedTermsAtom);
   const checkedAge = useRecoilValue(checkedAgeAtom);
-  // const userObject = useCurrentUser();
+
+  const navigate = useNavigate();
 
   async function handleCheckRegister() {
     if(email === "" || emailVisible === true) {
@@ -82,6 +69,7 @@ export function Register() {
       const result = await createUserWithEmailAndPassword(auth, email, password);
       console.log("회원가입 성공!")
       addUserCollection(result.user.uid, name, mobile, email, birthday, profileImageURL)
+      navigate("/");
     } catch(error) {
       console.log(error.message);
     }
