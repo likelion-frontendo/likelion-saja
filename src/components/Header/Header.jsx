@@ -7,7 +7,7 @@ import { auth } from '@/firebase/app';
 import {signOut} from "firebase/auth";
 import { atom, useRecoilState } from 'recoil';
 
-const checkCurrentUserStateAtom = atom({
+export const checkCurrentUserStateAtom = atom({
   key: "checkCurrentUserStateAtom",
   default: false
 })
