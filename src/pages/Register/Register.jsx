@@ -6,10 +6,10 @@ import { uidAtom } from './atoms/uidAtom';
 import styled from 'styled-components'
 import { auth, db } from "@/firebase/app";
 import { setDoc, doc } from 'firebase/firestore';
+import { Helmet } from 'react-helmet-async';
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { RegisterForm, RegisterTerms } from '@/pages/Register'
 import { Header, Footer, Heading2, Button } from '@/components'
-
 
   /* function useCurrentUser() {
     const [currentUser, setCurrentUser] = useRecoilState(currentUserAtom);
