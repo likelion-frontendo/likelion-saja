@@ -1,14 +1,9 @@
 import sajaLogo from "@/assets/Home/logo.png";
-import { currentUserAtom } from '@/atoms/currentUser';
-import { useLogout } from '@/utils/logout';
+import { logout } from '@/functions/logout';
 import {Link} from "react-router-dom";
-import { useRecoilValue } from 'recoil';
 import styled from "styled-components";
 
-export function Header() {
-
-  const currentUser = useRecoilValue(currentUserAtom);
-  
+export function Header() {  
   return (
     <StyledHeader>
       <h1>
@@ -32,21 +27,15 @@ export function Header() {
       </nav>
       <input type="text" placeholder="물품이나 동네를 검색해보세요"></input>
       <div className="buttonContainer">
-        {
-          !currentUser && <>
           <button type="button" aria-label="로그인" className="loginButton">
             로그인
           </button>
           <button type="button" aria-label="회원가입" className="registerButton">
             회원가입
           </button>
-        </> }
-        { currentUser && <>
-          <button type="button" aria-label="로그아웃" className="loginButton" onClick={useLogout}>
+          <button type="button" aria-label="로그인" className="loginButton" onClick={logout}>
             로그아웃
           </button>
-        </>
-        }
       </div>
     </StyledHeader>
   );
