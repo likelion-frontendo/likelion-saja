@@ -1,11 +1,13 @@
+import { useEffect } from 'react';
+import { useRecoilState } from 'recoil';
+import { emailAtom, passwordAtom, passwordConfirmAtom, nameAtom, mobileAtom, birthdayAtom, profileImageAtom, profileImageURLAtom, currentUserAtom } from './atoms/inputValueAtoms';
+import { emailVisibleAtom, passwordVisibleAtom, passwordConfirmVisibleAtom, nameVisibleAtom, mobileVisibleAtom } from './atoms/checkInputValueAtom';
+import { nameWarningAtom, emailWarningAtom, passwordWarningAtom, passwordConfirmWarningAtom, mobileWarningAtom } from './atoms/inputWarningAtoms';
+import styled from 'styled-components'
+import { storage } from "@/firebase/app";
+import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import {RegisterFormInput} from "@/pages/Register"
 import {Form, Button, Label, Heading3} from "@/components";
-import styled from 'styled-components'
-import { useRecoilState } from 'recoil';
-import { emailAtom, profileImageAtom, profileImageURLAtom, mobileAtom, nameAtom, birthdayAtom, nameVisibleAtom, nameWarningAtom, passwordAtom, passwordConfirmAtom, emailWarningAtom, passwordWarningAtom, passwordConfirmWarningAtom, mobileWarningAtom, mobileVisibleAtom, passwordConfirmVisibleAtom, passwordVisibleAtom, emailVisibleAtom } from './atoms';
-import { storage } from "@/firebase/app";
-import { ref, uploadBytes, uploadBytesResumable, getDownloadURL } from "firebase/storage";
-import { useEffect } from 'react';
 
 export function RegisterForm() {
 
@@ -158,24 +160,6 @@ export function RegisterForm() {
     profileImage && uploadFile();
   }, [profileImage]);
 
-  /* // 이미지 입력값 업데이트
-  function handleProfileImage(e) {
-    setImage(e.target.files[0]);
-    if(image !== null) {
-      // 저장된 이미지를 스토어로 보낸다 
-      updateImageToFirebase(image);
-    }
-  }
-
-  // 파이어베이스 업로드하기
-  async function updateImageToFirebase(file){
-    //파이어스토어 안에서 이미지 경로 설정
-    const fileRef = ref(storage, `profiles/${file.name}`);
-    //파이어스토어의 해당 경로로 이미지를 업로드 해주는 코드
-    const snapshot = await uploadBytes(fileRef, file);
-    console.log("업로드 성공!");
-  } */
-
   useEffect(() => {
     emailValidation(email);
   }, [email]);
@@ -217,13 +201,11 @@ export function RegisterForm() {
           <span className={mobileVisible === true ? "registerWarning showWarning" : "registerWarning"}>{mobileWarning}</span>
         </RegisterFormInput>
         <RegisterFormInput label="생년월일" name="year" type="date" onChange={handleBirthdayValue}/>
-        {/* <RegisterFormInput label="생년월일" name="year" type="text" onChange={handleBirthdayValue}/> */}
         <div className="registerFormInput">
           <Heading3 className="registerHeading">
             <Label className="registerLabel">프로필 사진<sup>*</sup></Label>
           </Heading3>
-          <input type="file" onChange={(e) => setProfileImage(e.target.files[0])/* handleProfileImage */} />
-          {/* <Button className="registerButtonLong" >프로필 등록</Button> */}
+          <input type="file" onChange={(e) => setProfileImage(e.target.files[0])} />
         </div>
       </Form>
   </StyledSection>

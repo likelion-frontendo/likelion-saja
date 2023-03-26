@@ -1,11 +1,11 @@
 // import {RegisterCheckListItem} from '@/pages/Register'
-import {Button, Label, Heading3} from "@/components";
-import {ReactComponent as ChevronRightIcon} from "@/assets/Register/chevron-right.svg"
-import {ReactComponent as CheckIcon} from "@/assets/Register/checkbutton-off.svg";
+import {useEffect} from 'react';
+import {useRecoilState} from 'recoil';
+import {checkedAllAtom, checkedTermsAtom, checkedAgeAtom, checkedMarketingAtom} from './atoms/termsAtoms';
 import styled from 'styled-components'
-import { useEffect} from 'react';
-import { checkedAllAtom, checkedTermsAtom, checkedAgeAtom, checkedMarketingAtom } from './atoms';
-import { useRecoilState } from 'recoil';
+import {Button, Label, Heading3} from "@/components";
+import {ReactComponent as CheckIcon} from "@/assets/Register/checkbutton-off.svg";
+import {ReactComponent as ChevronRightIcon} from "@/assets/Register/chevron-right.svg"
 
 
 export function RegisterTerms() {
