@@ -2,8 +2,40 @@ import styled from "styled-components";
 import {Link} from "react-router-dom";
 import {Image, Heading1, Button, Input} from "@/components";
 import sajaLogo from "@/assets/Home/logo.png";
+import { onAuthStateChanged } from 'firebase/auth';
+import { auth } from '@/firebase/app';
+import {signOut} from "firebase/auth";
+import { atom, useRecoilState } from 'recoil';
+
+const checkCurrentUserStateAtom = atom({
+  key: "checkCurrentUserStateAtom",
+  default: false
+})
 
 export function Header() {  
+
+  const [checkCurrentUserState, setCheckCurrentUserState] = useRecoilState(checkCurrentUserStateAtom);
+
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      const uid = user.uid;
+      setCheckCurrentUserState(true);
+      console.log(uid, "사용자 로그인", checkCurrentUserState);
+    } else {
+      setCheckCurrentUserState(false);
+      console.log("사용자 로그아웃", checkCurrentUserState);
+    }
+  });
+
+  async function handleLogout() {
+    try {
+      await signOut(auth);
+      console.log("로그아웃!");
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
+
   return (
     <StyledHeader>
       <Heading1>
@@ -27,12 +59,25 @@ export function Header() {
       </nav>
       <Input type="text" placeholder="물품이나 동네를 검색해보세요"></Input>
       <div className="buttonContainer">
-        <Button type="button" aria-label="로그인" className="loginButton">
-          로그인
-        </Button>
-        <Button type="button" aria-label="회원가입" className="registerButton">
-          회원가입
-        </Button>
+        {
+          !checkCurrentUserState &&
+          <>
+            <Button type="button" aria-label="로그인" className="loginButton">
+              로그인
+            </Button>
+            <Button type="button" aria-label="회원가입" className="registerButton">
+              회원가입
+            </Button>
+          </>
+        }
+        {
+          checkCurrentUserState && 
+          <>
+            <Button type="button" aria-label="로그아웃" className="loginButton" onClick={handleLogout}>
+              로그아웃
+            </Button>
+          </>
+        }
       </div>
     </StyledHeader>
   );
