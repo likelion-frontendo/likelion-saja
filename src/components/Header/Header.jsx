@@ -6,6 +6,9 @@ import { onAuthStateChanged } from 'firebase/auth';
 import { auth } from '@/firebase/app';
 import {signOut} from "firebase/auth";
 import { atom, useRecoilState } from 'recoil';
+import { uidAtom } from '@/pages/Register/atoms/uidAtom';
+import { useEffect } from 'react';
+
 
 export const checkCurrentUserStateAtom = atom({
   key: "checkCurrentUserStateAtom",
@@ -15,17 +18,22 @@ export const checkCurrentUserStateAtom = atom({
 export function Header() {  
 
   const [checkCurrentUserState, setCheckCurrentUserState] = useRecoilState(checkCurrentUserStateAtom);
+  const [uid, setUid] = useRecoilState(uidAtom);
 
-  onAuthStateChanged(auth, (user) => {
-    if (user) {
-      const uid = user.uid;
-      setCheckCurrentUserState(true);
-      console.log(uid, "사용자 로그인", checkCurrentUserState);
-    } else {
-      setCheckCurrentUserState(false);
-      console.log("사용자 로그아웃", checkCurrentUserState);
-    }
-  });
+  useEffect(()=>{
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        const userId = user.uid;
+        setCheckCurrentUserState(true);
+        setUid(userId);
+        console.log("사용자 로그인", checkCurrentUserState, uid);
+      } else {
+        setCheckCurrentUserState(false);
+        setUid("");
+        console.log("사용자 로그아웃", checkCurrentUserState, uid);
+      }
+    });
+  }, [])
 
   async function handleLogout() {
     try {
