@@ -1,45 +1,55 @@
-import {useState} from "react";
+import {useState, useEffect} from "react";
 import styled from "styled-components/macro";
 import {Button} from "@/components/Button/Button";
 import {Input} from "@/components/Input/Input";
 import {ReactComponent as RightArrow} from "@/assets/Post/right.svg";
 import {useRecoilState} from "recoil";
 import {postcodePopupAtom, addressAtom, priceAtom, imagesAtom, imageListAtom, postTitleAtom, postContentAtom} from "./postAtoms";
-import { collection, addDoc } from "firebase/firestore";
-import { db } from '@/firebase/app';
+import {collection, addDoc} from "firebase/firestore";
+import {db} from "@/firebase/app";
 import {useNavigate} from "react-router-dom";
 
 export function PlaceSearchBox() {
   const [postcodePopup, setPostcodePopup] = useRecoilState(postcodePopupAtom);
   const [address, setAddress] = useRecoilState(addressAtom);
   const [images, setImages] = useRecoilState(imagesAtom);
-  const [imageList, setImageList]  = useRecoilState(imageListAtom);
+  const [imageList, setImageList] = useRecoilState(imageListAtom);
   const [priceValue, setPriceValue] = useRecoilState(priceAtom);
   const [postTitle, setPostTitle] = useRecoilState(postTitleAtom);
   const [postContent, setPostContent] = useRecoilState(postContentAtom);
-  const moveToAnotherPage  = useNavigate();
+  const moveToAnotherPage = useNavigate();
 
   const onSubmit = async (e) => {
     e.preventDefault();
     handlePostSubmit();
-  }
+  };
+
+  useEffect(() => {
+    console.log("PlaceSearchBox: ", imageList);
+  }, [imageList]);
 
   const handlePostSubmit = async () => {
-    try {
-      const docRef = await addDoc(collection(db, "Products"), {
-        description: postContent,
-        imgUrl: imageList,
-        location: address,
-        price: priceValue,
-        title: postTitle,
-      });
-      console.log("Document written with ID: ", docRef.id);
-      moveToAnotherPage("/");
-    } catch (e) {
-      console.error("Error adding document: ", e);
+    if (imageList.length > 0) {
+      const uploadImageUrl = imageList[0];
+      try {
+        const uploadData = {
+          description: postContent,
+          imgUrl: uploadImageUrl,
+          location: address,
+          price: priceValue,
+          title: postTitle,
+        };
+
+        console.log("데이터베이스에 업로드할 데이터: ", uploadData);
+
+        const docRef = await addDoc(collection(db, "Products"), uploadData);
+        console.log("Document written with ID: ", docRef.id);
+        moveToAnotherPage("/");
+      } catch (e) {
+        console.error("Error adding document: ", e);
+      }
     }
-  }
-  
+  };
 
   const handlePostcodePopup = () => {
     if (!postcodePopup) {
@@ -64,14 +74,16 @@ export function PlaceSearchBox() {
   return (
     <PlaceSearch>
       <div className="PlaceSearchInputBox">
-        <Input value={address || "거래장소 선택하기"} onClick={handlePostcodePopup} />
+        <Input value={address || "거래장소 선택하기"} onChange={handlePostcodePopup} />
         <Button onClick={handlePostcodePopup}>
           장소 선택 <RightArrow className="RightArrow"></RightArrow>
         </Button>
       </div>
       <div className="UploadBtnBox">
         <Button className="CancleBtn">취소</Button>
-        <Button className="SubmitBtn" onClick={onSubmit}>등록</Button>
+        <Button className="SubmitBtn" onClick={onSubmit}>
+          등록
+        </Button>
       </div>
     </PlaceSearch>
   );
