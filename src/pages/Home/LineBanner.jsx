@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import {Image} from "@/components";
-import BannerImg from "@/assets/Home/lineBanner.svg";
+import BannerImg from "@/assets/Home/lineBanner.png";
 
 export function LineBanner() {
   return (
