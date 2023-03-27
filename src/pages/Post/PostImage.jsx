@@ -1,4 +1,4 @@
-import {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import {ReactComponent as CameraIcon} from "@/assets/Post/camera-fill.svg";
 import styled from "styled-components/macro";
 import {storage} from "./../../firebase/app";
@@ -20,6 +20,12 @@ export function PostImage() {
       file: file,
       url: URL.createObjectURL(file),
     }));
+    if (newImages.length > 0) {
+      const span = document.querySelector(".PreviewImage span");
+      if (span) {
+        span.style.display = "none";
+      }
+    }
     if (images.length + newImages.length <= 6) {
       setImages([...images, ...newImages]);
     } else {
@@ -53,6 +59,12 @@ export function PostImage() {
     const newImages = newFiles
       .filter((file) => file.type === "image/jpeg" || file.type === "image/png" || file.type === "image/gif" || file.type === "image/bmp")
       .map((file) => ({name: file.name, url: URL.createObjectURL(file)}));
+    if (newImages.length > 0) {
+      const span = document.querySelector(".PreviewImage span");
+      if (span) {
+        span.style.display = "none";
+      }
+    }
     if (images.length + newImages.length <= 6) {
       setImages([...images, ...newImages]);
     } else {
@@ -72,10 +84,11 @@ export function PostImage() {
         </label>
         <input type="file" name="file" id="file" accept=".jpg,.jpeg,.png,.gif,.bmp" multiple required onChange={handleImageChange}></input>
       </div>
-      <div className="PreviewImage" onDrop={handleDrop} placeholder="이지미를 드래그 해주세요" onDragOver={(e) => e.preventDefault()}>
+      <div className="PreviewImage" onDrop={handleDrop} onDragOver={(e) => e.preventDefault()}>
+        {images.length === 0 && <span>이미지를 드래그 해주세요</span>}
         {images.map((image, index) => (
           <div key={image.name} className="PreviewImageItem">
-            <img src={image.url} alt={image.name} />
+            <img src={image.url} key={index} alt={image.name} />
             <button onClick={() => handleImageDelete(index)}>X</button>
           </div>
         ))}
@@ -129,6 +142,11 @@ const PostImageSection = styled.div`
     display: flex;
     align-items: center;
     padding: 24px;
+    justify-content: center;
+
+    & span {
+      color: #868b94;
+    }
   }
 
   .PreviewImage img {
