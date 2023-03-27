@@ -1,11 +1,25 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import {Store, useStores} from "@/pages/Home";
+import raccoon from "@/assets/Logo/raccoon.gif";
+import styled from "styled-components";
 
 export function UserStoreList({selectedType}) {
   const {isLoading, stores} = useStores();
+  const [showLoading, setShowLoading] = useState(true);
 
-  if (isLoading) {
-    return <div role="alert">로딩 중...</div>;
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowLoading(false);
+    }, 2000);
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (isLoading || showLoading) {
+    return (
+      <StyledLoadingImgContainer role="alert">
+        <img src={raccoon} alt="로딩 중..."></img>
+      </StyledLoadingImgContainer>
+    );
   }
 
   const filteredStores = selectedType === "전체" ? stores : stores.filter((store) => store.classification === selectedType);
@@ -28,3 +42,13 @@ export function UserStoreList({selectedType}) {
     </div>
   );
 }
+
+const StyledLoadingImgContainer = styled.div`
+  display: flex;
+  margin-top: 40px;
+  justify-content: center;
+
+  & img {
+    border-radius: 10%;
+  }
+`;
