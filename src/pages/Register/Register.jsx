@@ -9,8 +9,9 @@ import { auth, db } from "@/firebase/app";
 import { setDoc, doc } from 'firebase/firestore';
 import { Helmet } from 'react-helmet-async';
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { RegisterForm, RegisterTerms } from '@/pages/Register'
+import { RegisterForm, RegisterTerms, RegisterModal } from '@/pages/Register'
 import { Header, Footer, Heading2, Button } from '@/components'
+import { useState } from 'react';
 
 export function Register() {
 
@@ -35,32 +36,52 @@ export function Register() {
 
   const navigate = useNavigate();
 
+  const [modal, setModal] = useState(false);
+  const [modalText, setModalText] = useState("");
+
   async function handleCheckRegister() {
-    if(email === "" || emailVisible === true) {
-      console.log('응 이메일 탈락~');
-      return;
-    } else if (password === "" || passwordVisible === true) {
-      console.log('응 비번 탈락~');
-      return;
-    } else if (passwordConfirm === "" || passwordConfirmVisible === true) {
-      console.log('응 비번중복 탈락~');
-      return;
-    } else if (name === "" || nameVisible === true) {
-      console.log('응 이름 탈락~');
-      return;
-    } else if (mobile === "" || mobileVisible === true) {
-      console.log('응 휴대폰 탈락~');
-      return;
-    } else if (checkedTerms === false) {
-      console.log('이용약관 체크 안함');
-      return;
-    } else if (checkedAge === false) {
-      console.log('나이 확인 안함');
-      return;
-    } else {
-      console.log('이야 이걸 통과하네ㅋ');
-      await registerUser();
-      console.log(uid);
+    switch (true) {
+      case email === "" || emailVisible === true:
+        setModal(true);
+        setModalText("이메일을 확인해주세요");
+        return;
+      case password === "" || passwordVisible === true:
+        setModal(true);
+        setModalText("비밀번호를 확인해주세요");
+        return;
+      case passwordConfirm === "" || passwordConfirmVisible === true:
+        setModal(true);
+        setModalText("비밀번호 중복을 확인해주세요");
+        return;
+      case name === "" || nameVisible === true:
+        setModal(true);
+        setModalText("이름을 확인해주세요");
+        return;
+      case mobile === "" || mobileVisible === true:
+        setModal(true);
+        setModalText("휴대폰 번호를 확인해주세요");
+        return;
+      case birthday === "":
+        setModal(true);
+        setModalText("생년월일을 입력해주세요");
+        return;
+      case !profileImage.name:
+        setModal(true);
+        setModalText("프로필 이미지를 넣어주세요");
+        return;
+      case checkedTerms === false:
+        setModal(true);
+        setModalText("이용약관 및 동의사항을 확인해주세요");
+        return;
+      case checkedAge === false:
+        setModal(true);
+        setModalText("만 14세 이상만 가입이 가능합니다");
+        return;
+      default:
+        setModal(true);
+        setModalText("회원이 되신 걸 축하드립니다!");
+        await registerUser();
+        break;
     }
   }
 
@@ -71,6 +92,7 @@ export function Register() {
       console.log("회원가입 성공!")
       addUserCollection(result.user.uid, name, mobile, email, birthday, profileImageURL)
       navigate("/");
+      setModal(false);
     } catch(error) {
       console.log(error.message);
     }
@@ -114,6 +136,12 @@ export function Register() {
         <RegisterTerms />
         <Button className="registerButton" onClick={handleCheckRegister}>가입하기</Button>
       </StyledMain>
+      {
+        modal &&
+        <RegisterModal onClick={()=>{setModal(false); console.log(modal)}}>
+          {modalText}
+        </RegisterModal>
+      }
       <Footer></Footer>
     </>
   );
