@@ -1,18 +1,24 @@
-import React, {useState, useEffect} from "react";
+import React, {useEffect} from "react";
 import {Store, useStores} from "@/pages/Home";
 import raccoon from "@/assets/Logo/raccoon.gif";
 import styled from "styled-components";
+import {atom, useRecoilState} from "recoil";
+
+const showLoadingAtom = atom({
+  key: "showLoadingStoreRaccoon",
+  default: true,
+});
 
 export function UserStoreList({selectedType}) {
   const {isLoading, stores} = useStores();
-  const [showLoading, setShowLoading] = useState(true);
+  const [showLoading, setShowLoading] = useRecoilState(showLoadingAtom);
 
   useEffect(() => {
     const timer = setTimeout(() => {
       setShowLoading(false);
-    }, 2000);
+    }, 1000);
     return () => clearTimeout(timer);
-  }, []);
+  }, [setShowLoading]);
 
   if (isLoading || showLoading) {
     return (
