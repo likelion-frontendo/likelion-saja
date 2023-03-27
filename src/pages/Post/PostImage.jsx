@@ -1,16 +1,16 @@
 import {useEffect} from "react";
 import {ReactComponent as CameraIcon} from "@/assets/Post/camera-fill.svg";
 import styled from "styled-components/macro";
-import { storage } from './../../firebase/app';
+import {storage} from "./../../firebase/app";
 import {ref, uploadBytes, listAll, getDownloadURL} from "firebase/storage";
 import {v4} from "uuid";
-import { useRecoilState } from 'recoil';
-import { imagesAtom, imageListAtom} from "./postAtoms";
+import {useRecoilState} from "recoil";
+import {imagesAtom, imageListAtom} from "./postAtoms";
 
 export function PostImage() {
   const [images, setImages] = useRecoilState(imagesAtom);
-  const [imageList, setImageList]  = useRecoilState(imageListAtom);
-  const imageListRef = ref(storage, "post/")
+  const [imageList, setImageList] = useRecoilState(imageListAtom);
+  const imageListRef = ref(storage, "post/");
 
   const handleImageChange = (e) => {
     const files = Array.from(e.target.files);
@@ -28,14 +28,14 @@ export function PostImage() {
 
     if (newImages == null) return;
     newImages.forEach((newImage) => {
-    const imageRef = ref(storage, `post/${newImage.file.name + v4()}`);
-    uploadBytes(imageRef, newImage.file).then((snaphsot) => {
-      getDownloadURL(snaphsot.ref).then((url) => {
-        setImageList((prev) => [...prev, url]);
-      })
+      const imageRef = ref(storage, `post/${newImage.file.name + v4()}`);
+      uploadBytes(imageRef, newImage.file).then((snaphsot) => {
+        getDownloadURL(snaphsot.ref).then((url) => {
+          setImageList((prev) => [...prev, url]);
+        });
+      });
     });
-  });
-};
+  };
 
   useEffect(() => {
     listAll(imageListRef).then((response) => {
@@ -72,7 +72,7 @@ export function PostImage() {
         </label>
         <input type="file" name="file" id="file" accept=".jpg,.jpeg,.png,.gif,.bmp" multiple required onChange={handleImageChange}></input>
       </div>
-      <div className="PreviewImage" onDrop={handleDrop} onDragOver={(e) => e.preventDefault()}>
+      <div className="PreviewImage" onDrop={handleDrop} placeholder="이지미를 드래그 해주세요" onDragOver={(e) => e.preventDefault()}>
         {images.map((image, index) => (
           <div key={image.name} className="PreviewImageItem">
             <img src={image.url} alt={image.name} />
