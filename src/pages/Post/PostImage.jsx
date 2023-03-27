@@ -1,8 +1,8 @@
-import React, {useEffect, useState} from "react";
+import {useEffect} from "react";
 import {ReactComponent as CameraIcon} from "@/assets/Post/camera-fill.svg";
 import styled from "styled-components/macro";
 import {storage} from "./../../firebase/app";
-import {ref, uploadBytes, listAll, getDownloadURL} from "firebase/storage";
+import {ref, uploadBytes, getDownloadURL} from "firebase/storage";
 import {v4} from "uuid";
 import {useRecoilState} from "recoil";
 import {imagesAtom, imageListAtom} from "./postAtoms";
@@ -10,7 +10,10 @@ import {imagesAtom, imageListAtom} from "./postAtoms";
 export function PostImage() {
   const [images, setImages] = useRecoilState(imagesAtom);
   const [imageList, setImageList] = useRecoilState(imageListAtom);
-  const imageListRef = ref(storage, "post/");
+
+  useEffect(() => {
+    console.log("PostImage: ", imageList);
+  }, [imageList]);
 
   const handleImageChange = (e) => {
     const files = Array.from(e.target.files);
@@ -42,16 +45,6 @@ export function PostImage() {
       });
     });
   };
-
-  useEffect(() => {
-    listAll(imageListRef).then((response) => {
-      response.items.forEach((item) => {
-        getDownloadURL(item).then((url) => {
-          setImageList((prev) => [...prev, url]);
-        });
-      });
-    });
-  }, []);
 
   function handleDrop(e) {
     e.preventDefault();
