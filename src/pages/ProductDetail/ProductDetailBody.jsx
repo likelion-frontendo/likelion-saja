@@ -23,7 +23,7 @@ export function ProductDetailBody(props) {
           <span>당근마켓 인기중고</span>
           <Link to="/PopularProduct">더 구경하기</Link>
         </div>
-        <UseProductList count={6} />
+        <UseProductList count={6} excludeId={props.id} />
       </section>
     </StyledProductDetail>
   );
@@ -92,7 +92,7 @@ const StyledProductDetail = styled.div`
     font-style: normal;
     margin-top: 3px;
     font-size: 12px;
-    line-height: 3 px;
+    line-height: 3px;
     color: #868e96;
   }
   & .popularProduct {

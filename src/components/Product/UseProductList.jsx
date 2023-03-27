@@ -4,7 +4,7 @@ import raccoon from "@/assets/Logo/raccoon.gif";
 import styled from "styled-components";
 
 export function UseProductList(props) {
-  const {isLoadingState, productsState} = useProducts();
+  const {isLoadingState, productsState} = useProducts(props.excludeId, props.count);
   const [showLoading, setShowLoading] = useState(true);
 
   useEffect(() => {
@@ -22,11 +22,9 @@ export function UseProductList(props) {
     );
   }
 
-  const slicedProducts = productsState.slice(0, props.count);
-
   return (
     <div className="productContainer">
-      {slicedProducts.map((product, index) => (
+      {productsState.map((product, index) => (
         <Product key={index} id={product.id} imgUrl={product.imgUrl} title={product.title} price={product.price} location={product.location} />
       ))}
     </div>
