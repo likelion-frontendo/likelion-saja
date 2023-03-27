@@ -1,5 +1,5 @@
 import {SidebarBottom} from "@/pages/Mypage/SidebarBottom";
-import profile from "@/assets/Mypage/유네찌.png";
+// import profile from "@/assets/Mypage/유네찌.png";
 import styled from "styled-components/macro";
 import {db} from "@/firebase/app";
 import {doc, getDoc} from "firebase/firestore";
@@ -8,13 +8,17 @@ import {uidAtom} from "../Register/atoms/uidAtom";
 import {useRecoilState} from "recoil";
 
 export function SidebarTop() {
+  const [uid, setUid] = useRecoilState(uidAtom);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [profileImageURL, setProfileImageURL] = useState("");
+  const [docSnap, setDocSnap] = useState(null);
 
   useEffect(() => {
     async function getUserDataFromFirebase() {
-      const docRef = doc(db, "users", "mEh3O0OYmJdqw09hypXaiIMNIg73");
+      if (!uid) return;
+      console.log(uid);
+      const docRef = doc(db, "users", uid);
       const docSnap = await getDoc(docRef);
 
       if (docSnap.exists()) {
@@ -28,7 +32,7 @@ export function SidebarTop() {
     }
 
     getUserDataFromFirebase();
-  }, []);
+  }, [uid]);
   return (
     <MypageSide>
       <div className="profile">

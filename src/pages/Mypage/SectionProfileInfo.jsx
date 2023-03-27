@@ -1,5 +1,5 @@
 import {Link} from "react-router-dom";
-import profile from "@/assets/Mypage/유네찌.png";
+// import profile from "@/assets/Mypage/유네찌.png";
 import styled from "styled-components/macro";
 import {db} from "@/firebase/app";
 import {doc, getDoc} from "firebase/firestore";
@@ -8,16 +8,20 @@ import {uidAtom} from "../Register/atoms/uidAtom";
 import {useRecoilState} from "recoil";
 
 export function SectionProfileInfo() {
-  // const [uid, setUid] = useRecoilState(uidAtom);
+  const [uid, setUid] = useRecoilState(uidAtom);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [birthday, setBirthday] = useState("");
   const [mobile, setMobile] = useState("");
   const [profileImageURL, setProfileImageURL] = useState("");
+  const [docSnap, setDocSnap] = useState(null);
 
   useEffect(() => {
     async function getUserDataFromFirebase() {
-      const docRef = doc(db, "users", "mEh3O0OYmJdqw09hypXaiIMNIg73");
+      // const docRef = doc(db, "users", "mEh3O0OYmJdqw09hypXaiIMNIg73");
+      if (!uid) return;
+      console.log(uid);
+      const docRef = doc(db, "users", uid);
       const docSnap = await getDoc(docRef);
 
       if (docSnap.exists()) {
@@ -30,10 +34,11 @@ export function SectionProfileInfo() {
         // doc.data() will be undefined in this case
         console.log("유저 정보를 찾지 못했습니다.");
       }
+      setDocSnap(docSnap);
     }
 
     getUserDataFromFirebase();
-  }, []);
+  }, [uid]);
 
   return (
     <ProfileInfoTop>
