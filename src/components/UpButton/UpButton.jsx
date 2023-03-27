@@ -41,7 +41,7 @@ export function UpButton() {
       <TopButton>
         {checkCurrentUserState && (
           <Button className="PostBtn" onClick={clickNavigate}>
-            <span>+</span>
+            <p>+</p>
           </Button>
         )}
         <div>
@@ -68,12 +68,13 @@ const TopButton = styled.div`
     background-color: #eca997;
     border: 0;
     border-radius: 50%;
+    position: relative;
 
     &:hover {
       opacity: 80%;
     }
 
-    &:hover span {
+    &:hover p {
       font-size: 0;
     }
 
@@ -84,11 +85,14 @@ const TopButton = styled.div`
       font-weight: 600;
     }
 
-    & span {
+    & p {
       color: #fff;
       font-weight: 600;
       font-size: 40px;
-      text-align: center;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -57%);
     }
   }
 

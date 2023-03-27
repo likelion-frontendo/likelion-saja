@@ -108,6 +108,8 @@ const PlaceSearch = styled.div`
     border-bottom: 2px solid #a5b2a6;
     color: #393a40;
     padding-left: 12px;
+    font-size: 14px;
+    font-weight: 600;
   }
 
   & .PlaceSearchInputBox Button {
