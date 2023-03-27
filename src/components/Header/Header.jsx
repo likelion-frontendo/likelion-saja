@@ -65,7 +65,7 @@ export function Header() {
             <Link to="/">동네가게</Link>
           </li>
           <li>
-            <Link to="/">인기매물</Link>
+            <Link to="/PopularProduct">인기매물</Link>
           </li>
         </ul>
       </nav>
