@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {Image, Heading1, Button, Input} from "@/components";
 import sajaLogo from "@/assets/Home/logo.png";
 import { onAuthStateChanged } from 'firebase/auth';
@@ -20,8 +20,9 @@ export function Header() {
   const [checkCurrentUserState, setCheckCurrentUserState] = useRecoilState(checkCurrentUserStateAtom);
   const [uid, setUid] = useRecoilState(uidAtom);
 
+  const navigate = useNavigate();
+
   useEffect(() => {
-    // 종속성 배열에 포함된 항목이 변경될 때마다 이벤트 구독 시도 (먼저 클린업 함수로 이벤트 구독 해제 됨)
     const unsub = onAuthStateChanged(auth, (user) => {
       if (user) {
         const userId = user.uid;
@@ -35,7 +36,6 @@ export function Header() {
       }
     });
   
-    // 리-렌더링 : "구독 해제 → 구독"을 위한 클린업 함수 반환
     return unsub;
   }, [checkCurrentUserState, setCheckCurrentUserState, setUid, uid]);
 
@@ -43,6 +43,7 @@ export function Header() {
     try {
       await signOut(auth);
       console.log("로그아웃!");
+      navigate("/");
     } catch (error) {
       console.log(error.message);
     }
