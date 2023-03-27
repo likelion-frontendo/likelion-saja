@@ -1,11 +1,10 @@
 import {SidebarBottom} from "@/pages/Mypage/SidebarBottom";
-// import profile from "@/assets/Mypage/유네찌.png";
-import styled from "styled-components/macro";
 import {db} from "@/firebase/app";
 import {doc, getDoc} from "firebase/firestore";
 import {useEffect, useState} from "react";
 import {uidAtom} from "../Register/atoms/uidAtom";
 import {useRecoilState} from "recoil";
+import styled from "styled-components/macro";
 
 export function SidebarTop() {
   const [uid, setUid] = useRecoilState(uidAtom);
@@ -26,7 +25,6 @@ export function SidebarTop() {
         setEmail(docSnap.data().email);
         setProfileImageURL(docSnap.data().profileImageURL);
       } else {
-        // doc.data() will be undefined in this case
         console.log("유저 정보를 찾지 못했습니다.");
       }
     }

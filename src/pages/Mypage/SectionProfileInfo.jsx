@@ -1,11 +1,10 @@
 import {Link} from "react-router-dom";
-// import profile from "@/assets/Mypage/유네찌.png";
-import styled from "styled-components/macro";
 import {db} from "@/firebase/app";
 import {doc, getDoc} from "firebase/firestore";
 import {useEffect, useState} from "react";
 import {uidAtom} from "../Register/atoms/uidAtom";
 import {useRecoilState} from "recoil";
+import styled from "styled-components/macro";
 
 export function SectionProfileInfo() {
   const [uid, setUid] = useRecoilState(uidAtom);
@@ -18,7 +17,6 @@ export function SectionProfileInfo() {
 
   useEffect(() => {
     async function getUserDataFromFirebase() {
-      // const docRef = doc(db, "users", "mEh3O0OYmJdqw09hypXaiIMNIg73");
       if (!uid) return;
       console.log(uid);
       const docRef = doc(db, "users", uid);
