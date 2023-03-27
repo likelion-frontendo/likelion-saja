@@ -10,7 +10,7 @@ export function Product(props) {
         <Image src={props.imgUrl} alt="상품 이미지"></Image>
       </Link>
       <span className="title">{props.title}</span>
-      <span className="price">{props.price}벨</span>
+      <span className="price">{props.price.toLocaleString(navigator.language)}벨</span>
       <span className="location">{props.location}</span>
     </StyledProductContainer>
   );
