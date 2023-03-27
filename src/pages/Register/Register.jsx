@@ -60,6 +60,7 @@ export function Register() {
     } else {
       console.log('이야 이걸 통과하네ㅋ');
       await registerUser();
+      console.log(uid);
     }
   }
 
