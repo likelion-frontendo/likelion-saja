@@ -20,8 +20,9 @@ export function Header() {
   const [checkCurrentUserState, setCheckCurrentUserState] = useRecoilState(checkCurrentUserStateAtom);
   const [uid, setUid] = useRecoilState(uidAtom);
 
-  useEffect(()=>{
-    onAuthStateChanged(auth, (user) => {
+  useEffect(() => {
+    // 종속성 배열에 포함된 항목이 변경될 때마다 이벤트 구독 시도 (먼저 클린업 함수로 이벤트 구독 해제 됨)
+    const unsub = onAuthStateChanged(auth, (user) => {
       if (user) {
         const userId = user.uid;
         setCheckCurrentUserState(true);
@@ -33,7 +34,10 @@ export function Header() {
         console.log("사용자 로그아웃", checkCurrentUserState, uid);
       }
     });
-  }, [])
+  
+    // 리-렌더링 : "구독 해제 → 구독"을 위한 클린업 함수 반환
+    return unsub;
+  }, [checkCurrentUserState, setCheckCurrentUserState, setUid, uid]);
 
   async function handleLogout() {
     try {
@@ -67,25 +71,24 @@ export function Header() {
       </nav>
       <Input type="text" placeholder="물품이나 동네를 검색해보세요"></Input>
       <div className="buttonContainer">
-        {
-          !checkCurrentUserState &&
+        {!checkCurrentUserState && (
           <>
-            <Button type="button" aria-label="로그인" className="loginButton">
+            <Link to="/login" className="loginButton">
               로그인
-            </Button>
-            <Button type="button" aria-label="회원가입" className="registerButton">
+            </Link>
+            <Link to="/register" className="loginButton">
               회원가입
-            </Button>
+            </Link>
           </>
-        }
-        {
-          checkCurrentUserState && 
+        )}
+        {checkCurrentUserState && (
           <>
+            <Link to="/mypage">마이 페이지</Link>
             <Button type="button" aria-label="로그아웃" className="loginButton" onClick={handleLogout}>
               로그아웃
             </Button>
           </>
-        }
+        )}
       </div>
     </StyledHeader>
   );
