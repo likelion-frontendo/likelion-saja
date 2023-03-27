@@ -18,7 +18,7 @@ export function UseProductList(props) {
       setShowLoading(false);
     }, 1000);
     return () => clearTimeout(timer);
-  }, []);
+  }, [setShowLoading]);
 
   if (isLoadingState || showLoading) {
     return (

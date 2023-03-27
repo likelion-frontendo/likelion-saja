@@ -18,7 +18,7 @@ export function UserStoreList({selectedType}) {
       setShowLoading(false);
     }, 1000);
     return () => clearTimeout(timer);
-  }, []);
+  }, [setShowLoading]);
 
   if (isLoading || showLoading) {
     return (
