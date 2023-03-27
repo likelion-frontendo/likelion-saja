@@ -1,11 +1,17 @@
-import React, {useState, useEffect} from "react";
+import React, {useEffect} from "react";
 import {Product, useProducts} from "@/components";
 import raccoon from "@/assets/Logo/raccoon.gif";
 import styled from "styled-components";
+import {atom, useRecoilState} from "recoil";
+
+const showLoadingAtom = atom({
+  key: "showLoadingPopularRaccoon",
+  default: true,
+});
 
 export function UseProductList(props) {
   const {isLoadingState, productsState} = useProducts(props.excludeId, props.count);
-  const [showLoading, setShowLoading] = useState(true);
+  const [showLoading, setShowLoading] = useRecoilState(showLoadingAtom);
 
   useEffect(() => {
     const timer = setTimeout(() => {
