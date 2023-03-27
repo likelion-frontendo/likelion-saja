@@ -4,6 +4,7 @@ export * from "@/components/Product/Product";
 export * from "@/components/Product/UseProductList";
 export * from "@/components/Product/UseProducts";
 export * from "@/components/Button/Button";
+export * from "@/components/UpButton/UpButton";
 export * from "@/components/Form/Form";
 export * from "@/components/Label/Label";
 export * from "@/components/Input/Input";
