@@ -55,7 +55,8 @@ export function useProducts(excludeId, limitCount = 20) {
         const product = {id: doc.id, ...doc.data()};
         products.push(product);
       });
-      setProductsState(products);
+      const shuffledProducts = products.sort(() => Math.random() - 0.5);
+      setProductsState(shuffledProducts);
     });
   }, [setProductsState, excludeId, limitCount]);
 
