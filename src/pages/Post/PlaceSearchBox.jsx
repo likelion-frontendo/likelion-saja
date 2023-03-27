@@ -3,10 +3,43 @@ import styled from "styled-components/macro";
 import {Button} from "@/components/Button/Button";
 import {Input} from "@/components/Input/Input";
 import {ReactComponent as RightArrow} from "@/assets/Post/right.svg";
+import {useRecoilState} from "recoil";
+import {postcodePopupAtom, addressAtom, priceAtom, imagesAtom, imageListAtom, postTitleAtom, postContentAtom} from "./postAtoms";
+import { collection, addDoc } from "firebase/firestore";
+import { db } from '@/firebase/app';
+import {useNavigate} from "react-router-dom";
 
 export function PlaceSearchBox() {
-  const [postcodePopup, setPostcodePopup] = useState(null);
-  const [address, setAddress] = useState("");
+  const [postcodePopup, setPostcodePopup] = useRecoilState(postcodePopupAtom);
+  const [address, setAddress] = useRecoilState(addressAtom);
+  const [images, setImages] = useRecoilState(imagesAtom);
+  const [imageList, setImageList]  = useRecoilState(imageListAtom);
+  const [priceValue, setPriceValue] = useRecoilState(priceAtom);
+  const [postTitle, setPostTitle] = useRecoilState(postTitleAtom);
+  const [postContent, setPostContent] = useRecoilState(postContentAtom);
+  const moveToAnotherPage  = useNavigate();
+
+  const onSubmit = async (e) => {
+    e.preventDefault();
+    handlePostSubmit();
+  }
+
+  const handlePostSubmit = async () => {
+    try {
+      const docRef = await addDoc(collection(db, "Products"), {
+        description: postContent,
+        imgUrl: imageList,
+        location: address,
+        price: priceValue,
+        title: postTitle,
+      });
+      console.log("Document written with ID: ", docRef.id);
+      moveToAnotherPage("/");
+    } catch (e) {
+      console.error("Error adding document: ", e);
+    }
+  }
+  
 
   const handlePostcodePopup = () => {
     if (!postcodePopup) {
@@ -38,7 +71,7 @@ export function PlaceSearchBox() {
       </div>
       <div className="UploadBtnBox">
         <Button className="CancleBtn">취소</Button>
-        <Button className="SubmitBtn">등록</Button>
+        <Button className="SubmitBtn" onClick={onSubmit}>등록</Button>
       </div>
     </PlaceSearch>
   );
