@@ -1,33 +1,28 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 
-export function ProductMap() {
+const {kakao} = window;
+
+export function ProductMap(props) {
+  const [map, setMap] = useState(null);
+
   useEffect(() => {
-    const mapContainer = document.getElementsByClassName("map")[0];
-    const mapOption = {
-      center: new kakao.maps.LatLng(33.450701, 126.570667),
-      level: 3,
-    };
-
-    const map = new kakao.maps.Map(mapContainer, mapOption);
+    const container = document.getElementsByClassName("map")[0];
+    const options = {center: new kakao.maps.LatLng(35.12, 129.1), level: 3};
+    const kakaoMap = new kakao.maps.Map(container, options);
+    setMap(kakaoMap);
 
     const geocoder = new kakao.maps.services.Geocoder();
-
-    geocoder.addressSearch("제주특별자치도 제주시 첨단로 242", function (result, status) {
+    geocoder.addressSearch(props.address, function (result, status) {
       if (status === kakao.maps.services.Status.OK) {
-        const coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+        let coords = new kakao.maps.LatLng(result[0].y, result[0].x);
 
-        const marker = new kakao.maps.Marker({
-          map: map,
+        let marker = new kakao.maps.Marker({
+          map: kakaoMap,
           position: coords,
         });
 
-        const infowindow = new kakao.maps.InfoWindow({
-          content: '<div style="width:150px;text-align:center;padding:6px 0;">우리회사</div>',
-        });
-
-        infowindow.open(map, marker);
-
-        map.setCenter(coords);
+        marker.setMap(kakaoMap);
+        kakaoMap.setCenter(coords);
       }
     });
   }, []);

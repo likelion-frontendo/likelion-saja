@@ -8,7 +8,7 @@ export function MainProduct() {
       <div className="inner">
         <Heading2>중고거래 인기 매물</Heading2>
         <UseProductList count={8} />
-        <Link to="/">
+        <Link to="/PopularProduct">
           <span className="popularProduct">인기매물 더 보기</span>
         </Link>
       </div>

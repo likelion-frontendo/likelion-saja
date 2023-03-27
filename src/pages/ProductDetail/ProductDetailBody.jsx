@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import {Link} from "react-router-dom";
 import {UseProductList} from "@/components";
+import {ProductMap} from "@/pages/ProductDetail";
 
 export function ProductDetailBody(props) {
   return (
@@ -14,17 +15,17 @@ export function ProductDetailBody(props) {
       <hr />
       <section className="productDescription">
         <span className="titleDescription">{props.title} </span>
-        <span className="priceDescription">{props.price}벨 </span>
+        <span className="priceDescription">{props.price.toLocaleString(navigator.language)}벨 </span>
         <span className="descriptionDescription">{props.description} </span>
       </section>
       <hr />
       <section className="popularProduct">
         <div className="textContainer">
           <span>당근마켓 인기중고</span>
-          <Link to="/">더 구경하기</Link>
+          <Link to="/PopularProduct">더 구경하기</Link>
         </div>
-        <UseProductList count={6} />
-        <div className="map"></div>
+        <UseProductList count={6} excludeId={props.id} />
+        <ProductMap address={props.location} />
       </section>
     </StyledProductDetail>
   );
@@ -52,9 +53,8 @@ const StyledProductDetail = styled.div`
   }
   & .productDescription {
     width: 678px;
-    height: 148px;
-    margin: 36px auto 0 auto;
-    line-height: 30px;
+    height: 84px;
+    margin: 36px auto;
   }
 
   & .mainImg {
@@ -75,7 +75,6 @@ const StyledProductDetail = styled.div`
     display: block;
     font-style: normal;
     color: #212529;
-    margin-top: 3px;
     font-weight: 700;
     font-size: 15px;
     line-height: 30px;
