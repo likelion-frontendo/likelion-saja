@@ -50,9 +50,8 @@ const StyledProductDetail = styled.div`
   }
   & .productDescription {
     width: 678px;
-    height: 148px;
-    margin: 36px auto 0 auto;
-    line-height: 30px;
+    height: 84px;
+    margin: 36px auto;
   }
 
   & .mainImg {
@@ -73,7 +72,6 @@ const StyledProductDetail = styled.div`
     display: block;
     font-style: normal;
     color: #212529;
-    margin-top: 3px;
     font-weight: 700;
     font-size: 15px;
     line-height: 30px;
@@ -87,14 +85,6 @@ const StyledProductDetail = styled.div`
     line-height: 30px;
   }
 
-  & .interestDescription {
-    display: block;
-    font-style: normal;
-    margin-top: 3px;
-    font-size: 12px;
-    line-height: 3px;
-    color: #868e96;
-  }
   & .popularProduct {
     width: 678px;
     height: 830px;

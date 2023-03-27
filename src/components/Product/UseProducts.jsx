@@ -55,7 +55,6 @@ export function useProducts(excludeId, limitCount = 12) {
         const product = {id: doc.id, ...doc.data()};
         products.push(product);
       });
-      console.log({products});
       setProductsState(products);
     });
   }, [setProductsState, excludeId, limitCount]);
