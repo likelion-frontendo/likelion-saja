@@ -1,12 +1,44 @@
 import {Link} from "react-router-dom";
 import profile from "@/assets/Mypage/유네찌.png";
 import styled from "styled-components/macro";
+import {db} from "@/firebase/app";
+import {doc, getDoc} from "firebase/firestore";
+import {useEffect, useState} from "react";
+import {uidAtom} from "../Register/atoms/uidAtom";
+import {useRecoilState} from "recoil";
 
 export function SectionProfileInfo() {
+  // const [uid, setUid] = useRecoilState(uidAtom);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [birthday, setBirthday] = useState("");
+  const [mobile, setMobile] = useState("");
+  const [profileImageURL, setProfileImageURL] = useState("");
+
+  useEffect(() => {
+    async function getUserDataFromFirebase() {
+      const docRef = doc(db, "users", "mEh3O0OYmJdqw09hypXaiIMNIg73");
+      const docSnap = await getDoc(docRef);
+
+      if (docSnap.exists()) {
+        setName(docSnap.data().name);
+        setEmail(docSnap.data().email);
+        setBirthday(docSnap.data().birthday);
+        setMobile(docSnap.data().mobile);
+        setProfileImageURL(docSnap.data().profileImageURL);
+      } else {
+        // doc.data() will be undefined in this case
+        console.log("유저 정보를 찾지 못했습니다.");
+      }
+    }
+
+    getUserDataFromFirebase();
+  }, []);
+
   return (
     <ProfileInfoTop>
       <div className="InfoProfileImg">
-        <img src={profile} alt="프로필 이미지"></img>
+        <img src={profileImageURL} alt="프로필 이미지"></img>
       </div>
       <div className="UserInfoList">
         <ul>
@@ -22,28 +54,22 @@ export function SectionProfileInfo() {
           <li>
             <span>생년월일</span>
           </li>
-          <li>
-            <span>성별</span>
-          </li>
         </ul>
         <ul>
           <li>
-            <span>유미</span>
+            <span>{name}</span>
             <Link to="/">
               <span className="ProfileNum">#1817221</span>
             </Link>
           </li>
           <li>
-            <span>gkghgkgh0@gmail.com</span>
+            <span>{email}</span>
           </li>
           <li>
-            <span>010-1111-1111</span>
+            <span>{mobile}</span>
           </li>
           <li>
-            <span>1995-05-28</span>
-          </li>
-          <li>
-            <span>여</span>
+            <span>{birthday}</span>
           </li>
         </ul>
       </div>

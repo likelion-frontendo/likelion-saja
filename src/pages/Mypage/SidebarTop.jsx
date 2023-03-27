@@ -1,14 +1,40 @@
 import {SidebarBottom} from "@/pages/Mypage/SidebarBottom";
 import profile from "@/assets/Mypage/유네찌.png";
 import styled from "styled-components/macro";
+import {db} from "@/firebase/app";
+import {doc, getDoc} from "firebase/firestore";
+import {useEffect, useState} from "react";
+import {uidAtom} from "../Register/atoms/uidAtom";
+import {useRecoilState} from "recoil";
 
 export function SidebarTop() {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [profileImageURL, setProfileImageURL] = useState("");
+
+  useEffect(() => {
+    async function getUserDataFromFirebase() {
+      const docRef = doc(db, "users", "mEh3O0OYmJdqw09hypXaiIMNIg73");
+      const docSnap = await getDoc(docRef);
+
+      if (docSnap.exists()) {
+        setName(docSnap.data().name);
+        setEmail(docSnap.data().email);
+        setProfileImageURL(docSnap.data().profileImageURL);
+      } else {
+        // doc.data() will be undefined in this case
+        console.log("유저 정보를 찾지 못했습니다.");
+      }
+    }
+
+    getUserDataFromFirebase();
+  }, []);
   return (
     <MypageSide>
       <div className="profile">
-        <img src={profile} alt="프로필 이미지"></img>
-        <p className="profileName">유미</p>
-        <p className="profileNum">#1817221</p>
+        <img src={profileImageURL} alt="프로필 이미지"></img>
+        <p className="profileName">{name}</p>
+        <p className="profileNum">{email}</p>
       </div>
       <SidebarBottom></SidebarBottom>
     </MypageSide>
