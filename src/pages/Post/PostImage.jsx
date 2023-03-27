@@ -1,13 +1,15 @@
-import {useState, useEffect} from "react";
+import {useEffect} from "react";
 import {ReactComponent as CameraIcon} from "@/assets/Post/camera-fill.svg";
 import styled from "styled-components/macro";
 import { storage } from './../../firebase/app';
 import {ref, uploadBytes, listAll, getDownloadURL} from "firebase/storage";
 import {v4} from "uuid";
+import { useRecoilState } from 'recoil';
+import { imagesAtom, imageListAtom} from "./postAtoms";
 
 export function PostImage() {
-  const [images, setImages] = useState([]);
-  const [imageList, setImageList]  = useState([]);
+  const [images, setImages] = useRecoilState(imagesAtom);
+  const [imageList, setImageList]  = useRecoilState(imageListAtom);
   const imageListRef = ref(storage, "post/")
 
   const handleImageChange = (e) => {
