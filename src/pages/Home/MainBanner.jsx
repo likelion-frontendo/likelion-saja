@@ -1,10 +1,10 @@
 import React from "react";
 import styled from "styled-components";
 import {Image} from "@/components";
-import BannerImg from "@/assets/Home/banner01.svg";
-import BannerImg2 from "@/assets/Home/banner02.svg";
-import BannerImg3 from "@/assets/Home/banner03.svg";
-import BannerImg4 from "@/assets/Home/banner04.svg";
+import BannerImg from "@/assets/Home/mainBanner1.png";
+import BannerImg2 from "@/assets/Home/mainBanner2.png";
+import BannerImg3 from "@/assets/Home/mainBanner3.png";
+import BannerImg4 from "@/assets/Home/mainBanner4.png";
 import {Swiper, SwiperSlide} from "swiper/react";
 import {Autoplay} from "swiper";
 import "swiper/css";
