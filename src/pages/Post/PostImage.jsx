@@ -1,15 +1,23 @@
-import {useState} from "react";
+import {useEffect} from "react";
 import {ReactComponent as CameraIcon} from "@/assets/Post/camera-fill.svg";
 import styled from "styled-components/macro";
+import { storage } from './../../firebase/app';
+import {ref, uploadBytes, listAll, getDownloadURL} from "firebase/storage";
+import {v4} from "uuid";
+import { useRecoilState } from 'recoil';
+import { imagesAtom, imageListAtom} from "./postAtoms";
 
 export function PostImage() {
-  const [images, setImages] = useState([]);
+  const [images, setImages] = useRecoilState(imagesAtom);
+  const [imageList, setImageList]  = useRecoilState(imageListAtom);
+  const imageListRef = ref(storage, "post/")
 
   const handleImageChange = (e) => {
     const files = Array.from(e.target.files);
     const imageFiles = files.filter((file) => file.type === "image/jpeg" || file.type === "image/png" || file.type === "image/gif" || file.type === "image/bmp");
     const newImages = imageFiles.map((file) => ({
       name: file.name,
+      file: file,
       url: URL.createObjectURL(file),
     }));
     if (images.length + newImages.length <= 6) {
@@ -17,7 +25,27 @@ export function PostImage() {
     } else {
       alert("최대 6개 까지 업로드할 수 있습니다.");
     }
-  };
+
+    if (newImages == null) return;
+    newImages.forEach((newImage) => {
+    const imageRef = ref(storage, `post/${newImage.file.name + v4()}`);
+    uploadBytes(imageRef, newImage.file).then((snaphsot) => {
+      getDownloadURL(snaphsot.ref).then((url) => {
+        setImageList((prev) => [...prev, url]);
+      })
+    });
+  });
+};
+
+  useEffect(() => {
+    listAll(imageListRef).then((response) => {
+      response.items.forEach((item) => {
+        getDownloadURL(item).then((url) => {
+          setImageList((prev) => [...prev, url]);
+        });
+      });
+    });
+  }, []);
 
   function handleDrop(e) {
     e.preventDefault();
@@ -39,14 +67,14 @@ export function PostImage() {
   return (
     <PostImageSection>
       <div>
-        <label for="file">
+        <label htmlFor="file">
           <CameraIcon className="PostImageIcon FileUpload" />
         </label>
         <input type="file" name="file" id="file" accept=".jpg,.jpeg,.png,.gif,.bmp" multiple required onChange={handleImageChange}></input>
       </div>
       <div className="PreviewImage" onDrop={handleDrop} onDragOver={(e) => e.preventDefault()}>
         {images.map((image, index) => (
-          <div key={index} className="PreviewImageItem">
+          <div key={image.name} className="PreviewImageItem">
             <img src={image.url} alt={image.name} />
             <button onClick={() => handleImageDelete(index)}>X</button>
           </div>
