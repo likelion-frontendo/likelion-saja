@@ -1,6 +1,6 @@
 import {MainBanner, MainProduct, LineBanner, MainStore} from "@/pages/Home";
 import {Helmet} from "react-helmet-async";
-import {Header, Footer} from "@/components";
+import {Header, Footer, UpButton} from "@/components";
 
 export function Home() {
   return (
@@ -23,6 +23,7 @@ export function Home() {
       <MainProduct />
       <LineBanner />
       <MainStore />
+      <UpButton />
       <Footer />
     </div>
   );

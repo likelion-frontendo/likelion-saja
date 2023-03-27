@@ -1,4 +1,4 @@
-import {Header, Footer} from "@/components";
+import {Header, Footer, UpButton} from "@/components";
 import {useParams} from "react-router-dom";
 import {UseProductDetail} from "./UseProductDetail";
 import {Helmet} from "react-helmet-async";
@@ -22,6 +22,7 @@ export function ProductDetail() {
       </Helmet>
       <Header />
       <UseProductDetail id={id} />
+      <UpButton />
       <Footer />
     </div>
   );
