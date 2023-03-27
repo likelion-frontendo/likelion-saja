@@ -1,6 +1,6 @@
 import {Header, Footer} from "@/components";
 import {useParams} from "react-router-dom";
-import {UseProductDetail} from "./UseProductDetail";
+import {UseProductDetail} from "@/pages/ProductDetail";
 import {Helmet} from "react-helmet-async";
 
 export function ProductDetail() {
@@ -8,7 +8,7 @@ export function ProductDetail() {
   return (
     <div className="ProductDetail">
       <Helmet>
-        <title>사자-메인페이지</title>
+        <title>사자-상세페이지</title>
         <meta name="description" content="사자마켓-중고 거래 장터 whit.프론트엔도" />
         <meta name="keywords" content="중고거래, 당근마켓, 멋쟁이사자처럼, 멋쟁이사자처럼프론트엔드" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />

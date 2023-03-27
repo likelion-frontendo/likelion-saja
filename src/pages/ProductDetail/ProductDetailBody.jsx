@@ -24,6 +24,7 @@ export function ProductDetailBody(props) {
           <Link to="/">더 구경하기</Link>
         </div>
         <UseProductList count={6} />
+        <div className="map"></div>
       </section>
     </StyledProductDetail>
   );
@@ -34,6 +35,7 @@ const StyledProductDetail = styled.div`
     width: 678px;
     border: 1px solid #eaebee;
   }
+
   & .productContainer {
     display: grid;
     grid-template-rows: repeat(2, 1fr);
@@ -95,11 +97,13 @@ const StyledProductDetail = styled.div`
     line-height: 3 px;
     color: #868e96;
   }
+
   & .popularProduct {
     width: 678px;
-    height: 830px;
+    height: 100%;
     margin: 0 auto;
   }
+
   & .textContainer {
     display: flex;
     width: 678px;
@@ -129,5 +133,12 @@ const StyledProductDetail = styled.div`
 
   & a:hover {
     font-weight: 600;
+  }
+
+  & .map {
+    width: 100%;
+    height: 200px;
+    margin: 50px 0 30px;
+    background: black;
   }
 `;
