@@ -1,8 +1,8 @@
 import {useState} from "react";
 import {Input} from "@/components/Input/Input";
 import styled from "styled-components/macro";
-import { useRecoilState } from 'recoil';
-import { priceAtom, postTitleAtom, postContentAtom } from "./postAtoms";
+import {useRecoilState} from "recoil";
+import {priceAtom, postTitleAtom, postContentAtom} from "./postAtoms";
 
 export function PostText() {
   const [priceValue, setPriceValue] = useRecoilState(priceAtom);
@@ -35,10 +35,10 @@ export function PostText() {
   return (
     <TextBox>
       <div className="TextTitleInput">
-      <Input value={postTitle} placeholder="글 제목" className="TextTitle" onChange={onTitleChange}></Input>
+        <Input value={postTitle} placeholder="글 제목" className="TextTitle" onChange={onTitleChange}></Input>
         <div className="PriceBox">
           <span style={{color: priceValue ? "#4d5159" : "#dcdee3"}}>벨</span>
-          <Input value={addComma(priceValue || "")} placeholder="가격" onChange={onChangePoints} className="TextPrice" pattern="\d*" ></Input>
+          <Input value={addComma(priceValue || "")} placeholder="가격" onChange={onChangePoints} className="TextPrice" pattern="\d*"></Input>
         </div>
       </div>
       <textarea placeholder=" 게시글의 내용을 적어주세요. (판매 금지 물품은 게시가 제한될 수 있어요.)" className="TextareaBox" value={postContent} onChange={onTextareaChange}></textarea>
@@ -65,6 +65,9 @@ const TextBox = styled.div`
   }
 
   & Input {
+    font-size: 14px;
+    font-weight: 600;
+    color: #6c816d;
     border: 2px solid #a5b2a6;
     padding-left: 16px;
     &:focus {

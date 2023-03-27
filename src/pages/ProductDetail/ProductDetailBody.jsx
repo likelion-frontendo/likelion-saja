@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import {Link} from "react-router-dom";
 import {UseProductList} from "@/components";
+import test from "@/assets/test.jpg";
 
 export function ProductDetailBody(props) {
   return (
@@ -10,7 +11,17 @@ export function ProductDetailBody(props) {
           <img className="mainImg" src={props.imgUrl} alt="상품 이미지"></img>
         </Link>
       </section>
-      <section className="userInfo"></section>
+      <section className="userInfo">
+        <div className="userInfoContainer">
+          <div className="userInfoImgContainer">
+            <img src={test} alt="프로필 사진" />
+          </div>
+          <div className="spanContainer">
+            <span className="userId">아이디</span>
+            <span className="userLocation">장소</span>
+          </div>
+        </div>
+      </section>
       <hr />
       <section className="productDescription">
         <span className="titleDescription">{props.title} </span>
@@ -47,6 +58,42 @@ const StyledProductDetail = styled.div`
     margin: 64px auto 0 auto;
     width: 678px;
     height: 564px;
+  }
+
+  & .userInfoContainer {
+    display: flex;
+    width: 678px;
+    height: 60px;
+    margin: 24px auto;
+    align-items: center;
+  }
+
+  & .userInfoImgContainer {
+    width: 40px;
+    height: 40px;
+    border-radius: 70%;
+    overflow: hidden;
+    margin-right: 8px;
+  }
+  & .spanContainer {
+    line-height: 20px;
+  }
+  & .spanContainer span {
+    display: block;
+  }
+
+  & .userId {
+    font-style: normal;
+    font-weight: 600;
+    font-size: 15px;
+    color: #212529;
+  }
+
+  & .userLocation {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 13px;
+    color: #212529;
   }
   & .productDescription {
     width: 678px;

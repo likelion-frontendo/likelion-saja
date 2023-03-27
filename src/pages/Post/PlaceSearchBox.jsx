@@ -8,6 +8,7 @@ import {postcodePopupAtom, addressAtom, priceAtom, imagesAtom, imageListAtom, po
 import {collection, addDoc} from "firebase/firestore";
 import {db} from "@/firebase/app";
 import {useNavigate} from "react-router-dom";
+import { uidAtom } from "../Register/atoms/uidAtom";
 
 export function PlaceSearchBox() {
   const [postcodePopup, setPostcodePopup] = useRecoilState(postcodePopupAtom);
@@ -17,6 +18,7 @@ export function PlaceSearchBox() {
   const [priceValue, setPriceValue] = useRecoilState(priceAtom);
   const [postTitle, setPostTitle] = useRecoilState(postTitleAtom);
   const [postContent, setPostContent] = useRecoilState(postContentAtom);
+  const [uid, setUid] = useRecoilState(uidAtom);
   const moveToAnotherPage = useNavigate();
 
   const onSubmit = async (e) => {
@@ -38,6 +40,7 @@ export function PlaceSearchBox() {
           location: address,
           price: priceValue,
           title: postTitle,
+          userId: uid,
         };
 
         console.log("데이터베이스에 업로드할 데이터: ", uploadData);
@@ -105,6 +108,8 @@ const PlaceSearch = styled.div`
     border-bottom: 2px solid #a5b2a6;
     color: #393a40;
     padding-left: 12px;
+    font-size: 14px;
+    font-weight: 600;
   }
 
   & .PlaceSearchInputBox Button {
