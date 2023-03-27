@@ -19,7 +19,7 @@ export function PostText() {
     const fillteredText = inputText.replace(/[^0-9]/g, "");
     let str = value.replaceAll(",", "");
     setPriceValue(str);
-    setPriceValue(fillteredText);
+    setPriceValue(Number(fillteredText));
   }
 
   function onTextareaChange(e) {
