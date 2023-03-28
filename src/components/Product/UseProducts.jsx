@@ -70,7 +70,7 @@ export function useProducts(excludeId, limitCount = 99) {
         })
         .then((users) => {
           return products.map((product) => {
-            return {...product, ...users.find((user) => user.id === product.id)};
+            return {...product, ...users.find((user) => user.userId === product.userId), id: product.id};
           });
         })
         .then((processedProducts) => {
