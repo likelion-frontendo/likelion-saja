@@ -7,7 +7,6 @@ export function UseProductDetail(props) {
   if (isLoading) {
     return <div role="alert">로딩 중...</div>;
   }
-
   const product = productsState.find((p) => p.id === props.id);
 
   return (
