@@ -1,5 +1,5 @@
 import React, {useEffect} from "react";
-import {Product, useProducts} from "@/components";
+import {Product, useProducts, Image} from "@/components";
 import raccoon from "@/assets/Logo/raccoon.gif";
 import styled from "styled-components";
 import {atom, useRecoilState} from "recoil";
@@ -23,7 +23,7 @@ export function UseProductList(props) {
   if (isLoadingState || showLoading) {
     return (
       <StyledLoadingImgContainer role="alert">
-        <img src={raccoon} alt="로딩 중임..." />
+        <Image src={raccoon} alt="로딩 중임..." />
       </StyledLoadingImgContainer>
     );
   }

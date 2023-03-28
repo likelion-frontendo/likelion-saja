@@ -50,10 +50,20 @@ export function useProducts(excludeId, limitCount = 20) {
 
     getDocs(q).then((querySnapshot) => {
       const products = [];
+      const queryPromises = [];
 
       querySnapshot.forEach((doc) => {
         const product = {id: doc.id, ...doc.data()};
+        const userId = product.userId;
+
         products.push(product);
+
+        // const queryPromise = new Promise(async (resolve, reject) => {
+        //   const usersSnapshot = await getDocs(query(collection(db, "users"), where("id", "==", userId)));
+        //   resolve(usersSnapshot.docs);
+        // });
+
+        // queryPromises.push(queryPromise);
       });
       const shuffledProducts = products.sort(() => Math.random() - 0.5);
       setProductsState(shuffledProducts);

@@ -3,7 +3,6 @@ import React, {useCallback, useEffect, useRef} from "react";
 const {kakao} = window;
 
 export function ProductMap(props) {
-
   const kakakoMapRef = useRef({});
 
   const drawMap = useCallback(
@@ -35,11 +34,9 @@ export function ProductMap(props) {
     kakakoMapRef.current.geocoder = new kakao.maps.services.Geocoder();
 
     drawMap(props.address);
-
   }, []);
 
   useEffect(() => {
-    console.log(props.address);
     drawMap(props.address);
   }, [drawMap, props.address]);
 

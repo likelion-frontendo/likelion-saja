@@ -5,6 +5,7 @@ import {Helmet} from "react-helmet-async";
 
 export function ProductDetail() {
   const {id} = useParams();
+
   return (
     <div className="ProductDetail">
       <Helmet>
