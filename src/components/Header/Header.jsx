@@ -26,11 +26,9 @@ export function Header() {
         const userId = user.uid;
         setCheckCurrentUserState(true);
         setUid(userId);
-        console.log("사용자 로그인", checkCurrentUserState, uid);
       } else {
         setCheckCurrentUserState(false);
         setUid("");
-        console.log("사용자 로그아웃", checkCurrentUserState, uid);
       }
     });
   
@@ -40,7 +38,6 @@ export function Header() {
   async function handleLogout() {
     try {
       await signOut(auth);
-      console.log("로그아웃!");
       navigate("/");
     } catch (error) {
       console.log(error.message);

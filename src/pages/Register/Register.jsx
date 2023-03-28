@@ -85,11 +85,9 @@ export function Register() {
     }
   }
 
-  /* 파이어베이스 회원가입 기능 */
   async function registerUser() {
     try {
       const result = await createUserWithEmailAndPassword(auth, email, password);
-      console.log("회원가입 성공!")
       addUserCollection(result.user.uid, name, mobile, email, birthday, profileImageURL)
       navigate("/");
       setModal(false);
@@ -98,7 +96,6 @@ export function Register() {
     }
   }
 
-  /* 파이어베이스 유저 컬렉션 생성 기능 */
   async function addUserCollection(uid, name, mobile, email, birthday, profileImageURL) {
     await setDoc(doc(db, "users", uid), {
       name: name,
@@ -109,7 +106,6 @@ export function Register() {
       userId: uid,
     })
     setUid(uid);
-    console.log("유저 컬렉션 생성 성공!");
   }
 
   return(
