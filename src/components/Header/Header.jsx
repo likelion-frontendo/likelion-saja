@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import {Link, useNavigate} from "react-router-dom";
 import {Image, Heading1, Button, Input} from "@/components";
-import sajaLogo from "@/assets/Home/logo.png";
+import sajaLogo from "@/assets/Home/logo.svg";
 import {onAuthStateChanged} from "firebase/auth";
 import {auth} from "@/firebase/app";
 import {signOut} from "firebase/auth";
