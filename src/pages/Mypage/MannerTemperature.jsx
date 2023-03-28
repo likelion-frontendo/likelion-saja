@@ -9,7 +9,7 @@ export function MannerTemperature() {
         <h3>매너온도</h3>
         <Exclamation className="explanation" />
         <div className="HoverText">
-          매너온도는 당근마켓 사용자로부터 받은 <br /> 칭찬, 후기, 비매너 평가, 운영자 제재 등을 <br />
+          매너온도는 사자마켓 사용자로부터 받은 <br /> 칭찬, 후기, 비매너 평가, 운영자 제재 등을 <br />
           종합해서 만든 매너 지표예요.
         </div>
       </div>
