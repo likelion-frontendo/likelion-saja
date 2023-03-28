@@ -1,7 +1,5 @@
 import {atom} from "recoil";
 
-//경고창 텍스트
-
 export const emailWarningAtom = atom({
   key: "emailWarningAtom",
   default: "",
