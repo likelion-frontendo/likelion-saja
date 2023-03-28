@@ -4,10 +4,11 @@ import { emailAtom, passwordAtom, passwordConfirmAtom, nameAtom, mobileAtom, bir
 import { emailVisibleAtom, passwordVisibleAtom, passwordConfirmVisibleAtom, nameVisibleAtom, mobileVisibleAtom } from './atoms/checkInputValueAtom';
 import { nameWarningAtom, emailWarningAtom, passwordWarningAtom, passwordConfirmWarningAtom, mobileWarningAtom } from './atoms/inputWarningAtoms';
 import styled from 'styled-components'
-import { storage } from "@/firebase/app";
+import { db, storage } from "@/firebase/app";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import {RegisterFormInput} from "@/pages/Register"
 import {Form, Button, Label, Heading3} from "@/components";
+import { collection, getDocs } from 'firebase/firestore';
 
 export function RegisterForm() {
 
@@ -32,7 +33,6 @@ export function RegisterForm() {
   const [mobileWarning, setMobileWarning] = useRecoilState(mobileWarningAtom);
   const [nameWarning, setNameWarning] = useRecoilState(nameWarningAtom);
 
-  /* 이메일 유효성 검사 */
   function emailValidation(email){
     const emailRegex = /^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i;
     let warningMessage = '';
@@ -46,7 +46,6 @@ export function RegisterForm() {
     };
   }
 
-  /* 비밀번호 유효성 검사 */
   function passwordValidation(password) {
 
     let warningMessage = '';
@@ -60,7 +59,6 @@ export function RegisterForm() {
     }
   }
 
-  /* 비밀번호 중복 유효성 검사 */
   function passwordConfirmValidation(passwordConfirm) {
     let warningMessage = '';
 
@@ -73,7 +71,6 @@ export function RegisterForm() {
     }
   }
 
-  /* 이름 유효성 검사 */
   function nameValidation(name) {
     const nameRegex = /^[가-힣]{2,5}$/;
     let warning = "";
@@ -86,7 +83,6 @@ export function RegisterForm() {
     }
   }
 
-  /* 휴대폰 유효성 검사 */
   function mobileValidation(mobile) {
     const mobileRegex = /^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/;
     let warning = '';
@@ -100,7 +96,6 @@ export function RegisterForm() {
     }
   }
 
-  /* 휴대폰 잘못된 문자입력 방지 */
   function handleMobileValidation(e) {
     const mobile = e.target.value;
     const numberOnly = /^[0-9]*$/;
@@ -117,11 +112,32 @@ export function RegisterForm() {
     setMobile(mobile);
   }
 
-  /* 생년월일 입력값 업데이트 */
   function handleBirthdayValue(e) {
     setBirthday(e.target.value);
     console.log(birthday);
   }
+
+  function checkExistingUser() {
+    const colRef = collection(db, "users");
+
+    getDocs(colRef)
+    .then((snapshot) => {
+      let existingUsers = [];
+      snapshot.docs.forEach((doc)=>{
+        existingUsers.push({...doc.data(), id: doc.id})
+      })
+      existingUsers.forEach((user)=>{
+        if(email === user.email) {
+          alert("이미 가입이 완료된 이메일입니다!");
+          return;
+        }
+      })
+    })
+    .catch((err) => {
+      console.log(err.message);
+    })
+  }
+
 
   useEffect(() => {
     function uploadFile() {
@@ -132,8 +148,6 @@ export function RegisterForm() {
       uploadTask.on(
         'state_changed',
         (snapshot) => {
-          const progress =
-            (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
           switch (snapshot.state) {
             case 'paused':
               break;
@@ -180,7 +194,7 @@ export function RegisterForm() {
     <StyledSection className="registerTop">
       <Form className="registerForm" legend="회원가입">
         <RegisterFormInput label="이메일" name="email" type="email" placeholder="예시) frontendo@saja.com" onChange={(e) => {setEmail(e.target.value);}}>
-          <Button className="registerButtonShort">중복확인</Button>
+          <Button className="registerButtonShort" onClick={checkExistingUser}>중복확인</Button>
           <span className={emailVisible === true ? "registerWarning showWarning" : "registerWarning"}>{emailWarning}</span>
         </RegisterFormInput>
         <RegisterFormInput label="비밀번호" name="password" type="password" placeholder="비밀번호를 입력해주세요" onChange={(e)=>{setPassword(e.target.value);}}>
