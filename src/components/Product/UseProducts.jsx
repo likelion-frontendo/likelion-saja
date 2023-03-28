@@ -33,7 +33,7 @@ const errorSelector = selector({
   },
 });
 
-export function useProducts(excludeId, limitCount = 20) {
+export function useProducts(excludeId, limitCount = 99) {
   const [productsState, setProductsState] = useRecoilState(!excludeId ? productsAtom : productsExcludeIdAtom);
   const isLoading = useRecoilValue(isLoadingSelector);
   const error = useRecoilValue(errorSelector);
