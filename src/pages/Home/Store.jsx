@@ -17,8 +17,8 @@ export function Store(props) {
           </div>
           <span className="description">{props.store.description}</span>
           <div className="storeExtraInfo">
-            <span>후기 {props.store.review}</span>
-            <span>단골 {props.store.regular}</span>
+            <span>후기 {props.store.review.toLocaleString(navigator.language)}</span>
+            <span>단골 {props.store.regular.toLocaleString(navigator.language)}</span>
             <span>{props.store.type}</span>
           </div>
         </div>

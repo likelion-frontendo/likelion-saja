@@ -10,7 +10,7 @@ export function ProductDetailBody(props) {
     <StyledProductDetail>
       <section className="productImg">
         <Link to="/">
-          <Image className="mainImg" src={props.imgUrl} alt="상품 이미지"></Image>
+          <Image className="mainImg" src={props.product.imgUrl} alt="상품 이미지"></Image>
         </Link>
       </section>
       <section className="userInfo">

@@ -1,7 +1,7 @@
 import {useEffect} from "react";
 import {atom, selector, useRecoilState, useRecoilValue} from "recoil";
 import {app} from "@/firebase/app";
-import {getFirestore, collection, getDocs, query, limit, where} from "firebase/firestore";
+import {getFirestore, getDoc, doc, collection, getDocs, query, limit, where} from "firebase/firestore";
 
 const productsAtom = atom({
   key: "products",
@@ -52,31 +52,25 @@ export function useProducts(excludeId, limitCount = 99) {
       const products = [];
       const queryPromises = [];
 
-      querySnapshot.forEach((doc) => {
-        const product = {id: doc.id, ...doc.data()};
+      querySnapshot.forEach((document) => {
+        const product = {id: document.id, ...document.data()};
         const userId = product.userId;
-        console.log(product); // 문제 없음
         products.push(product);
-        const queryPromise = new Promise(async (resolve, reject) => {
-          const usersSnapshot = await getDocs(query(collection(db, "users"), where("userId", "==", userId)));
-          resolve(usersSnapshot.docs);
-        });
-
-        queryPromises.push(queryPromise);
+        queryPromises.push(getDoc(doc(db, `users/${userId}`)));
       });
 
       Promise.all(queryPromises)
         .then((userDocs) => {
           const users = [];
-          console.log(userDocs); // 여기서 부터 중복?
-          userDocs.forEach(([doc]) => {
+          userDocs.forEach((doc) => {
             users.push({id: doc.id, ...doc.data()});
           });
+
           return users;
         })
         .then((users) => {
-          return users.map((user) => {
-            return {...products.find((product) => product.userId === user.id), ...user};
+          return products.map((product) => {
+            return {...product, ...users.find((user) => user.id === product.id)};
           });
         })
         .then((processedProducts) => {
