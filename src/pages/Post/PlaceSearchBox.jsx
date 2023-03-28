@@ -5,7 +5,7 @@ import {Input} from "@/components/Input/Input";
 import {ReactComponent as RightArrow} from "@/assets/Post/right.svg";
 import {useRecoilState} from "recoil";
 import {postcodePopupAtom, addressAtom, priceAtom, imagesAtom, imageListAtom, postTitleAtom, postContentAtom} from "./postAtoms";
-import {collection, addDoc} from "firebase/firestore";
+import {collection, addDoc, doc, updateDoc} from "firebase/firestore";
 import {db} from "@/firebase/app";
 import {useNavigate} from "react-router-dom";
 import {uidAtom} from "../Register/atoms/uidAtom";
@@ -53,7 +53,9 @@ export function PlaceSearchBox() {
         console.log("데이터베이스에 업로드할 데이터: ", uploadData);
 
         const docRef = await addDoc(collection(db, "Products"), uploadData);
-        console.log("Document written with ID: ", docRef.id);
+        await updateDoc(doc(db, "Products", docRef.id), {
+          id: docRef.id,
+        });
         moveToAnotherPage("/");
       } catch (e) {
         console.error("Error adding document: ", e);
