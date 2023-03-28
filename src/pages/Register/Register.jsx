@@ -106,6 +106,7 @@ export function Register() {
       email: email,
       birthday: birthday,
       profileImageURL: profileImageURL,
+      userId: uid,
     })
     setUid(uid);
     console.log("유저 컬렉션 생성 성공!");
