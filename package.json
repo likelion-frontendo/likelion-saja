@@ -1,6 +1,6 @@
 {
-  "name": "frontendo-saja",
   "homepage": "https://likelion-frontendo.github.io/likelion-saja/",
+  "name": "frontendo-saja",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
