@@ -8,18 +8,18 @@ export function Store(props) {
     <StyledStoreContainer>
       <div className="storeInner">
         <Link to="/">
-          <Image src={props.imgUrl} alt="상품 이미지"></Image>
+          <Image src={props.store.imgUrl} alt="상품 이미지"></Image>
         </Link>
         <div className="storeContainer">
           <div className="storeInfo">
-            <span className="title">{props.title}</span>
-            <span className="location">{props.location}</span>
+            <span className="title">{props.store.title}</span>
+            <span className="location">{props.store.location}</span>
           </div>
-          <span className="description">{props.description}</span>
+          <span className="description">{props.store.description}</span>
           <div className="storeExtraInfo">
-            <span>후기 {props.review}</span>
-            <span>단골 {props.regular}</span>
-            <span>{props.type}</span>
+            <span>후기 {props.store.review.toLocaleString(navigator.language)}</span>
+            <span>단골 {props.store.regular.toLocaleString(navigator.language)}</span>
+            <span>{props.store.type}</span>
           </div>
         </div>
       </div>

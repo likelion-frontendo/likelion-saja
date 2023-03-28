@@ -1,7 +1,7 @@
 import {useEffect} from "react";
 import {atom, selector, useRecoilState, useRecoilValue} from "recoil";
 import {app} from "@/firebase/app";
-import {getFirestore, collection, getDocs, query, limit, where} from "firebase/firestore";
+import {getFirestore, getDoc, doc, collection, getDocs, query, limit, where} from "firebase/firestore";
 
 const productsAtom = atom({
   key: "products",
@@ -50,13 +50,33 @@ export function useProducts(excludeId, limitCount = 99) {
 
     getDocs(q).then((querySnapshot) => {
       const products = [];
+      const queryPromises = [];
 
-      querySnapshot.forEach((doc) => {
-        const product = {id: doc.id, ...doc.data()};
+      querySnapshot.forEach((document) => {
+        const product = {id: document.id, ...document.data()};
+        const userId = product.userId;
         products.push(product);
+        queryPromises.push(getDoc(doc(db, `users/${userId}`)));
       });
-      const shuffledProducts = products.sort(() => Math.random() - 0.5);
-      setProductsState(shuffledProducts);
+
+      Promise.all(queryPromises)
+        .then((userDocs) => {
+          const users = [];
+          userDocs.forEach((doc) => {
+            users.push({id: doc.id, ...doc.data()});
+          });
+
+          return users;
+        })
+        .then((users) => {
+          return products.map((product) => {
+            return {...product, ...users.find((user) => user.id === product.id)};
+          });
+        })
+        .then((processedProducts) => {
+          const shuffledProducts = processedProducts.sort(() => Math.random() - 0.5);
+          setProductsState(shuffledProducts);
+        });
     });
   }, [setProductsState, excludeId, limitCount]);
 

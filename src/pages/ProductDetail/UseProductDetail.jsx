@@ -3,8 +3,8 @@ import {useProducts} from "@/components";
 import {ProductDetailBody} from "@/pages/ProductDetail/ProductDetailBody";
 
 export function UseProductDetail(props) {
-  const {isLoadingState, productsState} = useProducts();
-  if (isLoadingState) {
+  const {isLoading, productsState} = useProducts();
+  if (isLoading) {
     return <div role="alert">로딩 중...</div>;
   }
 
@@ -12,7 +12,7 @@ export function UseProductDetail(props) {
 
   return (
     <div className="imgContainer">
-      <ProductDetailBody id={product.id} imgUrl={product.imgUrl} title={product.title} price={product.price} location={product.location} description={product.description} />
+      <ProductDetailBody id={product.id} product={product} />
     </div>
   );
 }
