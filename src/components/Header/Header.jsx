@@ -2,21 +2,19 @@ import styled from "styled-components";
 import {Link} from "react-router-dom";
 import {Image, Heading1, Button, Input} from "@/components";
 import sajaLogo from "@/assets/Home/logo.png";
-import { onAuthStateChanged } from 'firebase/auth';
-import { auth } from '@/firebase/app';
+import {onAuthStateChanged} from "firebase/auth";
+import {auth} from "@/firebase/app";
 import {signOut} from "firebase/auth";
-import { atom, useRecoilState } from 'recoil';
-import { uidAtom } from '@/pages/Register/atoms/uidAtom';
-import { useEffect } from 'react';
-
+import {atom, useRecoilState} from "recoil";
+import {uidAtom} from "@/pages/Register/atoms/uidAtom";
+import {useEffect} from "react";
 
 export const checkCurrentUserStateAtom = atom({
   key: "checkCurrentUserStateAtom",
-  default: false
-})
+  default: false,
+});
 
-export function Header() {  
-
+export function Header() {
   const [checkCurrentUserState, setCheckCurrentUserState] = useRecoilState(checkCurrentUserStateAtom);
   const [uid, setUid] = useRecoilState(uidAtom);
 
@@ -34,7 +32,7 @@ export function Header() {
         console.log("사용자 로그아웃", checkCurrentUserState, uid);
       }
     });
-  
+
     // 리-렌더링 : "구독 해제 → 구독"을 위한 클린업 함수 반환
     return unsub;
   }, [checkCurrentUserState, setCheckCurrentUserState, setUid, uid]);
@@ -73,18 +71,20 @@ export function Header() {
       <div className="buttonContainer">
         {!checkCurrentUserState && (
           <>
-            <Link to="/login" className="loginButton">
+            <Link to="/login" className="loginButton loginBtn">
               로그인
             </Link>
-            <Link to="/register" className="loginButton">
+            <Link to="/register" className="loginButton joinBtn">
               회원가입
             </Link>
           </>
         )}
         {checkCurrentUserState && (
           <>
-            <Link to="/mypage">마이 페이지</Link>
-            <Button type="button" aria-label="로그아웃" className="loginButton" onClick={handleLogout}>
+            <Link to="/mypage" className="MypageBtn">
+              MyPage
+            </Link>
+            <Button type="button" aria-label="로그아웃" className="loginButton logoutBtn" onClick={handleLogout}>
               로그아웃
             </Button>
           </>
@@ -139,9 +139,22 @@ const StyledHeader = styled.header`
   }
 
   & .loginButton {
-    color: black;
+    color: #6c816d;
     background-color: white;
+    font-size: 14px;
   }
+
+  & .joinBtn {
+    border: 2px solid #6c816d;
+    border-radius: 12px;
+    padding: 10px 12px;
+
+    &:hover {
+      color: #fff;
+      background-color: #6c816d;
+    }
+  }
+
   & .registerButton {
     background-color: #6c816d;
     color: white;
@@ -162,7 +175,7 @@ const StyledHeader = styled.header`
 
   & a {
     text-decoration-line: none;
-    color: black;
+    color: #212124;
     width: 64px;
     height: 24px;
     font-weight: 700;
@@ -178,5 +191,29 @@ const StyledHeader = styled.header`
     width: 150px;
     height: 64px;
     margin-left: 0;
+  }
+
+  & .logoutBtn {
+    color: #6c816d;
+    border-radius: 0;
+
+    &:hover {
+      color: #eca997;
+    }
+  }
+
+  & .MypageBtn {
+    font-size: 14px;
+    width: 30px;
+    margin-right: 0;
+    border: 2px solid #6c816d;
+    padding: 10px 12px;
+    border-radius: 12px;
+    color: #6c816d;
+
+    &:hover {
+      background-color: #6c816d;
+      color: #fff;
+    }
   }
 `;

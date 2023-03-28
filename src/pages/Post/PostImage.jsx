@@ -1,16 +1,19 @@
 import {useEffect} from "react";
 import {ReactComponent as CameraIcon} from "@/assets/Post/camera-fill.svg";
 import styled from "styled-components/macro";
-import { storage } from './../../firebase/app';
-import {ref, uploadBytes, listAll, getDownloadURL} from "firebase/storage";
+import {storage} from "./../../firebase/app";
+import {ref, uploadBytes, getDownloadURL} from "firebase/storage";
 import {v4} from "uuid";
-import { useRecoilState } from 'recoil';
-import { imagesAtom, imageListAtom} from "./postAtoms";
+import {useRecoilState} from "recoil";
+import {imagesAtom, imageListAtom} from "./postAtoms";
 
 export function PostImage() {
   const [images, setImages] = useRecoilState(imagesAtom);
-  const [imageList, setImageList]  = useRecoilState(imageListAtom);
-  const imageListRef = ref(storage, "post/")
+  const [imageList, setImageList] = useRecoilState(imageListAtom);
+
+  useEffect(() => {
+    console.log("PostImage: ", imageList);
+  }, [imageList]);
 
   const handleImageChange = (e) => {
     const files = Array.from(e.target.files);
@@ -20,6 +23,12 @@ export function PostImage() {
       file: file,
       url: URL.createObjectURL(file),
     }));
+    if (newImages.length > 0) {
+      const span = document.querySelector(".PreviewImage span");
+      if (span) {
+        span.style.display = "none";
+      }
+    }
     if (images.length + newImages.length <= 6) {
       setImages([...images, ...newImages]);
     } else {
@@ -28,24 +37,14 @@ export function PostImage() {
 
     if (newImages == null) return;
     newImages.forEach((newImage) => {
-    const imageRef = ref(storage, `post/${newImage.file.name + v4()}`);
-    uploadBytes(imageRef, newImage.file).then((snaphsot) => {
-      getDownloadURL(snaphsot.ref).then((url) => {
-        setImageList((prev) => [...prev, url]);
-      })
-    });
-  });
-};
-
-  useEffect(() => {
-    listAll(imageListRef).then((response) => {
-      response.items.forEach((item) => {
-        getDownloadURL(item).then((url) => {
+      const imageRef = ref(storage, `post/${newImage.file.name + v4()}`);
+      uploadBytes(imageRef, newImage.file).then((snaphsot) => {
+        getDownloadURL(snaphsot.ref).then((url) => {
           setImageList((prev) => [...prev, url]);
         });
       });
     });
-  }, []);
+  };
 
   function handleDrop(e) {
     e.preventDefault();
@@ -53,6 +52,12 @@ export function PostImage() {
     const newImages = newFiles
       .filter((file) => file.type === "image/jpeg" || file.type === "image/png" || file.type === "image/gif" || file.type === "image/bmp")
       .map((file) => ({name: file.name, url: URL.createObjectURL(file)}));
+    if (newImages.length > 0) {
+      const span = document.querySelector(".PreviewImage span");
+      if (span) {
+        span.style.display = "none";
+      }
+    }
     if (images.length + newImages.length <= 6) {
       setImages([...images, ...newImages]);
     } else {
@@ -73,9 +78,10 @@ export function PostImage() {
         <input type="file" name="file" id="file" accept=".jpg,.jpeg,.png,.gif,.bmp" multiple required onChange={handleImageChange}></input>
       </div>
       <div className="PreviewImage" onDrop={handleDrop} onDragOver={(e) => e.preventDefault()}>
+        {images.length === 0 && <span>이미지를 드래그 해주세요</span>}
         {images.map((image, index) => (
           <div key={image.name} className="PreviewImageItem">
-            <img src={image.url} alt={image.name} />
+            <img src={image.url} key={index} alt={image.name} />
             <button onClick={() => handleImageDelete(index)}>X</button>
           </div>
         ))}
@@ -129,6 +135,11 @@ const PostImageSection = styled.div`
     display: flex;
     align-items: center;
     padding: 24px;
+    justify-content: center;
+
+    & span {
+      color: #868b94;
+    }
   }
 
   .PreviewImage img {
