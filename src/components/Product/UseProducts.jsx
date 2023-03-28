@@ -55,18 +55,32 @@ export function useProducts(excludeId, limitCount = 20) {
       querySnapshot.forEach((doc) => {
         const product = {id: doc.id, ...doc.data()};
         const userId = product.userId;
-
         products.push(product);
+        const queryPromise = new Promise(async (resolve, reject) => {
+          const usersSnapshot = await getDocs(query(collection(db, "users"), where("userId", "==", userId)));
+          resolve(usersSnapshot.docs);
+        });
 
-        // const queryPromise = new Promise(async (resolve, reject) => {
-        //   const usersSnapshot = await getDocs(query(collection(db, "users"), where("id", "==", userId)));
-        //   resolve(usersSnapshot.docs);
-        // });
-
-        // queryPromises.push(queryPromise);
+        queryPromises.push(queryPromise);
       });
-      const shuffledProducts = products.sort(() => Math.random() - 0.5);
-      setProductsState(shuffledProducts);
+
+      Promise.all(queryPromises)
+        .then((userDocs) => {
+          const users = [];
+          userDocs.forEach(([doc]) => {
+            users.push({id: doc.id, ...doc.data()});
+          });
+          return users;
+        })
+        .then((users) => {
+          return users.map((user) => {
+            return {...products.find((product) => product.userId === user.id), ...user};
+          });
+        })
+        .then((processedProducts) => {
+          const shuffledProducts = processedProducts.sort(() => Math.random() - 0.5);
+          setProductsState(shuffledProducts);
+        });
     });
   }, [setProductsState, excludeId, limitCount]);
 

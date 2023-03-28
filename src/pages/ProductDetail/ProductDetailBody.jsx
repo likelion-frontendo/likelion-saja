@@ -10,25 +10,25 @@ export function ProductDetailBody(props) {
     <StyledProductDetail>
       <section className="productImg">
         <Link to="/">
-          <img className="mainImg" src={props.imgUrl} alt="상품 이미지"></img>
+          <Image className="mainImg" src={props.imgUrl} alt="상품 이미지"></Image>
         </Link>
       </section>
       <section className="userInfo">
         <div className="userInfoContainer">
           <div className="userInfoImgContainer">
-            <Image src={test} alt="프로필 사진" />
+            <Image className="userImg" src={props.product.profileImageURL} alt="프로필 사진" />
           </div>
           <div className="spanContainer">
-            <span className="userId">아이디</span>
-            <span className="userLocation">장소</span>
+            <span className="userId">{props.product.name}</span>
+            <span className="userLocation">{props.product.location}</span>
           </div>
         </div>
       </section>
       <hr />
       <section className="productDescription">
-        <span className="titleDescription">{props.title} </span>
-        <span className="priceDescription">{props.price.toLocaleString(navigator.language)}벨 </span>
-        <span className="descriptionDescription">{props.description} </span>
+        <span className="titleDescription">{props.product.title} </span>
+        <span className="priceDescription">{props.product.price.toLocaleString(navigator.language)}벨 </span>
+        <span className="descriptionDescription">{props.product.description} </span>
       </section>
       <hr />
       <section className="popularProduct">
@@ -37,7 +37,7 @@ export function ProductDetailBody(props) {
           <Link to="/PopularProduct">더 구경하기</Link>
         </div>
         <UseProductList count={6} excludeId={props.id} />
-        <ProductMap address={props.location} />
+        <ProductMap address={props.product.location} />
       </section>
     </StyledProductDetail>
   );
@@ -75,9 +75,15 @@ const StyledProductDetail = styled.div`
   & .userInfoImgContainer {
     width: 40px;
     height: 40px;
-    border-radius: 70%;
+    border-radius: 100%;
     overflow: hidden;
     margin-right: 8px;
+  }
+
+  & .userImg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
 
   & .spanContainer {

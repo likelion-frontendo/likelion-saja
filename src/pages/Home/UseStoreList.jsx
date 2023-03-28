@@ -34,16 +34,7 @@ export function UserStoreList({selectedType}) {
   return (
     <div className="storeList">
       {slicedStores.map((store, index) => (
-        <Store
-          key={index}
-          imgUrl={store.imgUrl}
-          title={store.title}
-          description={store.description}
-          location={store.location}
-          interest={store.interest}
-          review={store.review}
-          regular={store.regular}
-        />
+        <Store key={index} store={store} />
       ))}
     </div>
   );

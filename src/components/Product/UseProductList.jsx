@@ -31,7 +31,7 @@ export function UseProductList(props) {
   return (
     <div className="productContainer">
       {productsState.map((product, index) => (
-        <Product key={index} id={product.id} imgUrl={product.imgUrl} title={product.title} price={product.price} location={product.location} />
+        <Product key={index} id={product.id} product={product} />
       ))}
     </div>
   );
