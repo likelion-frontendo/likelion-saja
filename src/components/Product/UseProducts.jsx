@@ -55,6 +55,7 @@ export function useProducts(excludeId, limitCount = 99) {
       querySnapshot.forEach((doc) => {
         const product = {id: doc.id, ...doc.data()};
         const userId = product.userId;
+        console.log(product); // 문제 없음
         products.push(product);
         const queryPromise = new Promise(async (resolve, reject) => {
           const usersSnapshot = await getDocs(query(collection(db, "users"), where("userId", "==", userId)));
@@ -67,6 +68,7 @@ export function useProducts(excludeId, limitCount = 99) {
       Promise.all(queryPromises)
         .then((userDocs) => {
           const users = [];
+          console.log(userDocs); // 여기서 부터 중복?
           userDocs.forEach(([doc]) => {
             users.push({id: doc.id, ...doc.data()});
           });
