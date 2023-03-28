@@ -89,7 +89,7 @@ export function Login() {
 }
 
 const StyledMain = styled.main`
-  height: 496px;
+  height: 610px;
   display: flex;
   flex-direction: column;
   align-items: center;
