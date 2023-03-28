@@ -8,9 +8,16 @@ import {postcodePopupAtom, addressAtom, priceAtom, imagesAtom, imageListAtom, po
 import {collection, addDoc} from "firebase/firestore";
 import {db} from "@/firebase/app";
 import {useNavigate} from "react-router-dom";
-import { uidAtom } from "../Register/atoms/uidAtom";
+import {uidAtom} from "../Register/atoms/uidAtom";
 
 export function PlaceSearchBox() {
+  const navigate = useNavigate(); //변수 할당시켜서 사용
+  const onClickBtn = () => {
+    if (window.confirm("게시글작성을 취소하시겠습니까? 작성하신 게시물은 저장되지 않습니다.")) {
+      navigate(-1);
+    }
+  };
+
   const [postcodePopup, setPostcodePopup] = useRecoilState(postcodePopupAtom);
   const [address, setAddress] = useRecoilState(addressAtom);
   const [images, setImages] = useRecoilState(imagesAtom);
@@ -83,7 +90,9 @@ export function PlaceSearchBox() {
         </Button>
       </div>
       <div className="UploadBtnBox">
-        <Button className="CancleBtn">취소</Button>
+        <Button className="CancleBtn" onClick={onClickBtn}>
+          취소
+        </Button>
         <Button className="SubmitBtn" onClick={onSubmit}>
           등록
         </Button>
