@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import styled from 'styled-components'
 
 export function Form({action="/", method="post", legend, children, ...rest}) {
@@ -9,6 +10,12 @@ export function Form({action="/", method="post", legend, children, ...rest}) {
       {children}
     </StyledForm>
   )
+}
+
+Form.prototype = {
+  action: PropTypes.string,
+  method: PropTypes.string,
+  legend: PropTypes.string
 }
 
 const StyledForm = styled.form`
